@@ -49,3 +49,22 @@ header,
     -o-background-size: cover;
     background-size: cover;
 }
+
+/* .bg-color {
+  background-color: #2E2E2E
+} */
+
+
+/* grey-darken-4 */
+.my-bg-color-primary {
+  background-color: #212121
+}
+
+/* indigo-accent-1 */
+.my-color-primary {
+  color: #8c9eff
+}
+
+.my-color-secondary {
+  color: whitesmoke
+}
