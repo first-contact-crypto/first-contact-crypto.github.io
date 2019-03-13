@@ -16,7 +16,7 @@ header,
 
 /* grey-darken-4 */
 .my-bg-color-primary {
-  background-color: #212121 !important;
+  background-color: #111111 !important;
 }
 
 .my-bg-color-secondary {
@@ -25,7 +25,7 @@ header,
 
 /* indigo-accent-1 */
 .my-color-primary {
-  color: #aaa !important;
+  color: #c9c0bb !important;
 }
 
 .my-color-secondary {
@@ -33,7 +33,7 @@ header,
 }
 
 .navbar {
-  background-color: #212121 !important;
+  background-color: #111111 !important;
 }
 
 .my-hr-primary {
