@@ -6162,3 +6162,6 @@ ul.stepper {
 .fast.spinner-grow {
   -webkit-animation: spinner-grow .4s linear infinite;
   animation: spinner-grow .4s linear infinite; }
+
+header {
+  height: 100px; }
