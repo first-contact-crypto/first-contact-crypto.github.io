@@ -60,7 +60,7 @@ header,
   border: 1px solid #673ab7 !important
 }
 
-// Cards
+/** Cards **/
 .card {
   box-shadow: $z-depth-1;
   border: 0;
