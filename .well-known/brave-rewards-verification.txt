@@ -1,0 +1,3 @@
+This is a Brave Rewards publisher verification file.
+Domain: firstcontactcrypto.com
+Token: 2bd6056779be5993837778888a57e81f0dd592b05f855abe69cc8689be525090
