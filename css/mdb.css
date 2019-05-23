@@ -8487,4 +8487,8 @@ ul.stepper {
   animation: spinner-grow .4s linear infinite; }
 
 header {
-  height: 100px; }
+  height: 70px; }
+
+.my-container {
+  position: relative;
+  top: 80px; }
