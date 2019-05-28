@@ -151,7 +151,7 @@ function getAssertions() {
     }
   };
 
-  var params = "recipient=peter.alexander@prodatalab.com"
+  var params = "recipient=" + window.useremail;
 
   xhttp.open("GET", BADGR_BASE_URL + format(BADGR_ASSERTION_ISSUER_PATH, BADGR_ISSUER_ID) + "?" + params);
   xhttp.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
