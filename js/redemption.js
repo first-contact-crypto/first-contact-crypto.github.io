@@ -204,7 +204,7 @@ function calculateEPSpent() {
   ep_left = ep_saved - ep_spent
 
   deleteAssertions(ep_spent)
-
+  return true
 }
 
 getUrlVars();

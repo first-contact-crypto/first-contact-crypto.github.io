@@ -241,7 +241,7 @@
                 <p id="spend-ep-text">You currently have XXX epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!</p>
                 <div class="def-number-input number-input safari_only">
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-                  <input id="num-spent-input" class="quantity" min="0" name="quantity" value="1" type="number">
+                  <input id="num-spent-input" class="quantity" min="0" name="quantity" value="0" type="number">
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
                 </div>
               </div>
@@ -249,7 +249,10 @@
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-                <a href="#prize-area" type="button" class="btn btn-success" onclick="calculateEPSpent()">Bid Now<i class="far fa-gem ml-1 text-white"></i></a>
+                <!-- <a href="#prize-area" type="button" class="btn btn-success" onclick="calculateEPSpent()">Bid Now<i class="far fa-gem ml-1 text-white"></i></a> -->
+                <button type="button" class="btn btn-outline-success waves-effect" data-toggle="modal" onclick="calculateEPSpent()">
+                    Place Bid
+                </button>
                 <a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal">Cancel</a>
             </div>
             </div>
