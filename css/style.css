@@ -74,8 +74,10 @@ header,
     box-shadow: none;
   }
   .card-body {
+    background-color: $my-bg-color-primary;
     h1, h2, h3, h4, h5, h6 {
       font-weight: 400;
+      color: $my-color-secondary;
     }
     .card-title {
       a {
@@ -86,7 +88,7 @@ header,
       }
     }
     .card-text {
-      color: $md-card-text-color;
+      color: $my-color-primary;
       font-size: $md-card-font-size;
       font-weight: 400;
     }
