@@ -25,6 +25,10 @@ recipient.type = "email";
 recipient.hashed = true;
 recipient.plaintextIdentity = "string";
 
+var badgeclasses = null
+var assertions = null
+
+
         // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
         // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_efc20af1 - 7d43 - 4d1e - 877e-447244ea3fd3.png
 
@@ -127,9 +131,9 @@ function getBadgeClasses() {
 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML = this.responseText;
+      badgeclasses = JSON.parse(this.responseText)
     } else {
-      print("What the {0}", "FUCK! ..here I am")
+      print("What the FUCK: In getBadgeClasses.. ERROR")
     }
   };
   xhttp.open("GET", BADGR_BASE_URL + format(BADGR_BADGECLASS_SINGLE_ISSUER_PATH, "rGy5MNWtQgSs1vfnLyPlmg"));
@@ -144,8 +148,8 @@ function getAssertions() {
 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      ret = JSON.parse(this.responseText)
-      document.getElementById("demo").innerHTML = this.responseText;
+      assertions = JSON.parse(this.responseText)
+      // document.getElementById("demo").innerHTML = this.responseText;
     //   document.getElementById("demo").innerHTML = window.useremail;
     } else {
       console.log("WHAT THE FUCK: " + this.status + " " + this.responseText);
@@ -165,7 +169,7 @@ function displayUserInfo() {
 }
 
 function displaySpendEPText() {
-  alert("In displaySpendEPText()");
+  // alert("In displaySpendEPText()");
   document.getElementById("spend-ep-text").innerHTML = "You currently have " + window.num_epiph_asserts + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
   document.getElementById("num-spent-input").setAttribute("max", window.num_epiph_asserts);
 }
@@ -183,24 +187,24 @@ function deleteAssertion(num) {
       }
     };
 
-    var params = "recipient=" + window.useremail;
-
     xhttp.open("DELETE", BADGR_BASE_URL + format(BADGR_ASSERTION_DELETE_PATH, assertions[0].entityId));
     xhttp.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
     xhttp.send();
 }
 
 function deleteAssertions(num) {
-  for (var i;i<num-1;i++) {
+  for (i = 0;i<num;i++) {
     deleteAssertion()
   }
 }
 
 function calculateEPSpent() {
-  ep_saved = window.num_epiph_asserts;
+  ep_saved = window.num_epiph_asserts
   ep_spent = document.getElementById("num-spent-input").value
-  document.getElementById("spend-ep-text").innerHTML = document.getElementById("spend-ep-text").innerHTML + " and the ep_saved is" + ep_saved + 
-  " and the ep_spent is: " + ep_spent;
+  ep_left = ep_saved - ep_spent
+
+  deleteAssertions(ep_spent)
+
 }
 
 getUrlVars();
