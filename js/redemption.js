@@ -148,8 +148,8 @@ function getAssertions() {
 
   xhttp.onreadystatechange = function() {
     if (this.status == 200) {
-      assertions = JSON.parse(this.responseText)
-      console.log("In getAssertions success! the assertions type is: " + type(assertions) + " the reponse text is: " + this.responseText)
+      // assertions = JSON.parse(this.responseText)
+      console.log("In getAssertions success! the reponse text is: " + this.responseText)
 
       // document.getElementById("demo").innerHTML = this.responseText;
     //   document.getElementById("demo").innerHTML = window.useremail;
