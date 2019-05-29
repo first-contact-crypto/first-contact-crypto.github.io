@@ -199,6 +199,7 @@ function deleteAssertions(num) {
 function calculateEPSpent() {
   ep_saved = window.num_epiph_asserts;
   ep_spent = document.getElementById("num-spent-input").value
+  alert("ep_saved: " + ep_saved + " ep_spent: " + ep_spent);
 }
 
 getUrlVars();
