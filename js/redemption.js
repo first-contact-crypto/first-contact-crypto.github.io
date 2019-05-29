@@ -143,13 +143,13 @@ function getBadgeClasses() {
 
 
 function getAssertions() {
-
+  console.log("In getAssertions")
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       assertions = JSON.parse(this.responseText)
-      print("In getAssertions success! the number of assertions is: {0}", assertions)
+      console.log("In getAssertions success! the number of assertions is: " + assertions.length)
 
       // document.getElementById("demo").innerHTML = this.responseText;
     //   document.getElementById("demo").innerHTML = window.useremail;
