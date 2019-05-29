@@ -147,14 +147,14 @@ function getAssertions() {
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == "complete" && this.status == 200) {
       assertions = JSON.parse(this.responseText)
       console.log("In getAssertions success! the number of assertions is: " + assertions.length)
 
       // document.getElementById("demo").innerHTML = this.responseText;
     //   document.getElementById("demo").innerHTML = window.useremail;
     } else {
-      console.log("WHAT THE FUCK: " + this.status + " " + this.responseText);
+      console.log("In getAssertions().. WHAT THE FUCK: " + this.status + " " + this.responseText);
     }
   };
 
@@ -177,15 +177,16 @@ function displaySpendEPText() {
 }
 
 function deleteAssertion(num) {
+  console.log("In deleteAssertions()")
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 204) {
+      if (this.readyState == "complete" && this.status == 204) {
         var old = window.num_epiph_asserts;
         --window.num_epiph_asserts;
         alert("The number of assertions was " + old + " and now is " + window.num_epiph_asserts);
       } else {
-        console.log("WHAT THE FUCK: In deleteAssertions.. " + this.status + " " + this.responseText);
+        console.log("In deleteAssertions.. WHAT THE FUCK: In deleteAssertions.. " + this.status + " " + this.responseText);
       }
     };
 
