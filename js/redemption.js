@@ -149,6 +149,8 @@ function getAssertions() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       assertions = JSON.parse(this.responseText)
+      print("In getAssertions success! the number of assertions is: {0}", assertions)
+
       // document.getElementById("demo").innerHTML = this.responseText;
     //   document.getElementById("demo").innerHTML = window.useremail;
     } else {
@@ -207,6 +209,7 @@ function calculateEPSpent() {
   return true
 }
 
-getUrlVars();
-displayUserInfo();
-displaySpendEPText();
+getUrlVars()
+displayUserInfo()
+displaySpendEPText()
+getAssertions()
