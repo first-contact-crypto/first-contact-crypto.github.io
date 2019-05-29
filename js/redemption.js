@@ -159,16 +159,15 @@ function getAssertions() {
   xhttp.send();
 }
 
-
-
 function displayUserInfo() {
   // document.getElementById("demo").innerHTML = window.username + ";" + window.useremail + ";" + window.epiphany_issuer_id + ";" + window.epiphany_badgeclass_id;
-  document.getElementById("introductory-text").innerHTML = "Congratulations " + window.username + " You currently have " + window.num_epiph_asserts + " Epiphany Points to spend."
+  document.getElementById("introductory-text").innerHTML = "Congratulations " + window.username + " You currently have " + window.num_epiph_asserts + " Epiphany Points to spend.";
 }
 
 function displaySpendEPText() {
-  document.getElementById("spend-ep-text").innerHTML = "You currently have " + window.num_epiph_asserts + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!"
-  document.getElementById("num-spent-input").setAttribute("max", window.num_epiph_asserts)
+  alert("In displaySpendEPText()");
+  document.getElementById("spend-ep-text").innerHTML = "You currently have " + window.num_epiph_asserts + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
+  document.getElementById("num-spent-input").setAttribute("max", window.num_epiph_asserts);
 }
 
 function deleteAssertion(num) {
@@ -176,13 +175,11 @@ function deleteAssertion(num) {
 
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 204) {
-        var old = window.num_epiph_asserts
-        --window.num_epiph_asserts
-        alert("The number of assertions was " + old + " and now is " + window.num_epiph_asserts)
+        var old = window.num_epiph_asserts;
+        --window.num_epiph_asserts;
+        alert("The number of assertions was " + old + " and now is " + window.num_epiph_asserts);
       } else {
-        console.log(
-          "WHAT THE FUCK: In deleteAssertions.. " + this.status + " " + this.responseText
-        );
+        console.log("WHAT THE FUCK: In deleteAssertions.. " + this.status + " " + this.responseText);
       }
     };
 
@@ -202,10 +199,7 @@ function deleteAssertions(num) {
 function calculateEPSpent() {
   ep_saved = window.num_epiph_asserts;
   ep_spent = document.getElementById("num-spent-input").value
-
-
 }
-
 
 getUrlVars();
 displayUserInfo();
