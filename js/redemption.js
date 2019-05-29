@@ -16,6 +16,7 @@ const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw";
 var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"       // issuer id
 var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions";            // badge_class entityId
 var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions";
+var BADGR_ASSERTION_DELETE_PATH = "v2/assertions{0}"
 
 
 var recipient = new Object();
@@ -166,7 +167,43 @@ function displayUserInfo() {
 }
 
 function displaySpendEPText() {
-    document.getElementById("spend-ep-text").innerHTML = "You currently have " + window.num_epiph_asserts + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!"
+  document.getElementById("spend-ep-text").innerHTML = "You currently have " + window.num_epiph_asserts + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!"
+  document.getElementById("num-spent-input").setAttribute("max", window.num_epiph_asserts)
+}
+
+function deleteAssertion(num) {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 204) {
+        var old = window.num_epiph_asserts
+        --window.num_epiph_asserts
+        alert("The number of assertions was " + old + " and now is " + window.num_epiph_asserts)
+      } else {
+        console.log(
+          "WHAT THE FUCK: In deleteAssertions.. " + this.status + " " + this.responseText
+        );
+      }
+    };
+
+    var params = "recipient=" + window.useremail;
+
+    xhttp.open("DELETE", BADGR_BASE_URL + format(BADGR_ASSERTION_DELETE_PATH, assertions[0].entityId));
+    xhttp.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+    xhttp.send();
+}
+
+function deleteAssertions(num) {
+  for (var i;i<num-1;i++) {
+    deleteAssertion()
+  }
+}
+
+function calculateEPSpent() {
+  ep_saved = window.num_epiph_asserts;
+  ep_spent = document.getElementById("num-spent-input").value
+
+
 }
 
 
