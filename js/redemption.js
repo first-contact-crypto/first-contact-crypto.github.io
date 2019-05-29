@@ -4,7 +4,7 @@
 
 
 const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg";
-const BADGR_ACCESS_TOKEN = "irLWj7bSsXb2Ln4vsTooyFSfSmwOSG";
+const BADGR_ACCESS_TOKEN = "7VhqEXWNeQsJpAgaS6RGF9UYtFzxA6";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
 const BADGR_REDEMPTION_TYPE = "redemption";
