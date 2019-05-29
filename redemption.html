@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -219,6 +221,40 @@
           <button type="button" onclick="displayUserInfo()">Change Content</button>
         </div> -->
 
+        <!-- Central Modal Medium Success -->
+<div class="modal fade" id="placeBidModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Spend Epiphany Points</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>You currently have XXX epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!</p>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-success">Bid Now <i class="far fa-gem ml-1 text-white"></i></a>
+        <a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal">Cancel</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!-- Central Modal Medium Success-->
+
         <!-- ROW 1 -->
         <div class="row">
 
@@ -243,7 +279,10 @@
                 <!-- Text -->
                 <p class="card-text">Cotton Bitcoin t-shirt in various sizes.</p>
                 <!-- Button -->
-                <a href="#" class="btn btn-primary">Button</a>
+                <!-- <a href="#" class="btn btn-primary">Button</a> -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#placeBidModal">
+  Launch demo modal
+</button>
               </div>
             </div>
             <!-- Card -->
@@ -269,7 +308,9 @@
                 <!-- Text -->
                 <p class="card-text">Secure your bitcoins in cold storage.</p>
                 <!-- Button -->
-                <a href="#" class="btn btn-primary">Button</a>
+                <!-- <a href="#" class="btn btn-primary">Button</a> -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#placeBidModal">
+
               </div>
             </div>
             <!-- Card -->
@@ -295,7 +336,9 @@
                 <!-- Text -->
                 <p class="card-text">Win some Doge!</p>
                 <!-- Button -->
-                <a href="#" class="btn btn-primary">Button</a>
+                <!-- <a href="#" class="btn btn-primary">Button</a> -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#placeBidModal">
+
               </div>
             </div>
             <!-- Card -->
@@ -321,7 +364,9 @@
                 <!-- Text -->
                 <p class="card-text">Ceramic, ZCash coffee mug!</p>
                 <!-- Button -->
-                <a href="#" class="btn btn-primary">Button</a>
+                <!-- <a href="#" class="btn btn-primary">Button</a> -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#placeBidModal">
+
               </div>
             </div>
             <!-- Card -->
