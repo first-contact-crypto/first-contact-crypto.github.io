@@ -165,8 +165,11 @@ function displayUserInfo() {
   document.getElementById("introductory-text").innerHTML = "Congratulations " + window.username + " You currently have " + window.num_epiph_asserts + " Epiphany Points to spend."
 }
 
-
+function displaySpendEPText() {
+    document.getElementById("spend-ep-text").innerHTML = "You currently have " + window.num_epiph_asserts + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!"
+}
 
 
 getUrlVars();
 displayUserInfo();
+displaySpendEPText();
