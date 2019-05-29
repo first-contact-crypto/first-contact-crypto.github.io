@@ -147,7 +147,7 @@ function getAssertions() {
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
-    if (this.status == 200) {
+    if (this.readyState = 'completed' && this.status == 200) {
       assertions = JSON.parse(this.responseText)
       console.log(this.responseText)
 
