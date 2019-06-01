@@ -1,11 +1,13 @@
-import { inherits } from "util";
-
 // TODO: I don't like that I am getting the num_asserts from two different databases.
 // FIXME: ^^^^^
 
+// {
+//   "badgr_access_token": "eQYBJeoj8MD5CNNGiW9lbhmrqoGYTz",
+//   "badgr_refresh_token": "ScStrEeMla8gfXfR70Xxmm0sEW1zRY"
+// }
 
 const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg"
-const BADGR_ACCESS_TOKEN = "JCAFLKOLX6k1D28wAIVKfdqqZvQMXC";
+const BADGR_ACCESS_TOKEN = "eQYBJeoj8MD5CNNGiW9lbhmrqoGYTz";
 const BADGR_COURSE_TYPE = "course"
 const BADGR_EPIPHANY_TYPE = "epiphany"
 const BADGR_REDEMPTION_TYPE = "redemption"
@@ -20,7 +22,9 @@ var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions"
 var BADGR_ASSERTION_DELETE_PATH = "v2/assertions{0}"
 
 
-var recipient = new Object()
+// https://api.badgr.io/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
+
+var recipient = new Object();
 recipient.identity = "string"
 recipient.type = "email"
 recipient.hashed = true
@@ -93,12 +97,16 @@ function getJSONData(url, successfunc, errorfunc) {
   });
 }
 
-function setDevButton(btnTxt, htmlString) {
-  $("#my-container").append("<button id=\"dev-button\">" + btnTxt + "</button>");
-  $("#dev-button").click(function() {
-    $("#my-container").append(htmlString);
-  });
-}
+// function setDevButton(btnId, divId, htmlString) {
+//   // $("#my-container").append("<button id=\"" + btnId + "\">" + btnTxt + "</button>");
+//   // $("#"+btnId).click(function() {
+//   //   $("#my-container").append(htmlString);
+//   // });
+//   $("#"+divId).show();
+//   $(".show_hide").show();
+//   $('.show_hide').click(function(){
+//     $(".spread").toggle();
+// }
 
 
 function setVarsGlobally(vars) {
@@ -174,41 +182,52 @@ function getBadgeClasses() {
   getJSONData(format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     badgeclasses = data;
-    setDevButton("BadgeClasses", "<p>" + JSON.stringify(badgeclasses))
+    // setDevButton("BadgeClasses", "<p>" + JSON.stringify(badgeclasses))
 
   },
   function(jqXhr, textStatus, errorMessage) {
     // alert("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " + errorMessage + "textStatus: " + textStatus)
-    setDevButton("BadgeClasses", "<p>" + JSON.stringify("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " 
-                      + errorMessage + "textStatus: " + textStatus));
+    // setDevButton("BadgeClasses", "<h4>BadgeClasses</h4><p>" + JSON.stringify("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " 
+                      // + errorMessage + "textStatus: " + textStatus));
   });
 }
 
 function getAssertions() {
   console.log("In getAssertions")
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      assertions_txt = this.responseText
-      alert(assertions_txt)
-      assertions = JSON.parse(this.responseText)
+    getJSONData(format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
+    // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
+    assertions = data;
+    // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
 
-      if (isEmpty(assertions) != false) {
-        console.log("SUCCESS from the assertions object parse. here is the entityId: " + assertions.result[0].entityId)
-      }
-      else {
-          console.log("ERROR: In getAssertions.. the assertions object is empty!")
-      }
-      // document.getElementById("demo").innerHTML = this.responseText;
-    //   document.getElementById("demo").innerHTML = window.useremail;
-    } else {
-      console.log("In getAssertions().. WHAT THE FUCK: " + this.status + " " + this.responseText)
-    }
-  };
-  var params = "recipient=" + window.useremail;
-  xhttp.open("GET", BADGR_BASE_URL + format(BADGR_ASSERTION_ISSUER_PATH, BADGR_ISSUER_ID) + "?" + params, true)
-  xhttp.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
-  xhttp.send()
+  },
+  function(jqXhr, textStatus, errorMessage) {
+    // alert("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " + errorMessage + "textStatus: " + textStatus)
+    // setDevButton("BadgeClasses", "<h4>Assertions</h4><p>" + JSON.stringify("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " 
+                      // + errorMessage + "textStatus: " + textStatus));
+  });
+  // var xhttp = new XMLHttpRequest();
+  // xhttp.onreadystatechange = function() {
+  //   if (this.readyState == 4 && this.status == 200) {
+  //     assertions_txt = this.responseText
+  //     alert(assertions_txt)
+  //     assertions = JSON.parse(this.responseText)
+
+  //     if (isEmpty(assertions) != false) {
+  //       console.log("SUCCESS from the assertions object parse. here is the entityId: " + assertions.result[0].entityId)
+  //     }
+  //     else {
+  //         console.log("ERROR: In getAssertions.. the assertions object is empty!")
+  //     }
+  //     // document.getElementById("demo").innerHTML = this.responseText;
+  //   //   document.getElementById("demo").innerHTML = window.useremail;
+  //   } else {
+  //     console.log("In getAssertions().. WHAT THE FUCK: " + this.status + " " + this.responseText)
+  //   }
+  // };
+  // var params = "recipient=" + window.useremail;
+  // xhttp.open("GET", BADGR_BASE_URL + format(BADGR_ASSERTION_ISSUER_PATH, BADGR_ISSUER_ID) + "?" + params, true)
+  // xhttp.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+  // xhttp.send()
 }
 
 function createAssertion() {
@@ -320,7 +339,7 @@ getUrlVars()
 displayUserInfo()
 displaySpendEPText()
 getBadgeClasses()
-// getAssertions()
+getAssertions()
 // getPrizeList()
 // new_badges_needed = getBadgesToBeCreated()
 // createBadges(new_badges_needed)
