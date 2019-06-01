@@ -201,7 +201,7 @@
         REDEMPTION BADGE SERVER SLUG: XrG4QUcyTQGVch1VipS-Qw
         IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_41b742a0 - d58c - 4223 - bffb - f2bc92fdd4bf.png -->
     <main class=mt-5>
-      <div class="container my-container">
+      <div class="container my-container" id="my-container">
 
         <h3 class="h3 mb-3 my-color-secondary">Welcome to the Epiphany Points Prize Center</h3>
         <p id="introductory-text">Congratulations XXX! You currently have YYY Epiphany Points to spend.</p>
@@ -250,7 +250,7 @@
             <!--Footer-->
             <div class="modal-footer justify-content-center">
                 <!-- <a href="#prize-area" type="button" class="btn btn-success" onclick="calculateEPSpent()">Bid Now<i class="far fa-gem ml-1 text-white"></i></a> -->
-                <button type="button" class="btn btn-outline-success waves-effect" onclick="calculateEPSpent()" data-dismiss="modal">
+                <button type="button" class="btn btn-outline-success waves-effect" onclick="onPlaceBidEvent()" data-dismiss="modal">
                     Place Bid
                 </button>
                 <a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal">Cancel</a>
@@ -278,7 +278,7 @@
               <div class="card-body">
 
                 <!-- Title -->
-                <h4 class="card-title">Bitcoin T-shirt</h4>
+                <h4 class="card-title prize">Bitcoin T-shirt</h4>
                 <!-- Text -->
                 <p class="card-text">Cotton Bitcoin t-shirt in various sizes.</p>
                 <!-- Button -->
@@ -304,7 +304,7 @@
               <div class="card-body">
 
                 <!-- Title -->
-                <h4 class="card-title">Tezor Hardware Wallet</h4>
+                <h4 class="card-title prize">Tezor Hardware Wallet</h4>
                 <!-- Text -->
                 <p class="card-text">Secure your bitcoins in cold storage.</p>
                 <!-- Button -->
@@ -330,7 +330,7 @@
               <div class="card-body">
 
                 <!-- Title -->
-                <h4 class="card-title">Doge Coin</h4>
+                <h4 class="card-title prize">Doge Coin</h4>
                 <!-- Text -->
                 <p class="card-text">Win some Doge!</p>
                 <!-- Button -->
@@ -356,7 +356,7 @@
               <div class="card-body">
 
                 <!-- Title -->
-                <h4 class="card-title">ZCash Coffee Mug</h4>
+                <h4 class="card-title prize">ZCash Coffee Mug</h4>
                 <!-- Text -->
                 <p class="card-text">Ceramic, ZCash coffee mug!</p>
                 <!-- Button -->
