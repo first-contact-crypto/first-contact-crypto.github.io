@@ -346,8 +346,16 @@ function onSelectPrizeEvent(title) {
 }
 
 function onPlaceBidEvent() {
+  $("#welcome-title").text("Good job cryptonaut and good luck!")
+  $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.")
+  var msg = "Now you can continue to bid on another prize or go on back to the control center."
+  $("#welcome-body").text(msg)
+  $("#welcome-body").after('<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-primary">Control Center</a>')
   ep_saved = window.num_epiph_asserts
   ep_spent = document.getElementById("num-spent-input").value
+  if (ep_spent == 0) {
+    return true
+  }
   ep_left = ep_saved - ep_spent
   createPrizeAssertions(ep_spent)
   deleteAssertions(ep_spent)

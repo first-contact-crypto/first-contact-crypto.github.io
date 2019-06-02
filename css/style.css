@@ -38,11 +38,11 @@ body {
 
 /* indigo-accent-1 */
 .my-color-primary {
-  color: #e5ffe5 !important;
+  color: #ddd !important;
 }
 
 .my-color-secondary {
-  color:  #ddd !important;
+  color:  #fff !important;
 }
 
 .navbar {
@@ -50,7 +50,7 @@ body {
 }
 
 .my-hr-primary {
-  border-top: 1px solid #673ab7 !important;
+  border-top: 1px solid #0000FF !important;
 }
 
 .my-hr-secondary {
@@ -111,9 +111,32 @@ body {
   }
 } */
 
+  .card .card-body .card-text {
+    color: #ddd;
+    font-size: 0.9rem;
+    font-weight: 400; }
+
 .my-anchor::before {
   height: 10px;
   content: "";
   display: block;
 }
 
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #000;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+.modal-dialog.modal-notify .modal-body {
+  padding: 1.5rem;
+  color: #fff; }
