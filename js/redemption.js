@@ -342,7 +342,7 @@ function createPrizeAssertions(ep_spent) {
 
 function onSelectPrizeEvent(title) {
   selectedPrize = convertToSlug(title)
-  $("#placeBidModel").modal()
+  $("#placeBidModal").modal()
 }
 
 function onPlaceBidEvent() {
