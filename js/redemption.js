@@ -1,5 +1,6 @@
-// TODO: I don't like that I am getting the num_asserts from two different databases.
-// FIXME: ^^^^^
+
+
+const DEV_ENV = false;
 
 // {
 //   "badgr_access_token": "eQYBJeoj8MD5CNNGiW9lbhmrqoGYTz",
@@ -14,7 +15,6 @@ const BADGR_REDEMPTION_TYPE = "redemption"
 const BADGR_BASE_URL = "https://api.badgr.io/"
 const BADGR_SERVER_SLUG_EPIPHANY = "V_MaSinhQJeKGOtZz6tDAQ"
 const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw"
-const DEV_ENV = true
 
 var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"       // issuer id
 var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions"            // badge_class entityId
