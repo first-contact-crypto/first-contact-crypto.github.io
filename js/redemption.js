@@ -8,7 +8,7 @@ const DEV_ENV = false;
 // }
 
 const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg"
-const BADGR_ACCESS_TOKEN = "eQYBJeoj8MD5CNNGiW9lbhmrqoGYTz";
+const BADGR_ACCESS_TOKEN = "8sIZ0Il1gnBcrgl4HxYZRG5EGu6Ecj";
 const BADGR_COURSE_TYPE = "course"
 const BADGR_EPIPHANY_TYPE = "epiphany"
 const BADGR_REDEMPTION_TYPE = "redemption"
