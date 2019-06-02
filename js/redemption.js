@@ -19,7 +19,7 @@ const DEV_ENV = true
 var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"       // issuer id
 var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions"            // badge_class entityId
 var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions"
-var BADGR_ASSERTION_DELETE_PATH = "v2/assertions{0}"
+var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}"
 
 
 // https://api.badgr.io/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
@@ -30,13 +30,13 @@ recipient.type = "email"
 recipient.hashed = true
 recipient.plaintextIdentity = "string"
 
-var badgeclasses = {}
+var badgeclasses = null
 var assertions = {}
-
 var badgeclasses_txt = ""
 var assertions_txt = ""
-
 var prizeList = []
+var badgeclassNamesList = []
+var selectedPrize = ""
 
 
         // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
@@ -50,6 +50,11 @@ var prizeList = []
 
 
 // UTITLITIES
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 function format(fmt, ...args) {
   // retstr = format("blah: {0}", "the_var")
@@ -89,6 +94,7 @@ function getJSONData(url, successfunc, errorfunc) {
     // error: function (jqXhr, textStatus, errorMessage) { // error callback 
     //     $('p').append('Error: ' + errorMessage);
     // }
+    async: false,
     success: successfunc,
     error: errorfunc,
     beforeSend: function(xhr) {
@@ -182,23 +188,24 @@ function getBadgeClasses() {
   getJSONData(format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     badgeclasses = data;
+    // print("In getBadgeClasses.. badgeclasses is: {0}", JSON.stringify(badgeclasses))
+    // print("In getBadgeClasses.. badgeclasses is: {0}", JSON.stringify(window.badgeclasses))
+
     // setDevButton("BadgeClasses", "<p>" + JSON.stringify(badgeclasses))
 
   },
   function(jqXhr, textStatus, errorMessage) {
-    // alert("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " + errorMessage + "textStatus: " + textStatus)
-    // setDevButton("BadgeClasses", "<h4>BadgeClasses</h4><p>" + JSON.stringify("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " 
-                      // + errorMessage + "textStatus: " + textStatus));
+    print("ERROR: {0}, {1}", textStatus, errorMessage)
   });
 }
 
 function getAssertions() {
-  console.log("In getAssertions")
+  // console.log("In getAssertions")
     getJSONData(format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     assertions = data;
     // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
-
+    window.num_epiph_asserts = assertions.result.length
   },
   function(jqXhr, textStatus, errorMessage) {
     // alert("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " + errorMessage + "textStatus: " + textStatus)
@@ -230,24 +237,27 @@ function getAssertions() {
   // xhttp.send()
 }
 
-function createAssertion() {
-  console.log("In createAssertion")
 
-}
 
 function createBadge(name) {
   var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
+  console.log
   $.ajax({
     method: "POST",
     dataType: "json",
+    processData: false,
+    contentType: "application/json",
     url: badge_url,
     data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
-    success: function(result) {
-      print("In createBadge.. SUCCESS, badge created")
+    success: function(data, status, xhr) {
+      print("In createBadge.. badge created: {0}", JSON.stringify(data))
     },
-    failure: function(errMsg) {
-      print("In createBadge.. ERROR: {0}", errMsg)
-    }
+    error: function(xhr, status, errMsg) { 
+      print("In createBadge.. badge creation failed! {0} {1}", status, errMsg)
+    },
+    beforeSend: function(xhr) {
+                  xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+                }
   })
 }
 
@@ -255,6 +265,7 @@ function createBadges(name_list) {
   for (i=0;i<name_list.length;i++) {
     createBadge(name_list[i])
   }
+  createBadge(name_list[0])
 }
 
 function displayUserInfo() {
@@ -270,21 +281,26 @@ function displaySpendEPText() {
 
 function deleteAssertion(num) {
   console.log("In deleteAssertions()")
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == "complete" && this.status == 204) {
-        var old = window.num_epiph_asserts;
-        --window.num_epiph_asserts;
-        alert("The number of assertions was " + old + " and now is " + window.num_epiph_asserts);
-      } else {
-        console.log("In deleteAssertions.. WHAT THE FUCK: In deleteAssertions.. " + this.status + " " + this.responseText);
-      }
-    };
-
-    xhttp.open("DELETE", BADGR_BASE_URL + format(BADGR_ASSERTION_DELETE_PATH, assertions[0].entityId));
-    xhttp.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-    xhttp.send();
+  var badgeId = getBadgeId(selectedPrize);
+  // var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
+  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, badgeId)
+  console.log
+  $.ajax({
+    method: "DELETE",
+    dataType: "json",
+    processData: false,
+    contentType: "application/json",
+    url: assertion_url,
+    // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
+    // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
+    success: function(data, status, xhr) {
+      print("In deleteAssertion.. assertion deleted: {0}", JSON.stringify(data))
+    },
+    error: function(xhr, status, errMsg) { 
+      print("In deleteAssertion.. assertion deletion failed! {0} {1}", status, errMsg)
+    },
+    beforeSend: function(xhr) {xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)}
+  })
 }
 
 function deleteAssertions(num) {
@@ -293,9 +309,41 @@ function deleteAssertions(num) {
   }
 }
 
-// function createPrizeAssertions(ep_spent) {
-//   for (var i=0;i<ep_spent;)
-// }
+function createAssertion() {
+  var badgeId = getBadgeId(selectedPrize);
+  // var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
+  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, badgeId)
+  console.log
+  $.ajax({
+    method: "POST",
+    dataType: "json",
+    processData: false,
+    contentType: "application/json",
+    url: badge_url,
+    // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
+    data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
+    success: function(data, status, xhr) {
+      print("In createAssertion.. assertion created: {0}", JSON.stringify(data))
+    },
+    error: function(xhr, status, errMsg) { 
+      print("In createAssertion.. assertion creation failed! {0} {1}", status, errMsg)
+    },
+    beforeSend: function(xhr) {
+                  xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+                }
+  })
+}
+
+function createPrizeAssertions(ep_spent) {
+  for (var i=0;i<ep_spent;i++) {
+    createAssertion()
+  }
+}
+
+function onSelectPrizeEvent(title) {
+  selectedPrize = convertToSlug(title)
+  $("#placeBidModel").modal()
+}
 
 function onPlaceBidEvent() {
   ep_saved = window.num_epiph_asserts
@@ -306,40 +354,73 @@ function onPlaceBidEvent() {
   return true
 }
 
-function convertToSlug(Text) {
-  return Text.toLowerCase()
+
+
+function convertToSlug(text) {
+  return text.toLowerCase()
     .replace(/[^\w ]+/g, "")
     .replace(/ +/g, "-");
 }
 
 function getPrizeList() {
-  $(".prize").each(function(index) {
-    prizeList.push(convertToSlug(this.text()))
-  })
+  console.log("In getPrizeList")
+  $(".prize").each(function(index, element) {
+    prizeList.push(convertToSlug($(this).text()))
+  });
+  
+}
+
+function getBadgeClassNamesList() {
+  print("In getBadgeClassNameList.. {0}", badgeclasses.result.length)
+  for (var i=0;i<badgeclasses.result.length;i++) {
+    var name = badgeclasses.result[i].name 
+    // print("{0}", name)
+    badgeclassNamesList.push(name)
+  }
+  print("bcnl: {0}", badgeclassNamesList.length)
+  return badgeclassNamesList
 }
 
 function getBadgesToBeCreated() {
-  ret = prizeList
-  for (i=0;i<badgeclasses.length;i++) {
-    bc = badgeclasses[i]
-    bc_name = bc.name 
-    for (j=0;j<prizeList.length;j++) {
-      pl_name = prizelist[j]
-      if (bc_name === pl_name) {
-        ret.splice(j,1)
-      }
-    }
-  }
-  return ret
+  print("Here I am")
+  getBadgeClassNamesList()
+  plSet = new Set(prizeList)
+  bcSet = new Set(badgeclassNamesList)
+  outSet = new Set([...plSet].filter(x => !bcSet.has(x)))
+  print("size 1: {0} .. size 2: {1} .. size 3: {2}", plSet.size, bcSet.size, outSet.size)
+  return Array.from(outSet)
 }
 
 
+
+async function testBadgesCreated() {
+  if (badgeclasses == null) {
+    await sleep(500)
+    testBadgesCreated()
+  }
+  else {
+    print("..badgeclasses created..\\0/ {0}", badgeclasses.result.length)
+  }
+}
+
+function getBadgeId(name) {
+  for (var i=0;i<badgeclasses.result.length;i++) {
+    var bc = badgeclassess.result[i]
+    if (bc.name === name) {
+      return bc.entityId
+    }
+  }
+}
 
 getUrlVars()
 displayUserInfo()
 displaySpendEPText()
 getBadgeClasses()
 getAssertions()
-// getPrizeList()
-// new_badges_needed = getBadgesToBeCreated()
-// createBadges(new_badges_needed)
+getPrizeList()
+console.log("prizeList: " + prizeList.toString())
+// testBadgesCreated()
+var new_badges_needed = getBadgesToBeCreated()
+console.log("new_badges_needed: " + JSON.stringify(new_badges_needed))
+createBadges(new_badges_needed)
+
