@@ -240,7 +240,7 @@ function deleteAssertion() {
       print("SUCCESS: In deleteAssertion.. assertion deleted: {0}", JSON.stringify(data))
     },
     error: function(xhr, status, errMsg) { 
-      print("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1}", status, errMsg)
+      print("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}", xhr.status, status, errMsg)
     },
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
