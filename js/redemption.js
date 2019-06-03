@@ -281,11 +281,11 @@ function displaySpendEPText() {
 }
 
 function deleteAssertion(num) {
-  console.log("In deleteAssertions()")
+  ("In deleteAssertion")
   var badgeId = getBadgeId(selectedPrize);
   // var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, badgeId)
-  console.log
+  
   $.ajax({
     method: "DELETE",
     dataType: "json",
@@ -305,16 +305,18 @@ function deleteAssertion(num) {
 }
 
 function deleteAssertions(num) {
+  print("In deleteAssertions")
   for (i = 0;i<num;i++) {
     deleteAssertion()
   }
 }
 
 function createAssertion() {
+  print("In createAssertion")
   var badgeId = getBadgeId(selectedPrize);
   // var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, badgeId)
-  console.log
+  print("In createAssertion.. the assertion url is: {0}", assertion_url)
   $.ajax({
     method: "POST",
     dataType: "json",
@@ -336,6 +338,7 @@ function createAssertion() {
 }
 
 function createPrizeAssertions(ep_spent) {
+  print("In createPrizeAssertion")
   for (var i=0;i<ep_spent;i++) {
     createAssertion()
   }
@@ -347,16 +350,18 @@ function onSelectPrizeEvent(title) {
 }
 
 function onPlaceBidEvent() {
+  ep_spent = document.getElementById("num-spent-input").value;
+  if (ep_spent == 0) {
+    return true;
+  }
+  print("In onPlaceBidEvent")
   $("#welcome-title").text("Good job cryptonaut and good luck!")
   $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.")
   var msg = "Now you can continue to bid on another prize or go on back to the control center."
   $("#welcome-body").text(msg)
   $("#welcome-body").after('<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-primary">Control Center</a>')
   ep_saved = window.num_epiph_asserts
-  ep_spent = document.getElementById("num-spent-input").value
-  if (ep_spent == 0) {
-    return true
-  }
+
   ep_left = ep_saved - ep_spent
   createPrizeAssertions(ep_spent)
   deleteAssertions(ep_spent)
