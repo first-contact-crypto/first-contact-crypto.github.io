@@ -84,32 +84,14 @@ function print(fmt, ...args) {
 
 function getJSONData(url, sync, successfunc, errorfunc) {
   print("In getJSONData")
-  // alert(url);
-  // $.ajax(url, 
-  // {
-  //   dataType: 'json', // type of response data
-  //   timeout: 3000,     // timeout milliseconds
-  //   // success: function (data,status,xhr) {   // success callback function
-  //   //     $('p').append(data.firstName + ' ' + data.middleName + ' ' + data.lastName);
-  //   // },
-  //   // error: function (jqXhr, textStatus, errorMessage) { // error callback 
-  //   //     $('p').append('Error: ' + errorMessage);
-  //   // }
-  //   async: false,
-  //   success: successfunc,
-  //   error: errorfunc,
-  //   beforeSend: function(xhr) {
-  //                 xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
-  //               }
-  // });
-    $.ajax({
+  $.ajax({
     method: "GET",
     dataType: "json",
     processData: false,
-    async: false,
+    async: sync,
     contentType: "application/json",
     timeout: 3000,
-    url: badge_url,
+    url: url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
     success: successfunc,
@@ -188,31 +170,10 @@ function isEmpty(obj) {
 
 function getBadgeClasses() {
   print("In getBadgeClasses")
-  // https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp
-  //   return makeHttpRequest(BADGR_BADGECLASS_SINGLE_ISSUER_PATH, "GET");
-  // var xhttp = new XMLHttpRequest();
-  // xhttp.onreadystatechange = function() {
-  //   if (this.readyState == 4 && this.status == 200) {
-  //     badgeclasses_txt = this.responseText
-  //     alert(badgeclasses_txt)
-  //     badgeclasses = JSON.parse(this.responseText)
-      
-  //   } else {
-  //     print("What the FUCK: In getBadgeClasses.. ERROR")
-  //   }
-  // };
-  // xhttp.open("GET", BADGR_BASE_URL + format(BADGR_BADGECLASS_SINGLE_ISSUER_PATH, "rGy5MNWtQgSs1vfnLyPlmg")+"?t="+Math.random(), true);
-  // xhttp.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
-  // xhttp.send()
   getJSONData(format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     badgeclasses = data;
-    print("In getBadgeClasses.. badgclasses are {0}", badgeclasses)
-    // print("In getBadgeClasses.. badgeclasses is: {0}", JSON.stringify(badgeclasses))
-    // print("In getBadgeClasses.. badgeclasses is: {0}", JSON.stringify(window.badgeclasses))
-
-    // setDevButton("BadgeClasses", "<p>" + JSON.stringify(badgeclasses))
-
+    print("In getBadgeClasses.. badgclasses are {0}", JSON.stringify(window.badgeclasses))
   },
   function(jqXhr, textStatus, errorMessage) {
     print("ERROR: {0}, {1}", textStatus, errorMessage)
