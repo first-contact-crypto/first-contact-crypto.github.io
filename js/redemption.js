@@ -336,6 +336,9 @@ function getBadgeClassNamesList() {
 
 function getBadgesToBeCreated() {
   print("INFO: In getBadgesToBeCreated")
+  if (window.badgeclasses == null) {
+    testBadgesCreated();
+  }
   getBadgeClassNamesList()
   plSet = new Set(prizeList)
   bcSet = new Set(badgeclassNamesList)
