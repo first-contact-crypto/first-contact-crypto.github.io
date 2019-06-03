@@ -252,8 +252,8 @@ function deleteAssertions(num) {
 }
 
 function createAssertion() {
-  print("INFO: In createAssertion")
-  var badgeId = getBadgeId(selectedPrize);
+  print("INFO: In createAssertion.. the selected prize is: {0}", window.selectedPrize)
+  var badgeId = getBadgeId(window.selectedPrize);
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, badgeId)
   print("INFO: In createAssertion.. the assertion url is: {0}", assertion_url)
   $.ajax({
@@ -376,6 +376,7 @@ async function testAssertionsCreated() {
 function getBadgeId(name) {
   for (var i=0;i<window.badgeclasses.result.length;i++) {
     var bc = window.badgeclasses.result[i]
+    print("In getBadgeId.. bc.name={0} .. name={1}", bc.name, name)
     if (bc.name === name) {
       return bc.entityId
     }
