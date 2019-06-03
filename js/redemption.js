@@ -224,6 +224,7 @@ function displaySpendEPText() {
 function deleteAssertion() {
   ("In deleteAssertion")
   var assertion_slug = assertions.result[0].entityId
+  print("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug)
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, assertion_slug)
   
   $.ajax({
@@ -231,6 +232,7 @@ function deleteAssertion() {
     dataType: "json",
     processData: false,
     contentType: "application/json",
+    data: '{"revocation_reason": "Epiphany Point Spent"}',
     url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
