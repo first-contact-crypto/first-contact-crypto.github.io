@@ -84,23 +84,38 @@ function print(fmt, ...args) {
 
 function getJSONData(url, successfunc, errorfunc) {
   // alert(url);
-  $.ajax(url, 
-  {
-    dataType: 'json', // type of response data
-    timeout: 3000,     // timeout milliseconds
-    // success: function (data,status,xhr) {   // success callback function
-    //     $('p').append(data.firstName + ' ' + data.middleName + ' ' + data.lastName);
-    // },
-    // error: function (jqXhr, textStatus, errorMessage) { // error callback 
-    //     $('p').append('Error: ' + errorMessage);
-    // }
-    async: false,
+  // $.ajax(url, 
+  // {
+  //   dataType: 'json', // type of response data
+  //   timeout: 3000,     // timeout milliseconds
+  //   // success: function (data,status,xhr) {   // success callback function
+  //   //     $('p').append(data.firstName + ' ' + data.middleName + ' ' + data.lastName);
+  //   // },
+  //   // error: function (jqXhr, textStatus, errorMessage) { // error callback 
+  //   //     $('p').append('Error: ' + errorMessage);
+  //   // }
+  //   async: false,
+  //   success: successfunc,
+  //   error: errorfunc,
+  //   beforeSend: function(xhr) {
+  //                 xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+  //               }
+  // });
+    $.ajax({
+    method: "GET",
+    dataType: "json",
+    processData: false,
+    contentType: "application/json",
+    timeout: 3000,
+    url: badge_url,
+    // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
+    // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
     success: successfunc,
     error: errorfunc,
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
                 }
-  });
+  })
 }
 
 // function setDevButton(btnId, divId, htmlString) {
@@ -189,6 +204,7 @@ function getBadgeClasses() {
   getJSONData(format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     badgeclasses = data;
+    print("In getBadgeClasses.. badgclasses are {0}", badgeclasses)
     // print("In getBadgeClasses.. badgeclasses is: {0}", JSON.stringify(badgeclasses))
     // print("In getBadgeClasses.. badgeclasses is: {0}", JSON.stringify(window.badgeclasses))
 
@@ -266,7 +282,7 @@ function createBadges(name_list) {
   for (i=0;i<name_list.length;i++) {
     createBadge(name_list[i])
   }
-  createBadge(name_list[0])
+  // createBadge(name_list[0])
 }
 
 function displayUserInfo() {
@@ -385,9 +401,9 @@ function getPrizeList() {
 }
 
 function getBadgeClassNamesList() {
-  print("In getBadgeClassNameList.. {0}", badgeclasses.result.length)
-  for (var i=0;i<badgeclasses.result.length;i++) {
-    var name = badgeclasses.result[i].name 
+  print("In getBadgeClassNameList.. {0}", window.badgeclasses.result.length)
+  for (var i=0;i<window.badgeclasses.result.length;i++) {
+    var name = window.badgeclasses.result[i].name 
     // print("{0}", name)
     badgeclassNamesList.push(name)
   }
@@ -413,12 +429,12 @@ async function testBadgesCreated() {
     testBadgesCreated()
   }
   else {
-    print("..badgeclasses created..\\0/ {0}", badgeclasses.result.length)
+    print("In testBadgesCreated.. badgeclasses created.. \\0/ {0}", window.badgeclasses.result.length)
   }
 }
 
 function getBadgeId(name) {
-  for (var i=0;i<badgeclasses.result.length;i++) {
+  for (var i=0;i<window.badgeclasses.result.length;i++) {
     var bc = badgeclassess.result[i]
     if (bc.name === name) {
       return bc.entityId
