@@ -396,8 +396,9 @@ getAssertions()
 testAssertionsCreated()
 getPrizeList()
 print("INFO: In global_scope.. prizeList: {0}", prizeList.toString())
-var new_badges_needed = getBadgesToBeCreated().length;
-print("INFO: In global_scope.. new_badges_needed: {0}", new_badges_needed);
-if (new_badges_needed > 0) {createBadges(new_badges_needed)}
+var new_badges_needed = getBadgesToBeCreated();
+var num_badges_needed = new_badges_needed.length
+print("INFO: In global_scope.. num_badges_needed: {0}", num_badges_needed);
+if (num_badges_needed > 0) {createBadges(new_badges_needed)}
 
 
