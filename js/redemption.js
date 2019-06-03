@@ -222,8 +222,7 @@ function displaySpendEPText() {
 
 function deleteAssertion(num) {
   ("In deleteAssertion")
-  var badgeId = getBadgeId("epiphany");
-  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, badgeId)
+  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, BADGR_SERVER_SLUG_EPIPHANY)
   
   $.ajax({
     method: "DELETE",
