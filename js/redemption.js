@@ -82,7 +82,8 @@ function print(fmt, ...args) {
   console.log(format(fmt, ...args))
 }
 
-function getJSONData(url, successfunc, errorfunc) {
+function getJSONData(url, sync, successfunc, errorfunc) {
+  print("In getJSONData")
   // alert(url);
   // $.ajax(url, 
   // {
@@ -105,6 +106,7 @@ function getJSONData(url, successfunc, errorfunc) {
     method: "GET",
     dataType: "json",
     processData: false,
+    async: false,
     contentType: "application/json",
     timeout: 3000,
     url: badge_url,
@@ -185,6 +187,7 @@ function isEmpty(obj) {
 
 
 function getBadgeClasses() {
+  print("In getBadgeClasses")
   // https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp
   //   return makeHttpRequest(BADGR_BADGECLASS_SINGLE_ISSUER_PATH, "GET");
   // var xhttp = new XMLHttpRequest();
