@@ -94,7 +94,7 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     error: errorfunc,
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
-                  xhr.setRequestHeader("Content-Type", "application/json")
+                  // xhr.setRequestHeader("Content-Type", "application/json")
                 }
   })
 }
@@ -223,7 +223,8 @@ function displaySpendEPText() {
 
 function deleteAssertion() {
   ("In deleteAssertion")
-  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, BADGR_SERVER_SLUG_EPIPHANY)
+  var assertion_slug = assertions.result[0].entityId
+  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, assertion_slug)
   
   $.ajax({
     method: "DELETE",
