@@ -94,6 +94,7 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     error: errorfunc,
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+                  xhr.setRequestHeader("Content-Type", "application/json")
                 }
   })
 }
@@ -222,7 +223,7 @@ function displaySpendEPText() {
 
 function deleteAssertion() {
   ("In deleteAssertion")
-  var assertion_url = BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH + BADGR_SERVER_SLUG_EPIPHANY
+  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, BADGR_SERVER_SLUG_EPIPHANY)
   
   $.ajax({
     method: "DELETE",
@@ -238,7 +239,10 @@ function deleteAssertion() {
     error: function(xhr, status, errMsg) { 
       print("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1}", status, errMsg)
     },
-    beforeSend: function(xhr) {xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)}
+    beforeSend: function(xhr) {
+                  xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+                  xhr.setRequestHeader("Content-Type", "application/json")
+                }
   })
 }
 
@@ -270,6 +274,7 @@ function createAssertion() {
     },
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+                  xhr.setRequestHeader("Content-Type", "application/json")
                 }
   })
 }
