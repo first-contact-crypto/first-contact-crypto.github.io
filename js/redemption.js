@@ -83,7 +83,7 @@ function print(fmt, ...args) {
 }
 
 function getJSONData(url, sync, successfunc, errorfunc) {
-  print("In getJSONData")
+  print("INFO: In getJSONData")
   $.ajax({
     method: "GET",
     dataType: "json",
@@ -169,14 +169,14 @@ function isEmpty(obj) {
 
 
 function getBadgeClasses() {
-  print("In getBadgeClasses")
+  print("INFO: In getBadgeClasses")
   getJSONData(format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     badgeclasses = data;
-    print("In getBadgeClasses.. badgclasses are {0}", JSON.stringify(window.badgeclasses))
+    print("SUCCESS: In getBadgeClasses.. badgclasses are {0}", JSON.stringify(window.badgeclasses))
   },
   function(jqXhr, textStatus, errorMessage) {
-    print("ERROR: {0}, {1}", textStatus, errorMessage)
+    print("ERROR: In getBadgeClasses.. {0}, {1}", textStatus, errorMessage)
   });
 }
 
@@ -189,7 +189,7 @@ function getAssertions() {
     window.num_epiph_asserts = assertions.result.length
   },
   function(jqXhr, textStatus, errorMessage) {
-    print("ERROR: {0}, {1}", textStatus, errorMessage);
+    print("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
   });
 }
 
@@ -197,7 +197,7 @@ function getAssertions() {
 
 function createBadge(name) {
   var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
-  print("In createBadge.. badge_url is: {0}", badge_url)
+  print("INFO: In createBadge.. badge_url is: {0}", badge_url)
   $.ajax({
     method: "POST",
     dataType: "json",
@@ -206,10 +206,10 @@ function createBadge(name) {
     url: badge_url,
     data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     success: function(data, status, xhr) {
-      print("In createBadge.. badge created: {0}", JSON.stringify(data))
+      print("SUCCESS: In createBadge.. badge created: {0}", JSON.stringify(data))
     },
     error: function(xhr, status, errMsg) { 
-      print("In createBadge.. badge creation failed! {0} {1}", status, errMsg)
+      print("ERROR: In createBadge.. badge creation failed! {0} {1}", status, errMsg)
     },
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
@@ -249,27 +249,27 @@ function deleteAssertion(num) {
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
     success: function(data, status, xhr) {
-      print("In deleteAssertion.. assertion deleted: {0}", JSON.stringify(data))
+      print("SUCCESS: In deleteAssertion.. assertion deleted: {0}", JSON.stringify(data))
     },
     error: function(xhr, status, errMsg) { 
-      print("In deleteAssertion.. assertion deletion failed! {0} {1}", status, errMsg)
+      print("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1}", status, errMsg)
     },
     beforeSend: function(xhr) {xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)}
   })
 }
 
 function deleteAssertions(num) {
-  print("In deleteAssertions")
+  print("INFO: In deleteAssertions")
   for (i = 0;i<num;i++) {
     deleteAssertion()
   }
 }
 
 function createAssertion() {
-  print("In createAssertion")
+  print("INFO: In createAssertion")
   var badgeId = getBadgeId(selectedPrize);
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, badgeId)
-  print("In createAssertion.. the assertion url is: {0}", assertion_url)
+  print("INFO: In createAssertion.. the assertion url is: {0}", assertion_url)
   $.ajax({
     method: "POST",
     dataType: "json",
@@ -279,10 +279,10 @@ function createAssertion() {
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
     success: function(data, status, xhr) {
-      print("In createAssertion.. assertion created: {0}", JSON.stringify(data))
+      print("SUCCESS: In createAssertion.. assertion created: {0}", JSON.stringify(data))
     },
     error: function(xhr, status, errMsg) { 
-      print("In createAssertion.. assertion creation failed! {0} {1}", status, errMsg)
+      print("SUCCESS: In createAssertion.. assertion creation failed! {0} {1}", status, errMsg)
     },
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
@@ -291,7 +291,7 @@ function createAssertion() {
 }
 
 function createPrizeAssertions(ep_spent) {
-  print("In createPrizeAssertion")
+  print("INFO: In createPrizeAssertion")
   for (var i=0;i<ep_spent;i++) {
     createAssertion()
   }
@@ -307,7 +307,7 @@ function onPlaceBidEvent() {
   if (ep_spent == 0) {
     return true;
   }
-  print("In onPlaceBidEvent")
+  print("INFO: In onPlaceBidEvent")
   $("#welcome-title").text("Good job cryptonaut and good luck!")
   $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.")
   var msg = "Now you can continue to bid on another prize or go on back to the control center."
@@ -338,23 +338,23 @@ function getPrizeList() {
 }
 
 function getBadgeClassNamesList() {
-  print("In getBadgeClassNameList.. {0}", window.badgeclasses.result.length)
+  print("INFO: In getBadgeClassNameList.. {0}", window.badgeclasses.result.length)
   for (var i=0;i<window.badgeclasses.result.length;i++) {
     var name = window.badgeclasses.result[i].name 
     // print("{0}", name)
     badgeclassNamesList.push(name)
   }
-  print("bcnl: {0}", badgeclassNamesList.length)
+  print("INFO: bcnl: {0}", badgeclassNamesList.length)
   return badgeclassNamesList
 }
 
 function getBadgesToBeCreated() {
-  print("Here I am")
+  print("INFO: In getBadgesToBeCreated")
   getBadgeClassNamesList()
   plSet = new Set(prizeList)
   bcSet = new Set(badgeclassNamesList)
   outSet = new Set([...plSet].filter(x => !bcSet.has(x)))
-  print("size 1: {0} .. size 2: {1} .. size 3: {2}", plSet.size, bcSet.size, outSet.size)
+  print("INFO: In getBadgesToBeCreated.. size 1: {0} .. size 2: {1} .. size 3: {2}", plSet.size, bcSet.size, outSet.size)
   return Array.from(outSet)
 }
 
@@ -366,7 +366,7 @@ async function testBadgesCreated() {
     testBadgesCreated()
   }
   else {
-    print("In testBadgesCreated.. badgeclasses created.. \\0/ {0}", window.badgeclasses.result.length)
+    print("SUCCESS: In testBadgesCreated.. badgeclasses created.. \\0/ {0}", window.badgeclasses.result.length)
   }
 }
 
