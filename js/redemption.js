@@ -189,40 +189,15 @@ function getAssertions() {
     window.num_epiph_asserts = assertions.result.length
   },
   function(jqXhr, textStatus, errorMessage) {
-    // alert("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " + errorMessage + "textStatus: " + textStatus)
-    // setDevButton("BadgeClasses", "<h4>Assertions</h4><p>" + JSON.stringify("ERROR: In getBadgeClasses.. FAILED get badgeclasses request:: errorMessage: " 
-                      // + errorMessage + "textStatus: " + textStatus));
+    print("ERROR: {0}, {1}", textStatus, errorMessage);
   });
-  // var xhttp = new XMLHttpRequest();
-  // xhttp.onreadystatechange = function() {
-  //   if (this.readyState == 4 && this.status == 200) {
-  //     assertions_txt = this.responseText
-  //     alert(assertions_txt)
-  //     assertions = JSON.parse(this.responseText)
-
-  //     if (isEmpty(assertions) != false) {
-  //       console.log("SUCCESS from the assertions object parse. here is the entityId: " + assertions.result[0].entityId)
-  //     }
-  //     else {
-  //         console.log("ERROR: In getAssertions.. the assertions object is empty!")
-  //     }
-  //     // document.getElementById("demo").innerHTML = this.responseText;
-  //   //   document.getElementById("demo").innerHTML = window.useremail;
-  //   } else {
-  //     console.log("In getAssertions().. WHAT THE FUCK: " + this.status + " " + this.responseText)
-  //   }
-  // };
-  // var params = "recipient=" + window.useremail;
-  // xhttp.open("GET", BADGR_BASE_URL + format(BADGR_ASSERTION_ISSUER_PATH, BADGR_ISSUER_ID) + "?" + params, true)
-  // xhttp.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
-  // xhttp.send()
 }
 
 
 
 function createBadge(name) {
   var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
-  console.log
+  print("In createBadge.. badge_url is: {0}", badge_url)
   $.ajax({
     method: "POST",
     dataType: "json",
@@ -263,7 +238,6 @@ function displaySpendEPText() {
 function deleteAssertion(num) {
   ("In deleteAssertion")
   var badgeId = getBadgeId(selectedPrize);
-  // var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, badgeId)
   
   $.ajax({
@@ -294,7 +268,6 @@ function deleteAssertions(num) {
 function createAssertion() {
   print("In createAssertion")
   var badgeId = getBadgeId(selectedPrize);
-  // var badge_url = format("https://api.badgr.io/v2/issuers/{0}/badgeclasses", BADGR_ISSUER_ID)
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, badgeId)
   print("In createAssertion.. the assertion url is: {0}", assertion_url)
   $.ajax({
@@ -302,7 +275,7 @@ function createAssertion() {
     dataType: "json",
     processData: false,
     contentType: "application/json",
-    url: badge_url,
+    url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
     success: function(data, status, xhr) {
