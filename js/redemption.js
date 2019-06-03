@@ -381,7 +381,7 @@ getUrlVars()
 displayUserInfo()
 displaySpendEPText()
 getBadgeClasses()
-// testBadgesCreated()
+testBadgesCreated()
 
 var new_badges_needed = getBadgesToBeCreated()
 print("INFO: In global_scope.. new_badges_needed: {0}", JSON.stringify(new_badges_needed))
