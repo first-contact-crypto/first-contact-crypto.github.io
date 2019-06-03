@@ -1,3 +1,4 @@
+import { start } from "repl";
 
 
 const DEV_ENV = false;
@@ -352,11 +353,22 @@ function getBadgesToBeCreated() {
 }
 
 
-
+var started = false
+var now_time = 0
 async function testBadgesCreated() {
+  if (started === true) {
+    now_time += 3000
+  }
+  started = true 
   print("INFO: In testBadgesCreated")
   if (badgeclasses == null) {
     await sleep(500)
+    if (now_time > 6000) {
+      print("In testBadgesCreated.. WTF 6000 ms have passed, calling getBadgeClasses")
+      getBadgeClasses()
+      started = false
+      now_time = 0
+    }
     testBadgesCreated()
   }
   else {
