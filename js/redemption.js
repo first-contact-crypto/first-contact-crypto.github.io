@@ -342,10 +342,11 @@ function getBadgesToBeCreated() {
     testBadgesCreated();
   }
   getBadgeClassNamesList()
-  plSet = new Set(prizeList)
-  bcSet = new Set(badgeclassNamesList)
+
+  plSet = new Set(window.prizeList)
+  bcSet = new Set(window.badgeclassNamesList)
   outSet = new Set([...plSet].filter(x => !bcSet.has(x)))
-  print("INFO: In getBadgesToBeCreated.. size 1: {0} .. size 2: {1} .. size 3: {2}", plSet.size, bcSet.size, outSet.size)
+  print("INFO: In getBadgesToBeCreated.. plSet size: {0} .. bcSet size: {1} .. out size: {2}", plSet.size, bcSet.size, outSet.size)
   return Array.from(outSet)
 }
 
@@ -376,8 +377,8 @@ async function testAssertionsCreated() {
 function getBadgeId(name) {
   for (var i=0;i<window.badgeclasses.result.length;i++) {
     var bc = window.badgeclasses.result[i]
-    print("In getBadgeId.. bc.name={0} .. name={1}", bc.name, name)
     if (bc.name === name) {
+      print("In getBadgeId")
       return bc.entityId
     }
   }
@@ -393,12 +394,7 @@ testAssertionsCreated()
 getPrizeList()
 print("INFO: In global_scope.. prizeList: {0}", prizeList.toString())
 var new_badges_needed = getBadgesToBeCreated();
-print(
-  "INFO: In global_scope.. new_badges_needed: {0}",
-  JSON.stringify(new_badges_needed)
-);
-if (new_badges_needed > 0) {
-  createBadges(new_badges_needed);
-}
+print("INFO: In global_scope.. new_badges_needed: {0}", JSON.stringify(new_badges_needed));
+if (new_badges_needed > 0) {createBadges(new_badges_needed);}
 
 
