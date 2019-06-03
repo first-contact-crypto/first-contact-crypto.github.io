@@ -31,7 +31,7 @@ recipient.hashed = true
 recipient.plaintextIdentity = "string"
 
 var badgeclasses = null
-var assertions = {}
+var assertions = null
 var badgeclasses_txt = ""
 var assertions_txt = ""
 var prizeList = []
@@ -156,7 +156,7 @@ function isEmpty(obj) {
 
 function getBadgeClasses() {
   print("INFO: In getBadgeClasses")
-  getJSONData(false, format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
+  getJSONData(true, format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     badgeclasses = data;
     print("SUCCESS: In getBadgeClasses.. badgclasses are {0}", JSON.stringify(window.badgeclasses))
@@ -168,7 +168,7 @@ function getBadgeClasses() {
 
 function getAssertions() {
     print("INFO: In getAssertions")
-    getJSONData(false, format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
+    getJSONData(true, format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     assertions = data;
     // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
@@ -347,12 +347,24 @@ function getBadgesToBeCreated() {
 
 
 async function testBadgesCreated() {
+  print("INFO: In testBadgesCreated")
   if (badgeclasses == null) {
     await sleep(500)
     testBadgesCreated()
   }
   else {
     print("SUCCESS: In testBadgesCreated.. badgeclasses created.. \\0/ {0}", window.badgeclasses.result.length)
+  }
+}
+
+async function testAssertionsCreated() {
+  print("INFO: In testAssertionsCreated")
+  if (assertions == null) {
+    await sleep(500)
+    testAssertionsCreated()
+  }
+  else {
+    print("SUCCESS: In testAssertionsCreated.. assertins created.. \\0/ {0}", window.badgeclasses.result.length)
   }
 }
 
@@ -369,14 +381,16 @@ getUrlVars()
 displayUserInfo()
 displaySpendEPText()
 getBadgeClasses()
+// testBadgesCreated()
+
 var new_badges_needed = getBadgesToBeCreated()
 print("INFO: In global_scope.. new_badges_needed: {0}", JSON.stringify(new_badges_needed))
 if (new_badges_needed > 0) {
   createBadges(new_badges_needed)
 }
 getAssertions()
+testAssertionsCreated()
 getPrizeList()
 print("INFO: In global_scope.. prizeList: {0}" + prizeList.toString())
-// testBadgesCreated()
 
 
