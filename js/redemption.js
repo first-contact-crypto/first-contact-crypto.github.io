@@ -156,7 +156,7 @@ function isEmpty(obj) {
 
 function getBadgeClasses() {
   print("INFO: In getBadgeClasses")
-  getJSONData(true, format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
+  getJSONData(false, format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     badgeclasses = data;
     print("SUCCESS: In getBadgeClasses.. badgclasses are {0}", JSON.stringify(window.badgeclasses))
@@ -168,7 +168,7 @@ function getBadgeClasses() {
 
 function getAssertions() {
     print("INFO: In getAssertions")
-    getJSONData(true, format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
+    getJSONData(false, format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     assertions = data;
     // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
