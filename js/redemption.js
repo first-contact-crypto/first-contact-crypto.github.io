@@ -319,7 +319,7 @@ function getPrizeList() {
   print("INFO: In getPrizeList")
   $(".prize").each(function(index) {
     var txt = convertToSlug($(this).text())
-    print("In getPrizeList: the prize is: {0}", txt)
+    print("INFO: In getPrizeList.. the prize is: {0}", txt)
     window.prizeList.push(txt)
   });
   
@@ -388,15 +388,17 @@ displayUserInfo()
 displaySpendEPText()
 getBadgeClasses()
 testBadgesCreated()
-
-var new_badges_needed = getBadgesToBeCreated()
-print("INFO: In global_scope.. new_badges_needed: {0}", JSON.stringify(new_badges_needed))
-if (new_badges_needed > 0) {
-  createBadges(new_badges_needed)
-}
 getAssertions()
 testAssertionsCreated()
 getPrizeList()
 print("INFO: In global_scope.. prizeList: {0}", prizeList.toString())
+var new_badges_needed = getBadgesToBeCreated();
+print(
+  "INFO: In global_scope.. new_badges_needed: {0}",
+  JSON.stringify(new_badges_needed)
+);
+if (new_badges_needed > 0) {
+  createBadges(new_badges_needed);
+}
 
 
