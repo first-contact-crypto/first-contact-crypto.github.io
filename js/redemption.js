@@ -204,8 +204,8 @@ function createBadge(name) {
 }
 
 function createBadges(name_list) {
-  print("In createBadges..")
-  for (i=0;i<name_list.length;i++) {
+  print("In createBadges.. the number of badges to create is: {0} .. {1}", name_list.length, name_list.toString())
+  for (var i=0;i<name_list.length;i++) {
     createBadge(name_list[i])
   }
   // createBadge(name_list[0])
