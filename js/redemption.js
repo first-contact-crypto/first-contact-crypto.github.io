@@ -375,10 +375,12 @@ async function testAssertionsCreated() {
 }
 
 function getBadgeId(name) {
-  for (var i=0;i<window.badgeclasses.result.length;i++) {
-    var bc = window.badgeclasses.result[i]
+  var num = badgeclasses.result.length
+  print("In getBadgeId.. the num badgeclasses is: {0}", num)
+  for (var i=0;i<num;i++) {
+    var bc = window.badgeclasses.result[i]  
     if (bc.name === name) {
-      print("In getBadgeId")
+      print("In getBadgeId.. the bc.name is: {0} .. the name is: {1}", bc.name, name)
       return bc.entityId
     }
   }
