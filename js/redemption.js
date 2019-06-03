@@ -370,7 +370,7 @@ async function testAssertionsCreated() {
 
 function getBadgeId(name) {
   for (var i=0;i<window.badgeclasses.result.length;i++) {
-    var bc = window.badgeclassess.result[i]
+    var bc = window.badgeclasses.result[i]
     if (bc.name === name) {
       return bc.entityId
     }
