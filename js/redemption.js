@@ -82,7 +82,7 @@ function print(fmt, ...args) {
   console.log(format(fmt, ...args))
 }
 
-function getJSONData(url, sync, successfunc, errorfunc) {
+function getJSONData(sync, url, successfunc, errorfunc) {
   print("INFO: In getJSONData")
   $.ajax({
     method: "GET",
@@ -92,8 +92,6 @@ function getJSONData(url, sync, successfunc, errorfunc) {
     contentType: "application/json",
     timeout: 3000,
     url: url,
-    // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
-    // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
     success: successfunc,
     error: errorfunc,
     beforeSend: function(xhr) {
@@ -101,18 +99,6 @@ function getJSONData(url, sync, successfunc, errorfunc) {
                 }
   })
 }
-
-// function setDevButton(btnId, divId, htmlString) {
-//   // $("#my-container").append("<button id=\"" + btnId + "\">" + btnTxt + "</button>");
-//   // $("#"+btnId).click(function() {
-//   //   $("#my-container").append(htmlString);
-//   // });
-//   $("#"+divId).show();
-//   $(".show_hide").show();
-//   $('.show_hide').click(function(){
-//     $(".spread").toggle();
-// }
-
 
 function setVarsGlobally(vars) {
   window.username = vars.username
@@ -170,7 +156,7 @@ function isEmpty(obj) {
 
 function getBadgeClasses() {
   print("INFO: In getBadgeClasses")
-  getJSONData(format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
+  getJSONData(false, format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     badgeclasses = data;
     print("SUCCESS: In getBadgeClasses.. badgclasses are {0}", JSON.stringify(window.badgeclasses))
@@ -181,8 +167,8 @@ function getBadgeClasses() {
 }
 
 function getAssertions() {
-  // console.log("In getAssertions")
-    getJSONData(format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
+    print("INFO: In getAssertions")
+    getJSONData(false, format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     assertions = data;
     // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
@@ -330,7 +316,7 @@ function convertToSlug(text) {
 }
 
 function getPrizeList() {
-  console.log("In getPrizeList")
+  print("INFO: In getPrizeList")
   $(".prize").each(function(index, element) {
     prizeList.push(convertToSlug($(this).text()))
   });
@@ -383,11 +369,14 @@ getUrlVars()
 displayUserInfo()
 displaySpendEPText()
 getBadgeClasses()
+var new_badges_needed = getBadgesToBeCreated()
+print("INFO: In global_scope.. new_badges_needed: {0}", JSON.stringify(new_badges_needed))
+if (new_badges_needed > 0) {
+  createBadges(new_badges_needed)
+}
 getAssertions()
 getPrizeList()
-console.log("prizeList: " + prizeList.toString())
+print("INFO: In global_scope.. prizeList: {0}" + prizeList.toString())
 // testBadgesCreated()
-var new_badges_needed = getBadgesToBeCreated()
-console.log("new_badges_needed: " + JSON.stringify(new_badges_needed))
-createBadges(new_badges_needed)
+
 
