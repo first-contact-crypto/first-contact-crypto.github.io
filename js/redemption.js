@@ -318,7 +318,9 @@ function convertToSlug(text) {
 function getPrizeList() {
   print("INFO: In getPrizeList")
   $(".prize").each(function(index, element) {
-    prizeList.push(convertToSlug($(this).text()))
+    var txt = convertToSlug($(this).text())
+    print("In getPrizeList: the prize is: {0}", txt)
+    window.prizeList.push(txt)
   });
   
 }
@@ -356,7 +358,7 @@ async function testBadgesCreated() {
     testBadgesCreated()
   }
   else {
-    print("SUCCESS: In testBadgesCreated.. badgeclasses created.. \\0/ {0}", window.badgeclasses.result.length)
+    print("SUCCESS: In testBadgesCreated.. badgeclasses list created.. \\o/ {0}", window.badgeclasses.result.length)
   }
 }
 
@@ -367,7 +369,7 @@ async function testAssertionsCreated() {
     testAssertionsCreated()
   }
   else {
-    print("SUCCESS: In testAssertionsCreated.. assertins created.. \\0/ {0}", window.badgeclasses.result.length)
+    print("SUCCESS: In testAssertionsCreated.. assertions list created.. \\0/ {0}", window.badgeclasses.result.length)
   }
 }
 
