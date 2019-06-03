@@ -268,7 +268,7 @@ function createAssertion() {
       print("SUCCESS: In createAssertion.. assertion created: {0}", JSON.stringify(data))
     },
     error: function(xhr, status, errMsg) { 
-      print("SUCCESS: In createAssertion.. assertion creation failed! {0} {1}", status, errMsg)
+      print("ERROR: In createAssertion.. assertion creation failed! {0} {1}", status, errMsg)
     },
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
