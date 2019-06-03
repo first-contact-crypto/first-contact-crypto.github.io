@@ -204,6 +204,7 @@ function createBadge(name) {
 }
 
 function createBadges(name_list) {
+  print("In createBadges..")
   for (i=0;i<name_list.length;i++) {
     createBadge(name_list[i])
   }
@@ -395,8 +396,8 @@ getAssertions()
 testAssertionsCreated()
 getPrizeList()
 print("INFO: In global_scope.. prizeList: {0}", prizeList.toString())
-var new_badges_needed = getBadgesToBeCreated();
-print("INFO: In global_scope.. new_badges_needed: {0}", JSON.stringify(new_badges_needed));
-if (new_badges_needed > 0) {createBadges(new_badges_needed);}
+var new_badges_needed = getBadgesToBeCreated().length;
+print("INFO: In global_scope.. new_badges_needed: {0}", new_badges_needed.length);
+if (new_badges_needed.length > 0) {createBadges(new_badges_needed)}
 
 
