@@ -317,7 +317,7 @@ function convertToSlug(text) {
 
 function getPrizeList() {
   print("INFO: In getPrizeList")
-  $(".prize").each(function(index, element) {
+  $(".prize").each(function(index) {
     var txt = convertToSlug($(this).text())
     print("In getPrizeList: the prize is: {0}", txt)
     window.prizeList.push(txt)
