@@ -83,7 +83,7 @@ function print(fmt, ...args) {
 }
 
 function getJSONData(sync, url, successfunc, errorfunc) {
-  print("INFO: In getJSONData")
+  console.log("INFO: In getJSONData")
   $.ajax({
     method: "GET",
     dataType: "json",
@@ -396,6 +396,6 @@ if (new_badges_needed > 0) {
 getAssertions()
 testAssertionsCreated()
 getPrizeList()
-print("INFO: In global_scope.. prizeList: {0}" + prizeList.toString())
+print("INFO: In global_scope.. prizeList: {0}", prizeList.toString())
 
 
