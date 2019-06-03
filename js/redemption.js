@@ -232,7 +232,7 @@ function deleteAssertion() {
     dataType: "json",
     processData: false,
     contentType: "application/json",
-    data: '{"revocation_reason": "Epiphany Point Spent"}',
+    data: JSON.stringify({"revocation_reason": "Epiphany Point Spent"}),
     url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
