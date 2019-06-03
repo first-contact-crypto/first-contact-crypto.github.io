@@ -220,9 +220,9 @@ function displaySpendEPText() {
   document.getElementById("num-spent-input").setAttribute("max", window.num_epiph_asserts);
 }
 
-function deleteAssertion(num) {
+function deleteAssertion() {
   ("In deleteAssertion")
-  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, BADGR_SERVER_SLUG_EPIPHANY)
+  var assertion_url = BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH + BADGR_SERVER_SLUG_EPIPHANY
   
   $.ajax({
     method: "DELETE",
@@ -243,7 +243,7 @@ function deleteAssertion(num) {
 }
 
 function deleteAssertions(num) {
-  print("INFO: In deleteAssertions")
+  print("INFO: In deleteAssertions.. deleting {0}", num)
   for (i = 0;i<num;i++) {
     deleteAssertion()
   }
