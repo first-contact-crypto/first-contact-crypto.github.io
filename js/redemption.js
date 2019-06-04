@@ -240,7 +240,9 @@ function deleteAssertion() {
       print("SUCCESS: In deleteAssertion.. assertion deleted: {0}", JSON.stringify(data))
     },
     error: function(xhr, status, errMsg) { 
-      print("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}", xhr.status, status, errMsg)
+      if (xhr.status != 200) {
+        print("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}", xhr.status, status, errMsg)
+      }
     },
     beforeSend: function(xhr) {
                   xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
@@ -253,6 +255,7 @@ function deleteAssertions(num) {
   print("INFO: In deleteAssertions.. deleting {0}", num)
   for (i = 0;i<num;i++) {
     deleteAssertion()
+    num_epiph_asserts -= 1
   }
 }
 
@@ -300,9 +303,14 @@ function onPlaceBidEvent() {
     return true;
   }
   print("INFO: In onPlaceBidEvent")
+
+  ep_left = ep_saved - ep_spent
+  createPrizeAssertions(ep_spent)
+  deleteAssertions(ep_spent)
+  
   $("#welcome-title").text("Good job cryptonaut and good luck!")
   $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.")
-  var msg = "Now you can continue to bid on another prize or go on back to the control center."
+  var msg = "Now you can continue to bid on another prize with your remaining" + num_epiph_asserts + "Epiphany Points, or go on back to the control center to earn some more!"
   $("#welcome-body").text(msg)
   $("#welcome-body").after('<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-primary">Control Center</a>')
   ep_saved = window.num_epiph_asserts
@@ -310,6 +318,7 @@ function onPlaceBidEvent() {
   ep_left = ep_saved - ep_spent
   createPrizeAssertions(ep_spent)
   deleteAssertions(ep_spent)
+
   return true
 }
 
