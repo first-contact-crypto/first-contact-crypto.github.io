@@ -142,6 +142,8 @@ body {
   color: #fff; }
 
 .card-img-top {
-  width: 600px;
-  height: 400px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
