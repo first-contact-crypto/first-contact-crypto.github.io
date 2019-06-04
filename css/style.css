@@ -140,3 +140,8 @@ body {
 .modal-dialog.modal-notify .modal-body {
   padding: 1.5rem;
   color: #fff; }
+
+.card-img-top {
+  width: 400px;
+  height: 600px;
+}
