@@ -154,3 +154,7 @@ body {
   margin-right: auto;
   display: block;
 }
+
+.my-card-deck {
+  background-color: #000;
+}
