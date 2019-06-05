@@ -38,7 +38,8 @@ body {
 
 /* indigo-accent-1 */
 .my-color-primary {
-  color: #ddd !important;
+  color: #fff !important;
+  font-weight: normal;
 }
 
 .my-color-secondary {
