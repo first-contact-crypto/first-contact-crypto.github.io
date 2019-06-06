@@ -210,10 +210,10 @@ function createBadges(name_list) {
   // createBadge(name_list[0])
 }
 
-function displayUserInfo() {
-  // document.getElementById("demo").innerHTML = window.username + ";" + window.useremail + ";" + window.epiphany_issuer_id + ";" + window.epiphany_badgeclass_id;
-  document.getElementById("introductory-text").innerHTML = "Congratulations " + window.username + " You currently have " + window.num_epiph_asserts + " Epiphany Points to spend.";
-}
+// function displayUserInfo() {
+//   // document.getElementById("demo").innerHTML = window.username + ";" + window.useremail + ";" + window.epiphany_issuer_id + ";" + window.epiphany_badgeclass_id;
+//   document.getElementById("introductory-text").innerHTML = "Congratulations " + window.username + " You currently have " + window.num_epiph_asserts + " Epiphany Points to spend.";
+// }
 
 function displaySpendEPText() {
   console.log("In displaySpendEPText.. ")
@@ -368,6 +368,7 @@ function getBadgesToBeCreated() {
 
 var started = false
 var now_time = 0
+
 async function testBadgesCreated() {
   if (started === true) {
     now_time += 3000
@@ -413,7 +414,7 @@ function getBadgeId(name) {
 }
 
 getUrlVars()
-displayUserInfo()
+// displayUserInfo()
 displaySpendEPText()
 window.alert(window.num_epiph_asserts)
 getBadgeClasses()
