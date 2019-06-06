@@ -216,7 +216,7 @@ function displayUserInfo() {
 }
 
 function displaySpendEPText() {
-  alert("In displaySpendEPText() : {0}", window.num_epiph_asserts);
+  console.log("In displaySpendEPText.. ")
   document.getElementById("spend-ep-text").innerHTML = "You currently have " + window.num_epiph_asserts + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
   document.getElementById("num-spent-input").setAttribute("max", window.num_epiph_asserts);
 }
