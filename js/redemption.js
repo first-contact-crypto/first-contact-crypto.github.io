@@ -416,7 +416,6 @@ function getBadgeId(name) {
 getUrlVars()
 // displayUserInfo()
 displaySpendEPText()
-window.alert(window.num_epiph_asserts)
 getBadgeClasses()
 testBadgesCreated()
 getAssertions()
