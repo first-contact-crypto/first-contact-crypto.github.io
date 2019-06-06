@@ -725,18 +725,30 @@
             </h6>
             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
               style="width: 60px;">
+<<<<<<< HEAD
             <!-- <p>
               <a href="about.html">About Us</a>
             </p> -->
+=======
+            <p>
+              <a href="about.html">About Us</a>
+            </p>
+>>>>>>> redemption_update
             <p>
               <a href="terms-of-use.html">Terms of use</a>
             </p>
             <p>
               <a href="privacy-policy.html">Privacy Policy</a>
             </p>
+<<<<<<< HEAD
             <!-- <p>
-              <!-- <a href="help.html">Help</a> -->
+              <a href="help.html">Help</a>
             </p> -->
+=======
+            <p>
+              <!-- <a href="help.html">Help</a> -->
+            </p>
+>>>>>>> redemption_update
           </div>
           <!--/.Third column-->
 

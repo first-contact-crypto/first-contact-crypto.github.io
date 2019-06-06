@@ -553,9 +553,15 @@
             <p>
               <a href="privacy-policy.html">Privacy Policy</a>
             </p>
+<<<<<<< HEAD
             <!-- <p>
-              <!-- <a href="help.html">Help</a> -->
+              <a href="help.html">Help</a>
             </p> -->
+=======
+            <p>
+              <!-- <a href="help.html">Help</a> -->
+            </p>
+>>>>>>> redemption_update
           </div>
           <!--/.Third column-->
 
