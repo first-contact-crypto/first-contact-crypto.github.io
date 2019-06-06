@@ -299,20 +299,21 @@ function onSelectPrizeEvent(title) {
 
 function onPlaceBidEvent() {
   ep_spent = document.getElementById("num-spent-input").value;
+  ep_saved = window.num_epiph_asserts
   if (ep_spent == 0) {
-    return true;
+    return true
   }
   print("INFO: In onPlaceBidEvent")
 
   ep_left = ep_saved - ep_spent
   createPrizeAssertions(ep_spent)
   deleteAssertions(ep_spent)
-  
+  $("#welcome-video").remove()
   $("#welcome-title").text("Good job cryptonaut and good luck!")
   $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.")
   var msg = "Now you can continue to bid on another prize with your remaining" + num_epiph_asserts + "Epiphany Points, or go on back to the control center to earn some more!"
-  $("#welcome-body").text(msg)
-  $("#welcome-body").after('<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-primary">Control Center</a>')
+  $("#congrats-instructions").text(msg)
+  $("#congrats-instructions").after('<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-primary">Control Center</a>')
   ep_saved = window.num_epiph_asserts
 
   ep_left = ep_saved - ep_spent
@@ -414,7 +415,6 @@ function getBadgeId(name) {
 }
 
 getUrlVars()
-// displayUserInfo()
 displaySpendEPText()
 getBadgeClasses()
 testBadgesCreated()
