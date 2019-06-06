@@ -4,17 +4,16 @@ html {
 
 html,
 body,
-header,
 #intro {
   height: 100%;
 }
 
 body {
   /* background:
-    #000 
-    url("../img/loopable-stars-4096x2304.png") 
-    no-repeat 
-    center 
+    #000
+    url("../img/loopable-stars-4096x2304.png")
+    no-repeat
+    center
     center
     fixed; */
     background-image: url("../img/loopable-stars-4096x2304.png");
