@@ -181,6 +181,7 @@ function getAssertions() {
   print("INFO: In getAssertions.. the num assertions before: {0}", assertions.result.length)
   for (i=0;i<window.assertions.result.length;++i) {
     a = window.assertions.result[i]
+    print("INFO: In getAssertions.. assertion.recipient.identity: {0} window.useremail: {1}", a.recipient.identity, window.useremail)
     if (a.recipient.identity === window.useremail) {
       window.assertions.result.splice(i, 1)
     }
