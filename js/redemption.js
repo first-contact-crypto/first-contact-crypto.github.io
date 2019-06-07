@@ -35,6 +35,8 @@ var assertions_txt = ""
 var prizeList = []
 var badgeclassNamesList = []
 var selectedPrize = ""
+var timer_started = false;
+var timer_now_time = 0;
 
 
         // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
@@ -104,7 +106,6 @@ function setVarsGlobally(vars) {
   window.useremail = vars.useremail
   window.epiphany_badgeclass_id = vars.epiphany_badgeclass_id
   window.epiphany_issuer_id = vars.epiphany_issuer_id
-  window.num_epiph_asserts = vars.num_epiph_asserts
 }
 
 
@@ -139,7 +140,7 @@ function getUrlVars() {
   }
   var vars = {
     // num_epiph_asserts: Object.keys(assertions).length,
-    num_epiph_asserts: pc_pkg.num_epiph_asserts,
+    // num_epiph_asserts: pc_pkg.num_epiph_asserts,
     epiphany_badgeclass_id: BADGR_SERVER_SLUG_EPIPHANY,
     epiphany_issuer_id: "rGy5MNWtQgSs1vfnLyPlmg",
     username: username,
@@ -157,7 +158,7 @@ function getBadgeClasses() {
   print("INFO: In getBadgeClasses")
   getJSONData(false, format(BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH, BADGR_ISSUER_ID), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
-    badgeclasses = data;
+    window.badgeclasses = data;
     print("SUCCESS: In getBadgeClasses.. badgclasses are {0}", JSON.stringify(window.badgeclasses))
   },
   function(jqXhr, textStatus, errorMessage) {
@@ -169,13 +170,22 @@ function getAssertions() {
     print("INFO: In getAssertions")
     getJSONData(false, format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, BADGR_SERVER_SLUG_EPIPHANY), function(data, status, jqXhr) {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
-    assertions = data;
+    window.assertions = data;
     // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
-    window.num_epiph_asserts = assertions.result.length
+    window.num_epiph_asserts = assertions.result[0].length
+    print("INFO: In getAssertions.. window.num_epiph_asserts: {0}", window.num_epiph_asserts)
   },
   function(jqXhr, textStatus, errorMessage) {
     print("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
   });
+  print("INFO: In getAssertions.. the num assertions before: {0}", assertions.result.length)
+  for (i=0;i<window.assertions.result.length;++i) {
+    a = window.assertions.result[i]
+    if (a.recipient.identity === window.useremail) {
+      window.assertions.result.splice(i, 1)
+    }
+  }
+    print("INFO: In getAssertions.. the num assertions after: {0}", assertions.result.length)
 }
 
 
@@ -368,18 +378,18 @@ function getBadgesToBeCreated() {
 }
 
 
-var started = false
-var now_time = 0
+
 
 async function testBadgesCreated() {
+    print("INFO: In testBadgesCreated")
   if (started === true) {
-    now_time += 3000
+    window.timer_now_time += 3000
   }
   started = true 
   print("INFO: In testBadgesCreated")
   if (badgeclasses == null) {
     await sleep(500)
-    if (now_time > 6000) {
+    if (window.timer_now_time > 6000) {
       print("In testBadgesCreated.. WTF 6000 ms have passed, calling getBadgeClasses")
       getBadgeClasses()
       started = false
@@ -394,12 +404,16 @@ async function testBadgesCreated() {
 
 async function testAssertionsCreated() {
   print("INFO: In testAssertionsCreated")
+    if (started === true) {
+      window.timer_now_time += 3000;
+    }
+    started = true; 
   if (assertions == null) {
     await sleep(500)
     testAssertionsCreated()
   }
   else {
-    print("SUCCESS: In testAssertionsCreated.. assertions list created.. \\0/ {0}", window.badgeclasses.result.length)
+    print("SUCCESS: In testAssertionsCreated.. assertions list created.. \\0/ {0}", window.assertions.result.length)
   }
 }
 
@@ -416,11 +430,12 @@ function getBadgeId(name) {
 }
 
 getUrlVars()
-displaySpendEPText()
 getBadgeClasses()
+
 testBadgesCreated()
 getAssertions()
 testAssertionsCreated()
+displaySpendEPText()
 getPrizeList()
 print("INFO: In global_scope.. prizeList: {0}", prizeList.toString())
 var new_badges_needed = getBadgesToBeCreated();
