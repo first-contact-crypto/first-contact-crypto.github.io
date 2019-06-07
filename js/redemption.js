@@ -306,12 +306,13 @@ function onPlaceBidEvent() {
   print("INFO: In onPlaceBidEvent")
 
   ep_left = ep_saved - ep_spent
+  print("INFO: ep_left: {0} ep_saved: {1} ep_spent: {2}", ep_left, ep_saved, ep_spent)
   createPrizeAssertions(ep_spent)
   deleteAssertions(ep_spent)
   $("#welcome-video").remove()
   $("#welcome-title").text("Good job cryptonaut and good luck!")
   $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.")
-  var msg = "Now you can continue to bid on another prize with your remaining" + num_epiph_asserts + "Epiphany Points, or go on back to the control center to earn some more!"
+  var msg = "Now you can continue to bid on another prize with your remaining " + ep_left + " Epiphany Points, or go on back to the control center to earn some more!"
   $("#congrats-instructions").text(msg)
   $("#congrats-instructions").after('<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-primary">Control Center</a>')
   ep_saved = window.num_epiph_asserts
