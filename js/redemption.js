@@ -172,7 +172,7 @@ function getAssertions() {
     // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
     window.assertions = data;
     // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
-    window.num_epiph_asserts = assertions.result[0].length
+    window.num_epiph_asserts = assertions.result.length
     print("INFO: In getAssertions.. window.num_epiph_asserts: {0}", window.num_epiph_asserts)
   },
   function(jqXhr, textStatus, errorMessage) {
@@ -182,7 +182,7 @@ function getAssertions() {
   for (i=0;i<window.assertions.result.length;++i) {
     a = window.assertions.result[i]
     print("INFO: In getAssertions.. assertion.recipient.identity: {0} window.useremail: {1}", a.recipient.identity, window.useremail)
-    if (a.recipient.identity === window.useremail) {
+    if (a.recipient.identity != window.useremail) {
       window.assertions.result.splice(i, 1)
     }
   }
