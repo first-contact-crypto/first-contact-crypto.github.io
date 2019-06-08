@@ -518,15 +518,18 @@ async function testAssertionsCreated() {
 }
 
 function getBadgeId(name) {
+  if (window.badgeclasses == null) {
+    testBadgesCreated();
+  }
   var num = badgeclasses.result.length;
   PRINT(
-    "In getBadgeId.. the num badgeclasses is: {0} .. the name is: {1}",
+    "DASHBOARD: In getBadgeId.. the num badgeclasses is: {0} .. the name is: {1}",
     num,
     name
   );
   for (var i = 0; i < num; i++) {
     var bc = window.badgeclasses.result[i];
-    // PRINT("In getBadgeId.. the bc.name is: {0} .. the name is: {1}", bc.name, name)
+    PRINT("DASHBOARD: In getBadgeId.. the bc.name is: {0} .. the name is: {1}", bc.name, name)
     if (bc.name === name) {
       return bc.entityId;
     }
@@ -536,14 +539,15 @@ function getBadgeId(name) {
 getUrlVars();
 getBadgeClasses();
 testBadgesCreated();
+var new_badges_needed = getBadgesToBeCreated();
+var num_badges_needed = new_badges_needed.length;
+PRINT("DASHBOARD: In global_scope.. num_badges_needed: {0}", num_badges_needed);
+if (num_badges_needed > 0) {
+  createBadges(new_badges_needed);
+}
 getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
 getPrizeList();
 PRINT("INFO: In global_scope.. prizeList: {0}", prizeList.toString());
-var new_badges_needed = getBadgesToBeCreated();
-var num_badges_needed = new_badges_needed.length;
-PRINT("INFO: In global_scope.. num_badges_needed: {0}", num_badges_needed);
-if (num_badges_needed > 0) {
-  createBadges(new_badges_needed);
-}
+
