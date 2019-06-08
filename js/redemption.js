@@ -274,6 +274,9 @@ function displaySpendEPText() {
 
 function deleteAssertion() {
   ("In deleteAssertion");
+  if (assertions.result.length == 0) {
+    return 
+  }
   var assertion_slug = assertions.result[0].entityId;
   print("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug);
   var assertion_url = format(

@@ -34,6 +34,6 @@ function mySetInterval(countDownDate) {
 }
 
 
-mySetInterval()
-// mySetInterval("countdown-timer-bitcoin5",bitcoin5CountDownDate)
+mySetInterval(bitcoin5CountDownDate)
+// mySetInterval("countdown-timer-bitcoin5",)
 // mySetInterval("countdown-timer-amazon5", amazon5CountDownDate)
