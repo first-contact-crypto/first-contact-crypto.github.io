@@ -1,5 +1,5 @@
 // Set the date we're counting down to
-var keepkeyCountDownDate = new Date("June 16, 2019 23:59:59").getTime()
+var keepkeyCountDownDate = new Date("July 7, 2019 23:59:59").getTime()
 var bitcoin5CountDownDate = new Date("June 16, 2019 23:59:59").getTime()
 var amazon5CountDownDate = new Date("June 16, 2019 23:59:59").getTime()
 
