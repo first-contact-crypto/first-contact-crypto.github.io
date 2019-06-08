@@ -4,7 +4,7 @@ var bitcoin5CountDownDate = new Date("June 16, 2019 23:59:59").getTime()
 var amazon5CountDownDate = new Date("June 16, 2019 23:59:59").getTime()
 
 // Update the count down every 1 second
-function mySetInterval(el_id, countDownDate, end_date) {
+function mySetInterval(el_id, countDownDate, end_date, end_date_el) {
     var x = setInterval(function() {
     // Get today's date and time
         var now = new Date().getTime()
@@ -22,7 +22,7 @@ function mySetInterval(el_id, countDownDate, end_date) {
         // document.getElementById("countdown-timer-keepkey").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
         // document.getElementById("countdown-timer-bitcoin5").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
         // document.getElementById("countdown-timer-amazon5").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
-        document.getElementById(el_id).before().innerHTML = "Ends " + end_date
+        document.getElementById(end_date_el).innerHTML = "Ends " + end_date
         document.getElementById(el_id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
         // If the count down is finished, write some text
         if (distance < 0) {
@@ -37,6 +37,6 @@ function mySetInterval(el_id, countDownDate, end_date) {
 }
 
 
-mySetInterval("countdown-timer-keepkey", keepkeyCountDownDate, "July 7, 2019")
-mySetInterval("countdown-timer-bitcoin5",bitcoin5CountDownDate, "June 16, 2019")
-mySetInterval("countdown-timer-amazon5", amazon5CountDownDate), "June 16, 2019")
+mySetInterval("countdown-timer-keepkey", keepkeyCountDownDate, "July 7, 2019", "keepkey-end-date")
+mySetInterval("countdown-timer-bitcoin5",bitcoin5CountDownDate, "June 16, 2019", "bitcoin5-end-date")
+mySetInterval("countdown-timer-amazon5", amazon5CountDownDate), "June 16, 2019", "amazon5-end-date")
