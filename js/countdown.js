@@ -22,7 +22,7 @@ function mySetInterval(el_id, countDownDate, end_date, end_date_el) {
         // document.getElementById("countdown-timer-keepkey").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
         // document.getElementById("countdown-timer-bitcoin5").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
         // document.getElementById("countdown-timer-amazon5").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
-        document.getElementById(end_date_el).innerHTML = "Ends " + end_date
+        // document.getElementById(end_date_el).innerHTML = "Ends " + end_date
         document.getElementById(el_id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
         // If the count down is finished, write some text
         if (distance < 0) {
