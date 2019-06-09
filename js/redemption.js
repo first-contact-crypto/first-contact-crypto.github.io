@@ -92,7 +92,6 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     error: errorfunc,
     beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-      // xhr.setRequestHeader("Content-Type", "application/json")
     }
   });
 }
@@ -242,6 +241,7 @@ function createBadge(name) {
     },
     beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
 }
@@ -337,19 +337,19 @@ function createAssertion() {
     badgeId
   );
   PRINT("INFO: In createAssertion.. the assertion url is: {0}", assertion_url);
+  PRINT("INFO: In createAssertion.. the window.useremail is {0} ,the window.username is {1}", window.useremail, window.useremail)
   $.ajax({
     method: "POST",
     dataType: "json",
     processData: false,
     contentType: "application/json",
     url: assertion_url,
-    // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     data: JSON.stringify({
       recipient: {
-        identity: useremail,
+        identity: window.useremail,
         type: "email",
         hashed: false,
-        plaintextIdentity: username
+        plaintextIdentity: window.username
       }
     }),
     success: function(data, status, xhr) {
