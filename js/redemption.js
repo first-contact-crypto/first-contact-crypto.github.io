@@ -30,6 +30,7 @@ var badgeclassNamesList = []
 var selectedPrize = ""
 var timer_started = false
 var timer_now_time = 0
+var GitHub = require('github-api')
 var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
 // var gh = new GitHub({username: '', password: ''})
 var gh_fcc = gh.getOrganization('first-contact-crypto')
