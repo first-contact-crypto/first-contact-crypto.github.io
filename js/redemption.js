@@ -315,11 +315,8 @@ function createAssertion() {
   PRINT("INFO: In createAssertion.. the selected prize is: {0}", window.selectedPrize);
   var badgeId = getBadgeId(window.selectedPrize);
   PRINT("In createAssertion.. the selected prize id: {0}", badgeId)
-  var assertion_url = format(
-    BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
-    badgeId
-  );
-  PRINT("In createAssertion.. the useremail is: {0}, the username is: {1} assertion url is: {3}", username, useremail, assertion_url);
+  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, badgeId);
+  PRINT("In createAssertion.. the useremail is: {0}, the username is: {1} assertion url is: {2}", username, useremail, assertion_url);
   $.ajax({
     method: "POST",
     dataType: "json",
