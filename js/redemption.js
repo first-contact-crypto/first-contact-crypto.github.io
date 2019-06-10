@@ -535,7 +535,7 @@ function prizeAccounting() {
     processData: false,
     contentType: "application/json",
     timeout: 3000,
-    url: "https://api.github.com/zen",
+    url: "https://api.github.com/users/defunkt",
     success: function(data, status, jqXhr) {
       window.assertions = data;
       window.num_epiph_asserts = assertions.result.length;
