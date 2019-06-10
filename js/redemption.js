@@ -83,7 +83,7 @@ function PRINT(fmt, ...args) {
   console.log(format(fmt, ...args))
 }
 
-function getJSONData(sync, url, successfunc, errorfunc, ) {
+function getJSONData(sync, url, successfunc, errorfunc) {
   console.log("INFO: In getJSONData")
   $.ajax({
     method: "GET",
