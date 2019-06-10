@@ -537,16 +537,12 @@ function prizeAccounting() {
     timeout: 3000,
     url: "https://api.github.com/users/defunkt",
     success: function(data, status, jqXhr) {
-      window.assertions = data;
-      window.num_epiph_asserts = assertions.result.length;
       PRINT("SUCCESS: In prizeAccounting.. data: {0}", data);
     },
     error: function(jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In prizeAccounting.. {0}, {1}", textStatus, errorMessage);
     },
     beforeSend: function(xhr) {
-      // xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
-      // xhr.setRequestHeader("Content-Type", "application/json")
       xhr.setRequestHeader("User-Agent", "First-Contact-Crypto");
     }
   });
