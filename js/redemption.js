@@ -547,8 +547,8 @@ function prizeAccounting() {
       PRINT("ERROR: In prizeAccounting.. {0}, {1}", textStatus, errorMessage);
     },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("User-Agent", "First-Contact-Crypto");
-
+      xhr.setRequestHeader("User-Agent", "First-Contact-Crypto")
+      xhr.setRequestHeader("Authorization", "token 1f833cd7447f5822c6986f625a3a6bb70c04a936")
     }
   });
 }
