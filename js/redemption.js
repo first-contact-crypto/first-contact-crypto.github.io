@@ -544,8 +544,10 @@ var epSpent = {
 function prizeAccounting() {
   bp = null
   PRINT("INFO: In prizeAccounting.. window.selectedPrize is: {0}", window.selectedPrize)
+  var badgeId = getBadgeId(window.selectedPrize)
   for (b in window.badgeclasses) {
-    if (b.entityId === getBadgeId(window.selectedPrize)) {
+    PRINT("INFO In prizeAccounting.. b.entityId: {0}, getBadgeId(selectedPrize): {1}", b.entityId, badgeId)
+    if (b.entityId === badgeId) {
       bp = b 
     }
   }
@@ -582,7 +584,7 @@ function prizeAccounting() {
     });
   }
   else {
-    PRINT("ERROR: In prizeAccounting.. the prize badgeclass {0}, was NOT FOUND in the badge_class list!", bp.name)
+    PRINT("ERROR: In prizeAccounting.. the prize badgeclass {0}, was NOT FOUND in the badge_class list! {1}", window.selectedPrize, window.badgeclasses)
   }
 }
 
