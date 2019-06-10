@@ -412,14 +412,14 @@ function onPlaceBidEvent() {
       '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-border-success btn-sm">Mission Control</a>'
     );
     ep_saved = window.num_epiph_asserts;
-    prizeAccounting();
+    
   }
 
 
   ep_left = ep_saved - ep_spent;
   // createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
-
+  prizeAccounting();
   return true;
 }
 
