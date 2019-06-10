@@ -30,6 +30,12 @@ var badgeclassNamesList = []
 var selectedPrize = ""
 var timer_started = false
 var timer_now_time = 0
+var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
+// var gh = new GitHub({username: '', password: ''})
+var gh_fcc = gh.getOrganization('first-contact-crypto')
+var gist_id = "1b4318e76e5c02436425a1a8f754cec4"
+var gist = gh.getGist(gist_id)
+
 
 // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
 // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_efc20af1 - 7d43 - 4d1e - 877e-447244ea3fd3.png
@@ -322,7 +328,6 @@ function createAssertion() {
     processData: false,
     contentType: "application/json",
     url: assertion_url,
-    // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     data: JSON.stringify(
       {
         recipient: {
@@ -516,6 +521,18 @@ function getBadgeId(name) {
   }
 }
 
+function prize_accounting() {
+  var fcc_data = null
+  gh_gist.read(function(error, result, request) {
+    fcc_data = result.data
+  });
+  alert(fcc_data)
+}
+
+
+prize_accounting()
+
+
 getUrlVars();
 getBadgeClasses();
 testBadgesCreated();
@@ -532,3 +549,4 @@ testAssertionsCreated();
 displaySpendEPText();
 
 
+// ff2254e5a7e7154411a13ea7dfb60fbb941158c0

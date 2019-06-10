@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/mdbootstrap/bootstrap-material-design/issues"
   },
-  "homepage": "https://mdbootstrap.com"
+  "homepage": "https://mdbootstrap.com",
+  "dependencies": {
+    "github-api": "^3.2.0"
+  }
 }
