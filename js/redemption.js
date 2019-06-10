@@ -401,7 +401,6 @@ function onPlaceBidEvent() {
   }
   else {
     msg = "Now.. go back to Mission Control and earn more Epiphany Points!"
-  }
     $("#congrats-instructions").text(msg);
     $("#congrats-instructions").after(
       '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-border-success btn-sm">Mission Control</a>'
