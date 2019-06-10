@@ -229,6 +229,7 @@ function createBadge(name) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
     }
   });
+  getBadgeClasses()
 }
 
 function createBadges(name_list) {
