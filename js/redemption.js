@@ -447,11 +447,11 @@ function getBadgesToBeCreated() {
 
   prizeListSet = new Set(window.prizeList);
   badgeClassNameListSet = new Set(window.badgeclassNamesList);
-  outSet = new Set([...plSet].filter(x => !bcSet.has(x)));
+  outSet = new Set([...prizeListSet].filter(x => !badgeClassNameListSet.has(x)));
   PRINT(
     "INFO: In getBadgesToBeCreated.. prizeListSet size: {0} .. badgeClassNameListSet size: {1} .. out size: {2}",
-    plSet.size,
-    bcSet.size,
+    prizeListSet.size,
+    badgeClassNameListSet.size,
     outSet.size
   );
   return Array.from(outSet);
