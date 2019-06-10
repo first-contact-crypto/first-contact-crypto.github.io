@@ -546,12 +546,13 @@ function prizeAccounting() {
     },
     beforeSend: function(xhr) {
       xhr.setRequestHeader("User-Agent", "First-Contact-Crypto");
-      xhr.setRequestHeader("Authorization", "ff2254e5a7e7154411a13ea7dfb60fbb941158c0");
+      xhr.setRequestHeader("Authorization", "token ff2254e5a7e7154411a13ea7dfb60fbb941158c0");
     }
   });
 }
 
 prizeAccounting()
+
 
 getUrlVars();
 getBadgeClasses();
