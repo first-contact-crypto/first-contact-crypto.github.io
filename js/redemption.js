@@ -536,7 +536,7 @@ function prizeAccounting() {
     async: sync,
     contentType: "application/json",
     timeout: 3000,
-    url: url,
+    url: "https://api.github.com/zen",
     success: function(data, status, jqXhr) {
       window.assertions = data;
       window.num_epiph_asserts = assertions.result.length;
