@@ -527,6 +527,7 @@ function getBadgeId(name) {
 }
 
 var gh_url = "https://api.github.com/user/repos";
+var params = "?username=travlr:kY38T@ENpXz*t*N2";
 
 function prizeAccounting() {
   // Authorize
@@ -537,8 +538,8 @@ function prizeAccounting() {
     processData: false,
     contentType: "application/json",
     timeout: 3000,
-    data: { username: "travlr:kY38T@ENpXz*t*N2" },
-    url: gh_url,
+    // data: {"username": "travlr:kY38T@ENpXz*t*N2"},
+    url: gh_url + params,
     success: function(data, status, jqXhr) {
       PRINT("SUCCESS: In prizeAccounting.. data: {0}", data);
     },
@@ -547,6 +548,7 @@ function prizeAccounting() {
     },
     beforeSend: function(xhr) {
       xhr.setRequestHeader("User-Agent", "First-Contact-Crypto");
+
     }
   });
 }
