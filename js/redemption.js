@@ -533,7 +533,6 @@ function prizeAccounting() {
     method: "GET",
     dataType: "json",
     processData: false,
-    async: sync,
     contentType: "application/json",
     timeout: 3000,
     url: "https://api.github.com/zen",
@@ -571,4 +570,4 @@ testAssertionsCreated();
 displaySpendEPText();
 
 
-// ff2254e5a7e7154411a13ea7dfb60fbb941158c0
+// ff2254e5a7e7154411a13ea7dfb60fbb941158c0`
