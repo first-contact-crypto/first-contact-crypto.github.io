@@ -528,7 +528,7 @@ function getBadgeId(name) {
 
 function prizeAccounting() {
   // Authorize
-  console.log("INFO: In getJSONData");
+  console.log("INFO: In prizeAccounting");
   $.ajax({
     method: "GET",
     dataType: "json",
