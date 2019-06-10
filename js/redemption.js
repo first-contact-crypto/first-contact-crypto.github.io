@@ -1,41 +1,35 @@
 const DEV_ENV = false;
 
-// {
-//   "badgr_access_token": "eQYBJeoj8MD5CNNGiW9lbhmrqoGYTz",
-//   "badgr_refresh_token": "ScStrEeMla8gfXfR70Xxmm0sEW1zRY"
-// }
+const BADGR_ACCESS_TOKEN = "iZZHCNoDE7RBjuI0f8DpWtNGkLmx7l"
+const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg"
+const BADGR_COURSE_TYPE = "course"
+const BADGR_EPIPHANY_TYPE = "epiphany"
+const BADGR_REDEMPTION_TYPE = "redemption"
+const BADGR_BASE_URL = "https://api.badgr.io/"
+const BADGR_SERVER_SLUG_EPIPHANY = "V_MaSinhQJeKGOtZz6tDAQ"
+const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw"
 
-const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg";
-const BADGR_ACCESS_TOKEN = "wOFWgXg3Gv1t4TWsEy1FJjWkSZSn4A";
-const BADGR_COURSE_TYPE = "course";
-const BADGR_EPIPHANY_TYPE = "epiphany";
-const BADGR_REDEMPTION_TYPE = "redemption";
-const BADGR_BASE_URL = "https://api.badgr.io/";
-const BADGR_SERVER_SLUG_EPIPHANY = "V_MaSinhQJeKGOtZz6tDAQ";
-const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw";
-
-var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"; // issuer id
-var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions"; // badge_class entityId
-var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions";
-var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}";
+var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses" // issuer id
+var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions" // badge_class entityId
+var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions"
+var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}"
 
 // https://api.badgr.io/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
 
-var recipient = new Object();
-recipient.identity = "string";
-recipient.type = "email";
-recipient.hashed = true;
-recipient.plaintextIdentity = "string";
-
-var badgeclasses = null;
-var assertions = null;
-var badgeclasses_txt = "";
-var assertions_txt = "";
-var prizeList = [];
-var badgeclassNamesList = [];
-var selectedPrize = "";
-var timer_started = false;
-var timer_now_time = 0;
+var recipient = new Object()
+recipient.identity = "string"
+recipient.type = "email"
+recipient.hashed = true
+recipient.plaintextIdentity = "string"
+var badgeclasses = null
+var assertions = null
+var badgeclasses_txt = ""
+var assertions_txt = ""
+var prizeList = []
+var badgeclassNamesList = []
+var selectedPrize = ""
+var timer_started = false
+var timer_now_time = 0
 
 // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
 // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_efc20af1 - 7d43 - 4d1e - 877e-447244ea3fd3.png
@@ -56,16 +50,16 @@ function format(fmt, ...args) {
   // retstr = format("blah: {0}", "the_var")
   // https://coderwall.com/p/flonoa/simple-string-format-in-javascript <BOTTOM OF THE PAGE>
   if (!fmt.match(/^(?:(?:(?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{[0-9]+\}))+$/)) {
-    throw new Error("invalid format string.");
+    throw new Error("invalid format string.")
   }
   return fmt.replace(
     /((?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{([0-9]+)\})/g,
     (m, str, index) => {
       if (str) {
-        return str.replace(/(?:{{)|(?:}})/g, m => m[0]);
+        return str.replace(/(?:{{)|(?:}})/g, m => m[0])
       } else {
         if (index >= args.length) {
-          throw new Error("argument index is out of range in format");
+          throw new Error("argument index is out of range in format")
         }
         return args[index];
       }
@@ -75,11 +69,11 @@ function format(fmt, ...args) {
 
 function PRINT(fmt, ...args) {
   // Use this for debug statements;
-  console.log(format(fmt, ...args));
+  console.log(format(fmt, ...args))
 }
 
 function getJSONData(sync, url, successfunc, errorfunc) {
-  console.log("INFO: In getJSONData");
+  console.log("INFO: In getJSONData")
   $.ajax({
     method: "GET",
     dataType: "json",
@@ -91,25 +85,25 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     success: successfunc,
     error: errorfunc,
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
       // xhr.setRequestHeader("Content-Type", "application/json")
     }
   });
 }
 
 function setVarsGlobally(vars) {
-  window.username = vars.username;
-  window.useremail = vars.useremail;
-  window.epiphany_badgeclass_id = vars.epiphany_badgeclass_id;
-  window.epiphany_issuer_id = vars.epiphany_issuer_id;
+  window.username = vars.username
+  window.useremail = vars.useremail
+  window.epiphany_badgeclass_id = vars.epiphany_badgeclass_id
+  window.epiphany_issuer_id = vars.epiphany_issuer_id
 }
 
 function getURLParameter(parameterName) {
   var result = null,
     tmp = [];
-  var items = location.search.substr(1).split("&");
+  var items = location.search.substr(1).split("&")
   for (var index = 0; index < items.length; index++) {
-    tmp = items[index].split("=");
+    tmp = items[index].split("=")
     if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
   }
   return result;
