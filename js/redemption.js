@@ -1,3 +1,5 @@
+// var GitHub = require("github-api");
+
 const DEV_ENV = false;
 
 const BADGR_ACCESS_TOKEN = "iZZHCNoDE7RBjuI0f8DpWtNGkLmx7l"
@@ -30,12 +32,14 @@ var badgeclassNamesList = []
 var selectedPrize = ""
 var timer_started = false
 var timer_now_time = 0
-var GitHub = require('github-api')
-var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
-// var gh = new GitHub({username: '', password: ''})
-var gh_fcc = gh.getOrganization('first-contact-crypto')
-var gist_id = "1b4318e76e5c02436425a1a8f754cec4"
-var gist = gh.getGist(gist_id)
+
+// var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
+// // var gh = new GitHub({username: '', password: ''})
+// var gh_fcc = gh.getOrganization('first-contact-crypto')
+// var gist_id = "1b4318e76e5c02436425a1a8f754cec4"
+// var gist = gh.getGist(gist_id)
+
+
 
 
 // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
@@ -79,7 +83,7 @@ function PRINT(fmt, ...args) {
   console.log(format(fmt, ...args))
 }
 
-function getJSONData(sync, url, successfunc, errorfunc) {
+function getJSONData(sync, url, successfunc, errorfunc, ) {
   console.log("INFO: In getJSONData")
   $.ajax({
     method: "GET",
@@ -522,17 +526,29 @@ function getBadgeId(name) {
   }
 }
 
-function prize_accounting() {
-  var fcc_data = null
-  gh_gist.read(function(error, result, request) {
-    fcc_data = result.data
+function prizeAccounting() {
+  // Authorize
+  console.log("INFO: In getJSONData");
+  $.ajax({
+    method: "GET",
+    dataType: "json",
+    processData: false,
+    async: sync,
+    contentType: "application/json",
+    timeout: 3000,
+    url: url,
+    success: successfunc,
+    error: errorfunc,
+    beforeSend: function(xhr) {
+      // xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+      // xhr.setRequestHeader("Content-Type", "application/json")
+      xhr.setRequestHeader("User-Agent", "First-Contact-Crypto")
+
+    }
   });
-  alert(fcc_data)
 }
 
-
-prize_accounting()
-
+prizeAccounting()
 
 getUrlVars();
 getBadgeClasses();
