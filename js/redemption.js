@@ -312,10 +312,7 @@ function deleteAssertions(num) {
 }
 
 function createAssertion() {
-  PRINT(
-    "INFO: In createAssertion.. the selected prize is: {0}",
-    window.selectedPrize
-  );
+  PRINT("INFO: In createAssertion.. the selected prize is: {0}", window.selectedPrize);
   var badgeId = getBadgeId(window.selectedPrize);
   PRINT("In createAssertion.. the selected prize id: {0}", badgeId)
   var assertion_url = format(
