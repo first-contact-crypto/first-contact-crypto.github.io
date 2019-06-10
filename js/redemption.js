@@ -537,6 +537,7 @@ function prizeAccounting() {
     processData: false,
     contentType: "application/json",
     timeout: 3000,
+    data: { username: "travlr:kY38T@ENpXz*t*N2" },
     url: gh_url,
     success: function(data, status, jqXhr) {
       PRINT("SUCCESS: In prizeAccounting.. data: {0}", data);
@@ -546,7 +547,6 @@ function prizeAccounting() {
     },
     beforeSend: function(xhr) {
       xhr.setRequestHeader("User-Agent", "First-Contact-Crypto");
-      xhr.setRequestHeader("Authorization", "token ff2254e5a7e7154411a13ea7dfb60fbb941158c0");
     }
   });
 }
