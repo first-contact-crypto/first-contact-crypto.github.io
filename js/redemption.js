@@ -322,7 +322,7 @@ function createAssertion() {
     BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
     badgeId
   );
-  PRINT("In createAssertion.. the assertion url is: {0}", assertion_url);
+  PRINT("In createAssertion.. the useremail is: {0}, the username is: {1} assertion url is: {3}", username, useremail, assertion_url);
   $.ajax({
     method: "POST",
     dataType: "json",
