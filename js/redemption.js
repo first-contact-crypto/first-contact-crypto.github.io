@@ -526,6 +526,8 @@ function getBadgeId(name) {
   }
 }
 
+var gh_url = "https://api.github.com/user/repos";
+
 function prizeAccounting() {
   // Authorize
   console.log("INFO: In prizeAccounting");
@@ -535,7 +537,7 @@ function prizeAccounting() {
     processData: false,
     contentType: "application/json",
     timeout: 3000,
-    url: "https://api.github.com/users/defunkt",
+    url: gh_url,
     success: function(data, status, jqXhr) {
       PRINT("SUCCESS: In prizeAccounting.. data: {0}", data);
     },
@@ -544,6 +546,7 @@ function prizeAccounting() {
     },
     beforeSend: function(xhr) {
       xhr.setRequestHeader("User-Agent", "First-Contact-Crypto");
+      xhr.setRequestHeader("Authorization", "ff2254e5a7e7154411a13ea7dfb60fbb941158c0");
     }
   });
 }
@@ -567,3 +570,5 @@ displaySpendEPText();
 
 
 // ff2254e5a7e7154411a13ea7dfb60fbb941158c0`
+
+
