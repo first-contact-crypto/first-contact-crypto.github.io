@@ -172,9 +172,7 @@ function getAssertions() {
       BADGR_SERVER_SLUG_EPIPHANY
     ),
     function(data, status, jqXhr) {
-      // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
       window.assertions = data;
-      // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
       window.num_epiph_asserts = assertions.result.length;
       PRINT("INFO: In getAssertions.. window.num_epiph_asserts: {0}", window.num_epiph_asserts);
     },
@@ -349,7 +347,6 @@ function createAssertion() {
     },
     beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-      xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
 }
