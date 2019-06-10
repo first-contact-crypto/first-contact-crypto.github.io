@@ -316,7 +316,7 @@ function createAssertion() {
   var badgeId = getBadgeId(window.selectedPrize);
   PRINT("In createAssertion.. the selected prize id: {0}", badgeId)
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, badgeId);
-  PRINT("In createAssertion.. the useremail is: {0}, the username is: {1} assertion url is: {2}", username, useremail, assertion_url);
+  PRINT("In createAssertion.. the username is: {0}, the useremail is: {1} assertion url is: {2}", username, useremail, assertion_url);
   $.ajax({
     method: "POST",
     dataType: "json",
@@ -324,12 +324,13 @@ function createAssertion() {
     contentType: "application/json",
     url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
-    data: JSON.stringify({
-      recipient: {
-        identity: useremail,
-        type: "email",
-        hashed: false,
-        plaintextIdentity: username
+    data: JSON.stringify(
+      {
+        recipient: {
+          identity: useremail,
+          type: "email",
+          hashed: false,
+          plaintextIdentity: username
       }
     }),
     success: function(data, status, xhr) {
@@ -427,10 +428,7 @@ function getPrizeList() {
 }
 
 function getBadgeClassNamesList() {
-  PRINT(
-    "INFO: In getBadgeClassNameList.. {0}",
-    window.badgeclasses.result.length
-  );
+  PRINT("INFO: In getBadgeClassNameList.. the window.badgeclasses length is: {0}", window.badgeclasses.result.length);
   for (var i = 0; i < window.badgeclasses.result.length; i++) {
     var name = window.badgeclasses.result[i].name;
     // PRINT("{0}", name)
@@ -447,11 +445,11 @@ function getBadgesToBeCreated() {
   }
   getBadgeClassNamesList();
 
-  plSet = new Set(window.prizeList);
-  bcSet = new Set(window.badgeclassNamesList);
+  prizeListSet = new Set(window.prizeList);
+  badgeClassNameListSet = new Set(window.badgeclassNamesList);
   outSet = new Set([...plSet].filter(x => !bcSet.has(x)));
   PRINT(
-    "INFO: In getBadgesToBeCreated.. plSet size: {0} .. bcSet size: {1} .. out size: {2}",
+    "INFO: In getBadgesToBeCreated.. prizeListSet size: {0} .. badgeClassNameListSet size: {1} .. out size: {2}",
     plSet.size,
     bcSet.size,
     outSet.size
@@ -523,6 +521,8 @@ function getBadgeId(name) {
 getUrlVars();
 getBadgeClasses();
 testBadgesCreated();
+getPrizeList();
+PRINT("INFO: In global_scope.. prizeList: {0}", prizeList.toString());
 var new_badges_needed = getBadgesToBeCreated();
 var num_badges_needed = new_badges_needed.length;
 PRINT("DASHBOARD: In global_scope.. num_badges_needed: {0}", num_badges_needed);
@@ -532,6 +532,5 @@ if (num_badges_needed > 0) {
 getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
-getPrizeList();
-PRINT("INFO: In global_scope.. prizeList: {0}", prizeList.toString());
+
 
