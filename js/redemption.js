@@ -33,6 +33,9 @@ var badgeclassNamesList = []
 var selectedPrize = ""
 var timer_started = false
 var timer_now_time = 0
+var ep_spent = 0;
+var ep_saved = 0;
+var ep_left = 0;
 
 // var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
 // // var gh = new GitHub({username: '', password: ''})
@@ -369,7 +372,7 @@ function createPrizeAssertions(ep_spent) {
 }
 
 function onSelectPrizeEvent(title) {
-  selectedPrize = convertToSlug(title);
+  window.selectedPrize = convertToSlug(title);
   $("#placeBidModal").modal();
 }
 
@@ -388,7 +391,7 @@ function onPlaceBidEvent() {
     ep_saved,
     ep_spent
   );
-  createPrizeAssertions(ep_spent);
+  // createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
   // $("#welcome-video").remove();
   $("#welcome-title").text("Good job cryptonaut and good luck!");
@@ -409,11 +412,12 @@ function onPlaceBidEvent() {
       '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-border-success btn-sm">Mission Control</a>'
     );
     ep_saved = window.num_epiph_asserts;
+    prizeAccounting();
   }
 
 
   ep_left = ep_saved - ep_spent;
-  createPrizeAssertions(ep_spent);
+  // createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
 
   return true;
@@ -539,8 +543,9 @@ var epSpent = {
 
 function prizeAccounting() {
   bp = null
+  PRINT("INFO: In prizeAccounting.. window.selectedPrize is: {0}", window.selectedPrize)
   for (b in window.badgeclasses) {
-    if (b.entityId === getBadgeId(selectedPrize)) {
+    if (b.entityId === getBadgeId(window.selectedPrize)) {
       bp = b 
     }
   }
@@ -599,6 +604,5 @@ getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
 
-prizeAccounting();
 
 
