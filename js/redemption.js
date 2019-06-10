@@ -15,6 +15,7 @@ var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses" // issue
 var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions" // badge_class entityId
 var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions"
 var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}"
+var BADGR_BADGECLASS_UPDATE_PATH = "v2/badgeclasses/{0}"
 
 // https://api.badgr.io/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
 
@@ -238,7 +239,6 @@ function createBadge(name) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
     }
   });
-  getBadgeClasses()
 }
 
 function createBadges(name_list) {
@@ -250,7 +250,7 @@ function createBadges(name_list) {
   for (var i = 0; i < name_list.length; i++) {
     createBadge(name_list[i]);
   }
-  // createBadge(name_list[0])
+  getBadgeClasses()
 }
 
 // function displayUserInfo() {
@@ -527,33 +527,61 @@ function getBadgeId(name) {
 }
 
 var gh_url = "https://api.github.com/user/repos";
-var params = "?username=travlr:kY38T@ENpXz*t*N2";
+var params = ""
 
-function prizeAccounting() {
-  // Authorize
-  console.log("INFO: In prizeAccounting");
-  $.ajax({
-    method: "GET",
-    dataType: "json",
-    processData: false,
-    contentType: "application/json",
-    timeout: 3000,
-    // data: {"username": "travlr:kY38T@ENpXz*t*N2"},
-    url: gh_url + params,
-    success: function(data, status, jqXhr) {
-      PRINT("SUCCESS: In prizeAccounting.. data: {0}", data);
-    },
-    error: function(jqXhr, textStatus, errorMessage) {
-      PRINT("ERROR: In prizeAccounting.. {0}, {1}", textStatus, errorMessage);
-    },
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader("User-Agent", "First-Contact-Crypto")
-      xhr.setRequestHeader("Authorization", "token 1f833cd7447f5822c6986f625a3a6bb70c04a936")
-    }
-  });
+var epSpent = {
+  name: "",
+  email: "",
+  prize: "",
+  numEPSpent: 0,
+  timestamp: 0
 }
 
-prizeAccounting()
+function prizeAccounting() {
+  bp = null
+  for (b in window.badgeclasses) {
+    if (b.entityId === getBadgeId(selectedPrize)) {
+      bp = b 
+    }
+  }
+  if (bp) {
+    epSpent.name = username
+    epSpent.email = useremail
+    epSpent.prize = selectedPrize
+    epSpent.numEPSpent = ep_spent
+    epSpent.timestamp = Date().getTime();
+    bp.extensions = epSpent
+    $.ajax({
+      method: "POST",
+      dataType: "json",
+      processData: false,
+      contentType: "application/json",
+      url: BADGR_BASE_URL + format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
+      data: JSON.stringify(bp),
+      success: function(data, status, xhr) {
+        PRINT(
+          "SUCCESS: In prizeAccounting: {0}",
+          JSON.stringify(data)
+        );
+      },
+      error: function(xhr, status, errMsg) {
+        PRINT(
+          "ERROR: In prizeAccounting.. badgeclass update FAILED! {0} {1}",
+          status,
+          errMsg
+        );
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      }
+    });
+  }
+  else {
+    PRINT("ERROR: In prizeAccounting.. the prize badgeclass {0}, was NOT FOUND in the badge_class list!", bp.name)
+  }
+}
+
+
 
 
 getUrlVars();
@@ -571,7 +599,6 @@ getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
 
-
-// ff2254e5a7e7154411a13ea7dfb60fbb941158c0`
+prizeAccounting();
 
 
