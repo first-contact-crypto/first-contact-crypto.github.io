@@ -566,7 +566,6 @@ function getBadgeId(name) {
 
 function prizeAccounting() {
   var success = true;
-  var emptyFilterList = false
   var prizeAssertion = {
     name: "",
     email: "",
@@ -647,38 +646,45 @@ function prizeAccounting() {
         "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
         JSON.stringify(prizeAssertions)
       );
-
-      $.ajax({
-        method: "PUT",
-        dataType: "json",
-        processData: false,
-        contentType: "application/json",
-        url: BADGR_BASE_URL + format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
-        data: JSON.stringify(bp),
-        success: function(data, status, xhr) {
-
-          PRINT("SUCCESS: In prizeAccounting: {0}", JSON.stringify(data));
-        },
-        error: function(xhr, status, errMsg) {
-          success = false;
-          PRINT(
-            "ERROR: In prizeAccounting.. badgeclass update FAILED! {0} {1}",
-            status,
-            errMsg
-          );
-        },
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-          xhr.setRequestHeader("Content-Type", "application/json")
-        }
-      });
-
     } else {
-      emptyFilterList = true
       PRINT(
         "INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER"
       );
     }
+    $.ajax({
+      method: "PUT",
+      dataType: "json",
+      processData: false,
+      contentType: "application/json",
+      url:
+        BADGR_BASE_URL +
+        format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
+      data: JSON.stringify(bp),
+      success: function(data, status, xhr) {
+        PRINT(
+          "SUCCESS: In prizeAccounting: {0}",
+          JSON.stringify(data)
+        );
+      },
+      error: function(xhr, status, errMsg) {
+        success = false;
+        PRINT(
+          "ERROR: In prizeAccounting.. badgeclass update FAILED! {0} {1}",
+          status,
+          errMsg
+        );
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader(
+          "Authorization",
+          "Bearer " + BADGR_ACCESS_TOKEN
+        );
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/json"
+        );
+      }
+    });
     deleteAssertion()
     getBadgeClasses()
     testBadgesCreated()
