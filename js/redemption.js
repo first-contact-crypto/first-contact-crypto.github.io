@@ -2,37 +2,37 @@
 
 const DEV_ENV = false;
 
-const BADGR_ACCESS_TOKEN = "9GfvZ9bTXjyYiHVzcT9BfbXUg5wqYp"
-const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg"
-const BADGR_COURSE_TYPE = "course"
-const BADGR_EPIPHANY_TYPE = "epiphany"
-const BADGR_REDEMPTION_TYPE = "redemption"
-const BADGR_BASE_URL = "https://api.badgr.io/"
-const BADGR_SERVER_SLUG_EPIPHANY = "V_MaSinhQJeKGOtZz6tDAQ"
-const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw"
+const BADGR_ACCESS_TOKEN = "9GfvZ9bTXjyYiHVzcT9BfbXUg5wqYp";
+const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg";
+const BADGR_COURSE_TYPE = "course";
+const BADGR_EPIPHANY_TYPE = "epiphany";
+const BADGR_REDEMPTION_TYPE = "redemption";
+const BADGR_BASE_URL = "https://api.badgr.io/";
+const BADGR_SERVER_SLUG_EPIPHANY = "V_MaSinhQJeKGOtZz6tDAQ";
+const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw";
 
-var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses" // issuer id
-var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions" // badge_class entityId
-var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions"
-var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}"
-var BADGR_BADGECLASS_UPDATE_PATH = "v2/badgeclasses/{0}"
+var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"; // issuer id
+var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions"; // badge_class entityId
+var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions";
+var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}";
+var BADGR_BADGECLASS_UPDATE_PATH = "v2/badgeclasses/{0}";
 
 // https://api.badgr.io/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
 
-var recipient = new Object()
-recipient.identity = "string"
-recipient.type = "email"
-recipient.hashed = true
-recipient.plaintextIdentity = "string"
-var badgeclasses = null
-var assertions = null
-var badgeclasses_txt = ""
-var assertions_txt = ""
-var prizeList = []
-var badgeclassNamesList = []
-var selectedPrize = ""
-var timer_started = false
-var timer_now_time = 0
+var recipient = new Object();
+recipient.identity = "string";
+recipient.type = "email";
+recipient.hashed = true;
+recipient.plaintextIdentity = "string";
+var badgeclasses = null;
+var assertions = null;
+var badgeclasses_txt = "";
+var assertions_txt = "";
+var prizeList = [];
+var badgeclassNamesList = [];
+var selectedPrize = "";
+var timer_started = false;
+var timer_now_time = 0;
 var ep_spent = 0;
 var ep_saved = 0;
 var ep_left = 0;
@@ -42,9 +42,6 @@ var ep_left = 0;
 // var gh_fcc = gh.getOrganization('first-contact-crypto')
 // var gist_id = "1b4318e76e5c02436425a1a8f754cec4"
 // var gist = gh.getGist(gist_id)
-
-
-
 
 // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
 // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_efc20af1 - 7d43 - 4d1e - 877e-447244ea3fd3.png
@@ -65,16 +62,16 @@ function format(fmt, ...args) {
   // retstr = format("blah: {0}", "the_var")
   // https://coderwall.com/p/flonoa/simple-string-format-in-javascript <BOTTOM OF THE PAGE>
   if (!fmt.match(/^(?:(?:(?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{[0-9]+\}))+$/)) {
-    throw new Error("invalid format string.")
+    throw new Error("invalid format string.");
   }
   return fmt.replace(
     /((?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{([0-9]+)\})/g,
     (m, str, index) => {
       if (str) {
-        return str.replace(/(?:{{)|(?:}})/g, m => m[0])
+        return str.replace(/(?:{{)|(?:}})/g, m => m[0]);
       } else {
         if (index >= args.length) {
-          throw new Error("argument index is out of range in format")
+          throw new Error("argument index is out of range in format");
         }
         return args[index];
       }
@@ -84,11 +81,11 @@ function format(fmt, ...args) {
 
 function PRINT(fmt, ...args) {
   // Use this for debug statements;
-  console.log(format(fmt, ...args))
+  console.log(format(fmt, ...args));
 }
 
 function getJSONData(sync, url, successfunc, errorfunc) {
-  console.log("INFO: In getJSONData")
+  console.log("INFO: In getJSONData");
   $.ajax({
     method: "GET",
     dataType: "json",
@@ -100,25 +97,25 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     success: successfunc,
     error: errorfunc,
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN)
+      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
       // xhr.setRequestHeader("Content-Type", "application/json")
     }
   });
 }
 
 function setVarsGlobally(vars) {
-  window.username = vars.username
-  window.useremail = vars.useremail
-  window.epiphany_badgeclass_id = vars.epiphany_badgeclass_id
-  window.epiphany_issuer_id = vars.epiphany_issuer_id
+  window.username = vars.username;
+  window.useremail = vars.useremail;
+  window.epiphany_badgeclass_id = vars.epiphany_badgeclass_id;
+  window.epiphany_issuer_id = vars.epiphany_issuer_id;
 }
 
 function getURLParameter(parameterName) {
   var result = null,
     tmp = [];
-  var items = location.search.substr(1).split("&")
+  var items = location.search.substr(1).split("&");
   for (var index = 0; index < items.length; index++) {
-    tmp = items[index].split("=")
+    tmp = items[index].split("=");
     if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
   }
   return result;
@@ -189,27 +186,35 @@ function getAssertions() {
     function(data, status, jqXhr) {
       window.assertions = data;
       window.num_epiph_asserts = assertions.result.length;
-      PRINT("INFO: In getAssertions.. window.num_epiph_asserts: {0}", window.num_epiph_asserts);
+      PRINT(
+        "INFO: In getAssertions.. window.num_epiph_asserts: {0}",
+        window.num_epiph_asserts
+      );
     },
     function(jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
     }
   );
-  var num_assertions_before = assertions.result.length
-  var assertions_list = assertions.result
+  var num_assertions_before = assertions.result.length;
+  var assertions_list = assertions.result;
 
   PRINT(
-    "INFO: In getAssertions.. the num assertions before: {0}", num_assertions_before);
-  var assertions_to_keep = []
-  for (i = 0; i < num_assertions_before;++i) {
-    a = assertions_list[i]
+    "INFO: In getAssertions.. the num assertions before: {0}",
+    num_assertions_before
+  );
+  var assertions_to_keep = [];
+  for (i = 0; i < num_assertions_before; ++i) {
+    a = assertions_list[i];
     if (a.recipient.identity === useremail) {
-      assertions_to_keep.push(a)
+      assertions_to_keep.push(a);
     }
   }
-  assertions.result = assertions_to_keep
-  PRINT("INFO: In getAssertions.. the num assertions after: {0}", assertions.result.length);
-  window.num_epiph_asserts = window.assertions.result.length
+  assertions.result = assertions_to_keep;
+  PRINT(
+    "INFO: In getAssertions.. the num assertions after: {0}",
+    assertions.result.length
+  );
+  window.num_epiph_asserts = window.assertions.result.length;
 }
 
 function createBadge(name) {
@@ -253,7 +258,7 @@ function createBadges(name_list) {
   for (var i = 0; i < name_list.length; i++) {
     createBadge(name_list[i]);
   }
-  getBadgeClasses()
+  getBadgeClasses();
 }
 
 // function displayUserInfo() {
@@ -275,7 +280,7 @@ function displaySpendEPText() {
 function deleteAssertion() {
   ("In deleteAssertion");
   if (assertions.result.length == 0) {
-    return 
+    return;
   }
   var assertion_slug = assertions.result[0].entityId;
   PRINT("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug);
@@ -325,25 +330,36 @@ function deleteAssertions(num) {
 }
 
 function createAssertion() {
-  PRINT("INFO: In createAssertion.. the selected prize is: {0}", window.selectedPrize);
+  PRINT(
+    "INFO: In createAssertion.. the selected prize is: {0}",
+    window.selectedPrize
+  );
   var badgeId = getBadgeId(window.selectedPrize);
-  PRINT("In createAssertion.. the selected prize id: {0}", badgeId)
-  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH, badgeId);
-  PRINT("In createAssertion.. the username is: {0}, the useremail is: {1} assertion url is: {2}", username, useremail, assertion_url);
+  PRINT("In createAssertion.. the selected prize id: {0}", badgeId);
+  var assertion_url = format(
+    BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
+    badgeId
+  );
+  PRINT(
+    "In createAssertion.. the username is: {0}, the useremail is: {1} assertion url is: {2}",
+    username,
+    useremail,
+    assertion_url
+  );
   $.ajax({
     method: "POST",
     dataType: "json",
     processData: false,
     contentType: "application/json",
     url: assertion_url,
-    data: JSON.stringify(
-      {
-        recipient: {
-          identity: useremail,
-          type: "email",
-          hashed: false,
-          plaintextIdentity: username
-      }
+    data: JSON.stringify({
+      recipient: {
+        identity: useremail,
+        type: "email",
+        hashed: false,
+        plaintextIdentity: username
+      },
+      description: "An Assertion for an FCC Prize"
     }),
     success: function(data, status, xhr) {
       PRINT(
@@ -366,9 +382,14 @@ function createAssertion() {
 
 function createPrizeAssertions(ep_spent) {
   PRINT("INFO: In createPrizeAssertion");
+  ret = true;
   for (var i = 0; i < ep_spent; i++) {
-    createAssertion();
+    tret = createAssertion();
+    if (tret === false) {
+      ret = false;
+    }
   }
+  return ret;
 }
 
 function onSelectPrizeEvent(title) {
@@ -399,30 +420,30 @@ function onPlaceBidEvent() {
     "You now are entered to win, an email will be sent you confirming your bid."
   );
 
-  var msg = ""
+  var msg = "";
   if (ep_left != 0) {
-    msg = "Now you can continue to bid on another prize with your remaining " +
+    msg =
+      "Now you can continue to bid on another prize with your remaining " +
       ep_left +
       " Epiphany Points, or go on back to the control center to earn some more!";
-  }
-  else {
-    msg = "Now.. go back to Mission Control and earn more Epiphany Points!"
+  } else {
+    msg = "Now.. go back to Mission Control and earn more Epiphany Points!";
     $("#congrats-instructions").text(msg);
     $("#congrats-instructions").after(
-      '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success btn-sm">Mission Control</a>'
+      '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-border-success btn-sm">Mission Control</a>'
     );
     ep_saved = window.num_epiph_asserts;
-    
   }
 
   ep_left = ep_saved - ep_spent;
-  // createPrizeAssertions(ep_spent);     FIXME
-  if (prizeAccounting()) {
-      PRINT("SUCCESS onPlaceBidEvent: the badgeclass.description was updated successfully")
-      deleteAssertions(ep_spent);
+  var good = createPrizeAssertions(ep_spent);
+  if (good) {
+    deleteAssertions();
+  } else {
+    PRINT(
+      "ERROR: NOT ALL PRIZE ASSERTIONS WERE CREATED!! NOT DELETING ANY OF THEM!"
+    );
   }
-  getAssertions();
-  testAssertionsCreated();
   return true;
 }
 
@@ -443,7 +464,10 @@ function getPrizeList() {
 }
 
 function getBadgeClassNamesList() {
-  PRINT("INFO: In getBadgeClassNameList.. the window.badgeclasses length is: {0}", window.badgeclasses.result.length);
+  PRINT(
+    "INFO: In getBadgeClassNameList.. the window.badgeclasses length is: {0}",
+    window.badgeclasses.result.length
+  );
   for (var i = 0; i < window.badgeclasses.result.length; i++) {
     var name = window.badgeclasses.result[i].name;
     // PRINT("{0}", name)
@@ -462,7 +486,9 @@ function getBadgesToBeCreated() {
 
   prizeListSet = new Set(window.prizeList);
   badgeClassNameListSet = new Set(window.badgeclassNamesList);
-  outSet = new Set([...prizeListSet].filter(x => !badgeClassNameListSet.has(x)));
+  outSet = new Set(
+    [...prizeListSet].filter(x => !badgeClassNameListSet.has(x))
+  );
   PRINT(
     "INFO: In getBadgesToBeCreated.. prizeListSet size: {0} .. badgeClassNameListSet size: {1} .. out size: {2}",
     prizeListSet.size,
@@ -474,7 +500,7 @@ function getBadgesToBeCreated() {
 
 async function testBadgesCreated() {
   PRINT("INFO: In testBadgesCreated");
-  started = false 
+  started = false;
   if (started === true) {
     window.timer_now_time += 3000;
   }
@@ -501,7 +527,7 @@ async function testBadgesCreated() {
 
 async function testAssertionsCreated() {
   PRINT("INFO: In testAssertionsCreated");
-  started = false
+  started = false;
   if (started === true) {
     window.timer_now_time += 3000;
   }
@@ -513,7 +539,7 @@ async function testAssertionsCreated() {
     PRINT(
       "SUCCESS: In testAssertionsCreated.. assertions list created.. \\0/ {0}",
       window.assertions.result.length
-    )
+    );
   }
 }
 
@@ -526,104 +552,136 @@ function getBadgeId(name) {
   );
   for (var i = 0; i < num; i++) {
     var bc = window.badgeclasses.result[i];
-    PRINT("DASHBOARD: In getBadgeId.. the bc.name is: {0} .. the name is: {1}", bc.name, name)
+    PRINT(
+      "DASHBOARD: In getBadgeId.. the bc.name is: {0} .. the name is: {1}",
+      bc.name,
+      name
+    );
     if (bc.name === name) {
       return bc.entityId;
     }
   }
 }
 
-
 function prizeAccounting() {
-  var success = true
+  var success = true;
   var prizeAssertion = {
     name: "",
     email: "",
     prize: "",
     numEPSpent: 0,
     timestamp: 0
-  }
+  };
   var prizeAssertions = [prizeAssertion];
-  var bp = null
-  PRINT("INFO: In prizeAccounting.. window.selectedPrize is: {0}", window.selectedPrize)
-  var badgeId = getBadgeId(window.selectedPrize)
-  PRINT("INFO prizeAccounting: badgeclasses.result type: {0} .. data: {1}", typeof(window.badgeclasses.result), JSON.stringify(window.badgeclasses.result))
-  for (var i = 0;i < window.badgeclasses.result.length;++i) {
-    var b = window.badgeclasses.result[i]
-    // PRINT("INFO In prizeAccounting.. b.entityId: {0}, getBadgeId(selectedPrize): {1}", b.entityId, badgeId)
+  var bp = null;
+  PRINT(
+    "INFO: In prizeAccounting.. window.selectedPrize is: {0}",
+    window.selectedPrize
+  );
+  var badgeId = getBadgeId(window.selectedPrize);
+  PRINT(
+    "INFO prizeAccounting: badgeclasses.result type: {0} .. data: {1}",
+    typeof window.badgeclasses.result,
+    JSON.stringify(window.badgeclasses.result)
+  );
+  for (var i = 0; i < window.badgeclasses.result.length; ++i) {
+    var b = window.badgeclasses.result[i];
+    PRINT(
+      "INFO In prizeAccounting.. b.entityId: {0}, getBadgeId(selectedPrize): {1}",
+      b.entityId,
+      badgeId
+    );
     if (b.entityId === badgeId) {
-      bp = b 
+      bp = b;
     }
   }
   if (bp) {
-    PRINT("SUCCESS In prizeAssertions: WE HAVE BP !!")
-    prizeAssertion.name = username
-    prizeAssertion.email = useremail
-    prizeAssertion.prize = selectedPrize
-    prizeAssertion.numEPSpent = ep_spent
+    PRINT("SUCCESS In prizeAssertions: WE HAVE BP !!");
+    prizeAssertion.name = username;
+    prizeAssertion.email = useremail;
+    prizeAssertion.prize = selectedPrize;
+    prizeAssertion.numEPSpent = ep_spent;
     prizeAssertion.timestamp = Date.now();
-    PRINT("INFO In prizeAssertions: NEW prizeAssertion: {0}", JSON.stringify(prizeAssertion))
+    PRINT(
+      "INFO In prizeAssertions: NEW prizeAssertion: {0}",
+      JSON.stringify(prizeAssertion)
+    );
     if (bp.description) {
       // sets prizeAssertions if there are existing on the server
-      PRINT("INFO In prizeAccounting.. the description string is: {0}", bp.description)
-      var ret = JSON.parse(bp.description)
-      PRINT("INFO In prizeAssertions: typeof(JSON.parse(bp.description): {0}", typeof(ret))
+      PRINT(
+        "INFO In prizeAccounting.. the description string is: {0}",
+        bp.description
+      );
+      var ret = JSON.parse(bp.description);
+      PRINT(
+        "INFO In prizeAssertions: typeof(JSON.parse(bp.description): {0}",
+        typeof ret
+      );
       if (Array.isArray(ret)) {
-        prizeAssertions = ret
-        PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
+        prizeAssertions = ret;
+        PRINT(
+          "INFO In prizeAssertions: OLD prizeAssertion(S): {0}",
+          JSON.stringify(prizeAssertions)
+        );
+      } else {
+        PRINT(
+          "ERROR In prizeAssertions: prizeAssertions is not an Array it is type: {0}",
+          typeof ret
+        );
       }
-      else {
-        prizeAssertions.push(ret)
-        PRINT("INFO In prizeAssertions: added new assertion: {0}", JSON.stringify(prizeAssertions))
-      }
+    } else {
+      PRINT(
+        "INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER"
+      );
     }
-    else {
-      PRINT("INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER")
+    if (!prizeAssertions.isArray()) {
+      PRINT("WHAT THE FUCKING FUCK!");
+      return false;
     }
     prizeAssertions.push(prizeAssertion);
-    PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
+    PRINT(
+      "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
+      JSON.stringify(prizeAssertions)
+    );
 
     bp.description = JSON.stringify(prizeAssertions);
-    PRINT("INFO prizeAccounting: the NEW bp.description: {0}", bp.description)
-    if (success) {
-      PRINT("INFO prizeAccounting: We have SUCCESS and are going to send the new prizeAssertion list to the badgr server")
-      $.ajax({
-        method: "PUT",
-        dataType: "json",
-        processData: false,
-        contentType: "application/json",
-        url: BADGR_BASE_URL + format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
-        data: JSON.stringify(bp),
-        success: function(data, status, xhr) {
-          PRINT(
-            "SUCCESS: In prizeAccounting: {0}",
-            JSON.stringify(data)
-          );
-        },
-        error: function(xhr, status, errMsg) {
-          success = false
-          PRINT(
-            "ERROR: In prizeAccounting.. badgeclass update FAILED! {0} {1}",
-            status,
-            errMsg
-          );
-        },
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-        }
-      });
-    }
+    PRINT(
+      "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
+      JSON.stringify(prizeAssertions)
+    );
+
+    $.ajax({
+      method: "PUT",
+      dataType: "json",
+      processData: false,
+      contentType: "application/json",
+      url: BADGR_BASE_URL + format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
+      data: JSON.stringify(bp),
+      success: function(data, status, xhr) {
+        PRINT("SUCCESS: In prizeAccounting: {0}", JSON.stringify(data));
+      },
+      error: function(xhr, status, errMsg) {
+        success = false;
+        PRINT(
+          "ERROR: In prizeAccounting.. badgeclass update FAILED! {0} {1}",
+          status,
+          errMsg
+        );
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      }
+    });
+  } else {
+    success = false;
+    PRINT(
+      "ERROR: In prizeAccounting.. the prize badgeclass {0}, was NOT FOUND in the badge_class list! {1}",
+      window.selectedPrize,
+      JSON.stringify(window.badgeclasses)
+    );
   }
-  else {
-    success = false
-    PRINT("ERROR: In prizeAccounting.. the prize badgeclass {0}, was NOT FOUND in the badge_class list! {1}", 
-            window.selectedPrize, JSON.stringify(window.badgeclasses))
-  }
-  return success
+  return success;
 }
-
-
-
 
 getUrlVars();
 getBadgeClasses();
@@ -639,7 +697,5 @@ if (num_badges_needed > 0) {
 getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
-
-
 
 // 5BqKu<HV
