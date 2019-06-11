@@ -579,7 +579,7 @@ function prizeAccounting() {
     }
     if (!prizeAssertions.isArray()) {
       PRINT("WHAT THE FUCKING FUCK!")
-      return false
+      success = false
     }
     prizeAssertions.push(prizeAssertion);
     PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
@@ -587,31 +587,33 @@ function prizeAccounting() {
     bp.description = JSON.stringify(prizeAssertions);
     PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
 
-    $.ajax({
-      method: "PUT",
-      dataType: "json",
-      processData: false,
-      contentType: "application/json",
-      url: BADGR_BASE_URL + format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
-      data: JSON.stringify(bp),
-      success: function(data, status, xhr) {
-        PRINT(
-          "SUCCESS: In prizeAccounting: {0}",
-          JSON.stringify(data)
-        );
-      },
-      error: function(xhr, status, errMsg) {
-        success = false
-        PRINT(
-          "ERROR: In prizeAccounting.. badgeclass update FAILED! {0} {1}",
-          status,
-          errMsg
-        );
-      },
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-      }
-    });
+    if (success) {
+      $.ajax({
+        method: "PUT",
+        dataType: "json",
+        processData: false,
+        contentType: "application/json",
+        url: BADGR_BASE_URL + format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
+        data: JSON.stringify(bp),
+        success: function(data, status, xhr) {
+          PRINT(
+            "SUCCESS: In prizeAccounting: {0}",
+            JSON.stringify(data)
+          );
+        },
+        error: function(xhr, status, errMsg) {
+          success = false
+          PRINT(
+            "ERROR: In prizeAccounting.. badgeclass update FAILED! {0} {1}",
+            status,
+            errMsg
+          );
+        },
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+        }
+      });
+    }
   }
   else {
     success = false
