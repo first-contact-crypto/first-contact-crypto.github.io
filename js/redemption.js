@@ -558,7 +558,7 @@ function prizeAccounting() {
     epSpent.email = useremail
     epSpent.prize = selectedPrize
     epSpent.numEPSpent = ep_spent
-    epSpent.timestamp = Date.getTime();
+    epSpent.timestamp = Date.now();
     bp.extensions = epSpent
     $.ajax({
       method: "POST",
