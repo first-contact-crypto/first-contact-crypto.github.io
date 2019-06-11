@@ -635,22 +635,34 @@ function prizeAccounting() {
         PRINT("WHAT THE FUCKING FUCK!");
         return false;
       }
-      prizeAssertions.push(prizeAssertion);
-      PRINT(
-        "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
-        JSON.stringify(prizeAssertions)
-      );
+      // prizeAssertions.push(prizeAssertion);
+      // PRINT(
+      //   "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
+      //   JSON.stringify(prizeAssertions)
+      // );
 
-      bp.description = JSON.stringify(prizeAssertions);
-      PRINT(
-        "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
-        JSON.stringify(prizeAssertions)
-      );
+      // bp.description = JSON.stringify(prizeAssertions);
+      // PRINT(
+      //   "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
+      //   JSON.stringify(prizeAssertions)
+      // );
     } else {
       PRINT(
         "INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER"
       );
     }
+    prizeAssertions.push(prizeAssertion);
+    PRINT(
+      "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
+      JSON.stringify(prizeAssertions)
+    );
+
+    bp.description = JSON.stringify(prizeAssertions);
+    PRINT(
+      "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
+      JSON.stringify(prizeAssertions)
+    );
+    PRINT("INFO In prizeAccounting: Calling badgeclass update now")
     $.ajax({
       method: "PUT",
       dataType: "json",
