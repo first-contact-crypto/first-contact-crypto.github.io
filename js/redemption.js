@@ -436,14 +436,15 @@ function onPlaceBidEvent() {
   }
 
   ep_left = ep_saved - ep_spent;
-  var good = createPrizeAssertions(ep_spent);
-  if (good) {
-    deleteAssertions();
-  } else {
-    PRINT(
-      "ERROR: NOT ALL PRIZE ASSERTIONS WERE CREATED!! NOT DELETING ANY OF THEM!"
-    );
-  }
+  // var good = createPrizeAssertions(ep_spent);
+  // if (good) {
+  //   deleteAssertions();
+  // } else {
+  //   PRINT(
+  //     "ERROR: NOT ALL PRIZE ASSERTIONS WERE CREATED!! NOT DELETING ANY OF THEM!"
+  //   );
+  // }
+  prizeAccounting()
   return true;
 }
 
@@ -670,6 +671,7 @@ function prizeAccounting() {
       },
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+        xhr.setRequestHeader("Content-Type", "application/json")
       }
     });
   } else {
