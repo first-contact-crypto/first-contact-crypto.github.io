@@ -571,6 +571,7 @@ function prizeAccounting() {
       }
       else {
         prizeAssertions.push(ret)
+        PRINT("INFO In prizeAssertions: added new assertion: {0}", JSON.stringify(prizeAssertions))
       }
     }
     else {
@@ -584,7 +585,6 @@ function prizeAccounting() {
     PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
 
     bp.description = JSON.stringify(prizeAssertions);
-    PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
 
     if (success) {
       $.ajax({
