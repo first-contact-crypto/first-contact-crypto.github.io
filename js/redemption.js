@@ -584,7 +584,7 @@ function prizeAccounting() {
     });
   }
   else {
-    PRINT("ERROR: In prizeAccounting.. the prize badgeclass {0}, was NOT FOUND in the badge_class list! {1}", window.selectedPrize, window.badgeclasses)
+    PRINT("ERROR: In prizeAccounting.. the prize badgeclass {0}, was NOT FOUND in the badge_class list! {1}", window.selectedPrize, JSON.stringify(window.badgeclasses)
   }
 }
 
