@@ -577,16 +577,13 @@ function prizeAccounting() {
     else {
       PRINT("INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER")
     }
-    if (!prizeAssertions.isArray()) {
-      PRINT("WHAT THE FUCKING FUCK!")
-      success = false
-    }
     prizeAssertions.push(prizeAssertion);
     PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
 
     bp.description = JSON.stringify(prizeAssertions);
-
+    PRINT("INFO prizeAccounting: the NEW bp.description: {0}", bp.description)
     if (success) {
+      PRINT("INFO prizeAccounting: We have SUCCESS and are going to send the new prizeAssertion list to the badgr server")
       $.ajax({
         method: "PUT",
         dataType: "json",
