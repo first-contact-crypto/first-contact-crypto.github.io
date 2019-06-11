@@ -608,7 +608,7 @@ function prizeAccounting() {
  
       JSON.stringify(prizeAssertion)
     );
-    if (bp.description) {
+    if (bp.description && bp.description.startsWith("[{")) {
       // sets prizeAssertions if there are existing on the server
       PRINT(
         "INFO In prizeAccounting.. the description string is: {0}",
@@ -635,6 +635,7 @@ function prizeAccounting() {
       PRINT(
         "INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER"
       );
+      return
     }
     if (!prizeAssertions.isArray()) {
       PRINT("WHAT THE FUCKING FUCK!");
