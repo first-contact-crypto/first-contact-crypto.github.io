@@ -418,8 +418,11 @@ function onPlaceBidEvent() {
   ep_left = ep_saved - ep_spent;
   // createPrizeAssertions(ep_spent);     FIXME
   if (prizeAccounting()) {
+      PRINT("SUCCESS onPlaceBidEvent: the badgeclass.description was updated successfully")
       deleteAssertions(ep_spent);
   }
+  getAssertions();
+  testAssertionsCreated();
   return true;
 }
 
