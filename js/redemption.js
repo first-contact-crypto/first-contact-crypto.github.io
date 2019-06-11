@@ -561,7 +561,7 @@ function prizeAccounting() {
     epSpent.timestamp = Date.now();
     bp.extensions = epSpent
     $.ajax({
-      method: "POST",
+      method: "PUT",
       dataType: "json",
       processData: false,
       contentType: "application/json",
