@@ -632,7 +632,7 @@ function prizeAccounting() {
           typeof ret
         );
       }
-      if (!Array.isArray(prizeAssertions) {
+      if (!Array.isArray(prizeAssertions)) {
         PRINT("WHAT THE FUCKING FUCK!");
         return false;
       }
