@@ -559,7 +559,7 @@ function prizeAccounting() {
     epSpent.prize = selectedPrize
     epSpent.numEPSpent = ep_spent
     epSpent.timestamp = Date.now();
-    bp.extensions = epSpent
+    bp.description = JSON.stringify(epSpent)
     $.ajax({
       method: "PUT",
       dataType: "json",
