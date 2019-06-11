@@ -566,6 +566,7 @@ function getBadgeId(name) {
 
 function prizeAccounting() {
   var success = true;
+  var emptyFilterList = false
   var prizeAssertion = {
     name: "",
     email: "",
@@ -631,11 +632,12 @@ function prizeAccounting() {
           typeof ret
         );
       }
+
     } else {
+      emptyFilterList = true
       PRINT(
         "INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER"
       );
-      return
     }
     if (!prizeAssertions.isArray()) {
       PRINT("WHAT THE FUCKING FUCK!");
@@ -671,13 +673,13 @@ function prizeAccounting() {
           status,
           errMsg
         );
-        deleteAssertion()
       },
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
         xhr.setRequestHeader("Content-Type", "application/json")
       }
     });
+    deleteAssertion();
   } else {
     success = false;
     PRINT(
