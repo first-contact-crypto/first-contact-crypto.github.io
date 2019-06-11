@@ -392,7 +392,7 @@ function onPlaceBidEvent() {
     ep_spent
   );
   // createPrizeAssertions(ep_spent);
-  deleteAssertions(ep_spent);
+  // deleteAssertions(ep_spent);
   // $("#welcome-video").remove();
   $("#welcome-title").text("Good job cryptonaut and good luck!");
   $("#introductory-text").text(
@@ -415,11 +415,11 @@ function onPlaceBidEvent() {
     
   }
 
-
   ep_left = ep_saved - ep_spent;
-  // createPrizeAssertions(ep_spent);
-  deleteAssertions(ep_spent);
-  prizeAccounting();
+  // createPrizeAssertions(ep_spent);     FIXME
+  if (prizeAccounting()) {
+      deleteAssertions(ep_spent);
+  }
   return true;
 }
 
@@ -532,6 +532,7 @@ function getBadgeId(name) {
 
 
 function prizeAccounting() {
+  var success = true
   var prizeAssertion = {
     name: "",
     email: "",
@@ -539,7 +540,7 @@ function prizeAccounting() {
     numEPSpent: 0,
     timestamp: 0
   }
-  var prizeAssertions = []
+  var prizeAssertions = [prizeAssertion];
   var bp = null
   PRINT("INFO: In prizeAccounting.. window.selectedPrize is: {0}", window.selectedPrize)
   var badgeId = getBadgeId(window.selectedPrize)
@@ -567,6 +568,10 @@ function prizeAccounting() {
     else {
       PRINT("INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER")
     }
+    if (!prizeAssertions.isArray()) {
+      PRINT("WHAT THE FUCKING FUCK!")
+      return false
+    }
     prizeAssertions.push(prizeAssertion);
     PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
 
@@ -587,6 +592,7 @@ function prizeAccounting() {
         );
       },
       error: function(xhr, status, errMsg) {
+        success = false
         PRINT(
           "ERROR: In prizeAccounting.. badgeclass update FAILED! {0} {1}",
           status,
@@ -599,9 +605,11 @@ function prizeAccounting() {
     });
   }
   else {
+    success = false
     PRINT("ERROR: In prizeAccounting.. the prize badgeclass {0}, was NOT FOUND in the badge_class list! {1}", 
             window.selectedPrize, JSON.stringify(window.badgeclasses))
   }
+  return success
 }
 
 
@@ -624,3 +632,4 @@ displaySpendEPText();
 
 
 
+// 5BqKu<HV
