@@ -2,7 +2,7 @@
 
 const DEV_ENV = false;
 
-const BADGR_ACCESS_TOKEN = "iZZHCNoDE7RBjuI0f8DpWtNGkLmx7l"
+const BADGR_ACCESS_TOKEN = "9GfvZ9bTXjyYiHVzcT9BfbXUg5wqYp"
 const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg"
 const BADGR_COURSE_TYPE = "course"
 const BADGR_EPIPHANY_TYPE = "epiphany"
@@ -530,18 +530,16 @@ function getBadgeId(name) {
   }
 }
 
-var gh_url = "https://api.github.com/user/repos";
-var params = ""
-
-var epSpent = {
-  name: "",
-  email: "",
-  prize: "",
-  numEPSpent: 0,
-  timestamp: 0
-}
 
 function prizeAccounting() {
+  var prizeAssertion = {
+    name: "",
+    email: "",
+    prize: "",
+    numEPSpent: 0,
+    timestamp: 0
+  }
+  prizeAssertions = []
   bp = null
   PRINT("INFO: In prizeAccounting.. window.selectedPrize is: {0}", window.selectedPrize)
   var badgeId = getBadgeId(window.selectedPrize)
@@ -554,12 +552,16 @@ function prizeAccounting() {
     }
   }
   if (bp) {
-    epSpent.name = username
-    epSpent.email = useremail
-    epSpent.prize = selectedPrize
-    epSpent.numEPSpent = ep_spent
-    epSpent.timestamp = Date.now();
-    bp.description = JSON.stringify(epSpent)
+    prizeAssertion.name = username
+    prizeAssertion.email = useremail
+    prizeAssertion.prize = selectedPrize
+    prizeAssertion.numEPSpent = ep_spent
+    prizeAssertion.timestamp = Date.now();
+    if (bp.description) {
+      prizeAssertions = JSON.parse(bp.description)
+    }
+    prizeAssertions.push(prizeAssertion);
+    bp.description = JSON.stringify(prizeAssertions);
     $.ajax({
       method: "PUT",
       dataType: "json",
