@@ -545,6 +545,7 @@ function prizeAccounting() {
   bp = null
   PRINT("INFO: In prizeAccounting.. window.selectedPrize is: {0}", window.selectedPrize)
   var badgeId = getBadgeId(window.selectedPrize)
+  PRINT("INFO prizeAccounting: badgeclasses.result type: {0} .. data: {1}", type(window.badgeclasses.result), JSON.stringify(window.badgeclasses.result))
   for (b in window.badgeclasses.result) {
     PRINT("INFO In prizeAccounting.. b.entityId: {0}, getBadgeId(selectedPrize): {1}", b.entityId, badgeId)
     if (b.entityId === badgeId) {
