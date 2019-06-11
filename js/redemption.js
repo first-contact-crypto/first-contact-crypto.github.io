@@ -552,16 +552,23 @@ function prizeAccounting() {
     }
   }
   if (bp) {
+    PRINT("SUCCESS In prizeAssertions: WE HAVE BP !!")
     prizeAssertion.name = username
     prizeAssertion.email = useremail
     prizeAssertion.prize = selectedPrize
     prizeAssertion.numEPSpent = ep_spent
     prizeAssertion.timestamp = Date.now();
+    PRINT("INFO In prizeAssertions: NEW prizeAssertion: {0}", JSON.stringify(prizeAssertion))
     if (bp.description) {
+      PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
       prizeAssertions = JSON.parse(bp.description)
     }
     prizeAssertions.push(prizeAssertion);
+    PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
+
     bp.description = JSON.stringify(prizeAssertions);
+    PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
+
     $.ajax({
       method: "PUT",
       dataType: "json",
