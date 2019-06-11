@@ -539,12 +539,12 @@ function prizeAccounting() {
     numEPSpent: 0,
     timestamp: 0
   }
-  prizeAssertions = []
-  bp = null
+  var prizeAssertions = []
+  var bp = null
   PRINT("INFO: In prizeAccounting.. window.selectedPrize is: {0}", window.selectedPrize)
   var badgeId = getBadgeId(window.selectedPrize)
   PRINT("INFO prizeAccounting: badgeclasses.result type: {0} .. data: {1}", typeof(window.badgeclasses.result), JSON.stringify(window.badgeclasses.result))
-  for (i = 0;i < window.badgeclasses.result.length;++i) {
+  for (var i = 0;i < window.badgeclasses.result.length;++i) {
     var b = window.badgeclasses.result[i]
     PRINT("INFO In prizeAccounting.. b.entityId: {0}, getBadgeId(selectedPrize): {1}", b.entityId, badgeId)
     if (b.entityId === badgeId) {
@@ -560,8 +560,12 @@ function prizeAccounting() {
     prizeAssertion.timestamp = Date.now();
     PRINT("INFO In prizeAssertions: NEW prizeAssertion: {0}", JSON.stringify(prizeAssertion))
     if (bp.description) {
-      PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
+      // sets prizeAssertions if there are existing on the server
       prizeAssertions = JSON.parse(bp.description)
+      PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
+    }
+    else {
+      PRINT("INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER")
     }
     prizeAssertions.push(prizeAssertion);
     PRINT("INFO In prizeAssertions: NEW prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
