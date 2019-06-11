@@ -563,21 +563,18 @@ function prizeAccounting() {
     if (bp.description) {
       // sets prizeAssertions if there are existing on the server
       PRINT("INFO In prizeAccounting.. the description string is: {0}", bp.description)
-      
-      return success
-
-
       var ret = JSON.parse(bp.description)
       PRINT("INFO In prizeAssertions: typeof(JSON.parse(bp.description): {0}", typeof(ret))
-      if (Array.isArray(ret)) {
+      if (typeof(ret) === typeof([])) {
         prizeAssertions = ret
         PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
       }
       else {
-        PRINT("ERROR In prizeAssertions: prizeAssertions is not an Array it is type: {0}", typeof(ret))
+        prizeAssertions.push(ret)
       }
     }
     else {
+
       PRINT("INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER")
     }
     if (!prizeAssertions.isArray()) {
