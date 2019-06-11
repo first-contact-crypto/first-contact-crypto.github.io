@@ -562,8 +562,15 @@ function prizeAccounting() {
     PRINT("INFO In prizeAssertions: NEW prizeAssertion: {0}", JSON.stringify(prizeAssertion))
     if (bp.description) {
       // sets prizeAssertions if there are existing on the server
-      prizeAssertions = JSON.parse(bp.description)
-      PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
+      var ret = JSON.parse(bp.description)
+      PRINT("INFO In prizeAssertions: typeof(JSON.parse(bp.description): {0}", typeof(ret))
+      if (Array.isArray(ret) {
+        prizeAssertions = ret
+        PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
+      }
+      else {
+        PRINT("ERROR In prizeAssertions: prizeAssertions is not an Array it is type: {0}", typeof(ret))
+      }
     }
     else {
       PRINT("INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER")
