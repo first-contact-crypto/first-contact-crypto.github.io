@@ -547,7 +547,7 @@ function prizeAccounting() {
   PRINT("INFO prizeAccounting: badgeclasses.result type: {0} .. data: {1}", typeof(window.badgeclasses.result), JSON.stringify(window.badgeclasses.result))
   for (var i = 0;i < window.badgeclasses.result.length;++i) {
     var b = window.badgeclasses.result[i]
-    PRINT("INFO In prizeAccounting.. b.entityId: {0}, getBadgeId(selectedPrize): {1}", b.entityId, badgeId)
+    // PRINT("INFO In prizeAccounting.. b.entityId: {0}, getBadgeId(selectedPrize): {1}", b.entityId, badgeId)
     if (b.entityId === badgeId) {
       bp = b 
     }
@@ -562,6 +562,11 @@ function prizeAccounting() {
     PRINT("INFO In prizeAssertions: NEW prizeAssertion: {0}", JSON.stringify(prizeAssertion))
     if (bp.description) {
       // sets prizeAssertions if there are existing on the server
+      PRINT("INFO In prizeAccounting.. the description string is: {0}", bp.description)
+      
+      return success
+
+
       var ret = JSON.parse(bp.description)
       PRINT("INFO In prizeAssertions: typeof(JSON.parse(bp.description): {0}", typeof(ret))
       if (Array.isArray(ret)) {
