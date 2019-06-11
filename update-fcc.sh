@@ -12,7 +12,9 @@ echo "In $(pwd)"
 git add . && git commit -m $1
 git push origin master
 
-cd ../first-contact-crypto.io
+cd ../first-contact-crypto.github.io
 cp -rp ../dev-firstcontactcrypto.com/dist/* .
+
+echo "=== In prod dir now ==="
 git add . && git commit -m $1
 git push origin master
