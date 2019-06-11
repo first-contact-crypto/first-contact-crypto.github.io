@@ -565,7 +565,7 @@ function prizeAccounting() {
       PRINT("INFO In prizeAccounting.. the description string is: {0}", bp.description)
       var ret = JSON.parse(bp.description)
       PRINT("INFO In prizeAssertions: typeof(JSON.parse(bp.description): {0}", typeof(ret))
-      if (Array.isArray(ret) {
+      if (Array.isArray(ret)) {
         prizeAssertions = ret
         PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
       }
