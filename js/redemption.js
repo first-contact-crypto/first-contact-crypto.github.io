@@ -564,7 +564,7 @@ function prizeAccounting() {
       // sets prizeAssertions if there are existing on the server
       var ret = JSON.parse(bp.description)
       PRINT("INFO In prizeAssertions: typeof(JSON.parse(bp.description): {0}", typeof(ret))
-      if (Array.isArray(ret) {
+      if (Array.isArray(ret)) {
         prizeAssertions = ret
         PRINT("INFO In prizeAssertions: OLD prizeAssertion(S): {0}", JSON.stringify(prizeAssertions))
       }
