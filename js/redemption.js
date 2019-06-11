@@ -605,6 +605,7 @@ function prizeAccounting() {
     prizeAssertion.timestamp = Date.now();
     PRINT(
       "INFO In prizeAssertions: NEW prizeAssertion: {0}",
+ 
       JSON.stringify(prizeAssertion)
     );
     if (bp.description) {
@@ -659,6 +660,7 @@ function prizeAccounting() {
       url: BADGR_BASE_URL + format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
       data: JSON.stringify(bp),
       success: function(data, status, xhr) {
+
         PRINT("SUCCESS: In prizeAccounting: {0}", JSON.stringify(data));
       },
       error: function(xhr, status, errMsg) {
@@ -668,6 +670,7 @@ function prizeAccounting() {
           status,
           errMsg
         );
+        deleteAssertion()
       },
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
