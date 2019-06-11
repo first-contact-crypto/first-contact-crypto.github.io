@@ -679,7 +679,9 @@ function prizeAccounting() {
         "INFO In prizeAssertions: OLD prizeAssertion(S) IS EMPTY, NOTHING ON SERVER"
       );
     }
-    deleteAssertion();
+    deleteAssertion()
+    getBadgeClasses()
+    testBadgesCreated()
   } else {
     success = false;
     PRINT(
