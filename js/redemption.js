@@ -332,68 +332,68 @@ function deleteAssertions(num) {
   }
 }
 
-// function createAssertion() {
-//   PRINT(
-//     "INFO: In createAssertion.. the selected prize is: {0}",
-//     window.selectedPrize
-//   );
-//   var badgeId = getBadgeId(window.selectedPrize);
-//   PRINT("In createAssertion.. the selected prize id: {0}", badgeId);
-//   var assertion_url = format(
-//     BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
-//     badgeId
-//   );
-//   PRINT(
-//     "In createAssertion.. the username is: {0}, the useremail is: {1} assertion url is: {2}",
-//     username,
-//     useremail,
-//     assertion_url
-//   );
-//   $.ajax({
-//     method: "POST",
-//     dataType: "json",
-//     processData: false,
-//     contentType: "application/json",
-//     url: assertion_url,
-//     data: JSON.stringify({
-//       recipient: {
-//         identity: useremail,
-//         type: "email",
-//         hashed: false,
-//         plaintextIdentity: username
-//       },
-//       description: "An Assertion for an FCC Prize"
-//     }),
-//     success: function(data, status, xhr) {
-//       PRINT(
-//         "SUCCESS: In createAssertion.. assertion created: {0}",
-//         JSON.stringify(data)
-//       );
-//     },
-//     error: function(xhr, status, errMsg) {
-//       PRINT(
-//         "ERROR: In createAssertion.. assertion creation failed! {0} {1}",
-//         status,
-//         errMsg
-//       );
-//     },
-//     beforeSend: function(xhr) {
-//       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-//     }
-//   });
-// }
+function createAssertion() {
+  PRINT(
+    "INFO: In createAssertion.. the selected prize is: {0}",
+    window.selectedPrize
+  );
+  var badgeId = getBadgeId(window.selectedPrize);
+  PRINT("In createAssertion.. the selected prize id: {0}", badgeId);
+  var assertion_url = format(
+    BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
+    badgeId
+  );
+  PRINT(
+    "In createAssertion.. the username is: {0}, the useremail is: {1} assertion url is: {2}",
+    username,
+    useremail,
+    assertion_url
+  );
+  $.ajax({
+    method: "POST",
+    dataType: "json",
+    processData: false,
+    contentType: "application/json",
+    url: assertion_url,
+    data: JSON.stringify({
+      recipient: {
+        identity: useremail,
+        type: "email",
+        hashed: false,
+        plaintextIdentity: username
+      },
+      description: "An Assertion for an FCC Prize"
+    }),
+    success: function(data, status, xhr) {
+      PRINT(
+        "SUCCESS: In createAssertion.. assertion created: {0}",
+        JSON.stringify(data)
+      );
+    },
+    error: function(xhr, status, errMsg) {
+      PRINT(
+        "ERROR: In createAssertion.. assertion creation failed! {0} {1}",
+        status,
+        errMsg
+      );
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+    }
+  });
+}
 
-// function createPrizeAssertions(ep_spent) {
-//   PRINT("INFO: In createPrizeAssertion");
-//   ret = true;
-//   for (var i = 0; i < ep_spent; i++) {
-//     tret = createAssertion();
-//     if (tret === false) {
-//       ret = false;
-//     }
-//   }
-//   return ret;
-// }
+function createPrizeAssertions(ep_spent) {
+  PRINT("INFO: In createPrizeAssertion");
+  ret = true;
+  for (var i = 0; i < ep_spent; i++) {
+    tret = createAssertion();
+    if (tret === false) {
+      ret = false;
+    }
+  }
+  return ret;
+}
 
 function onSelectPrizeEvent(title) {
   getAssertions();
@@ -741,3 +741,5 @@ testAssertionsCreated();
 displaySpendEPText();
 
 // 5BqKu<HV
+
+
