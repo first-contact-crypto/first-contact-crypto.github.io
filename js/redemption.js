@@ -396,8 +396,6 @@ function createPrizeAssertions(ep_spent) {
 }
 
 function onSelectPrizeEvent(title) {
-  getAssertions();
-  testAssertionsCreated();
   displaySpendEPText();
   window.selectedPrize = convertToSlug(title);
   $("#placeBidModal").modal();
@@ -451,6 +449,8 @@ function onPlaceBidEvent() {
   //   );
   // }
   prizeAccounting()
+  getAssertions();
+  testAssertionsCreated();
   return true;
 }
 
