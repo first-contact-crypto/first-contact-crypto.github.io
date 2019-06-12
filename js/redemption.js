@@ -37,7 +37,7 @@ var ep_spent = 0;
 var ep_saved = 0;
 var ep_left = 0;
 
-var receiving = false 
+var cnt = 0
 
 // var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
 // // var gh = new GitHub({username: '', password: ''})
@@ -217,6 +217,7 @@ function getAssertions() {
     assertions.result.length
   );
   window.num_epiph_asserts = window.assertions.result.length;
+  PRINT("INFO In getAssertions for the {0} time.. window.num_epiph_asserts: {1}", ++cnt, window.num_epiph_asserts)
 }
 
 function createBadge(name) {
@@ -399,8 +400,6 @@ function deleteAssertions(num) {
 // }
 
 function onSelectPrizeEvent(title) {
-  getAssertions();
-  testAssertionsCreated();
   window.selectedPrize = convertToSlug(title);
   $("#placeBidModal").modal();
 }
