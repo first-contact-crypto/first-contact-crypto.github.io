@@ -453,8 +453,6 @@ function onPlaceBidEvent() {
   // }
   prizeAccounting()
   window.old_num_epiph_asserts = window.num_epiph_asserts
-  getAssertions();
-  testAssertionsCreated();
   return true;
 }
 
