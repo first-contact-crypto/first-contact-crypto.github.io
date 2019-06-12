@@ -36,8 +36,10 @@ var timer_now_time = 0;
 var ep_spent = 0;
 var ep_saved = 0;
 var ep_left = 0;
-
 var cnt = 0
+var num_epiph_asserts = 0
+
+
 
 // var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
 // // var gh = new GitHub({username: '', password: ''})
@@ -252,6 +254,7 @@ function createBadge(name) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
     }
   });
+  return data.result.length
 }
 
 function createBadges(name_list) {
@@ -449,6 +452,7 @@ function onPlaceBidEvent() {
   //   );
   // }
   prizeAccounting()
+  window.old_num_epiph_asserts = window.num_epiph_asserts
   getAssertions();
   testAssertionsCreated();
   return true;
@@ -546,6 +550,33 @@ async function testAssertionsCreated() {
     PRINT(
       "SUCCESS: In testAssertionsCreated.. assertions list created.. \\0/ {0}",
       window.assertions.result.length
+    );
+  }
+}
+
+async function testDeletionsCompleted() {
+  PRINT("INFO: In testDeletionsCompleted");
+  started = false;
+  if (started === true) {
+    window.timer_now_time += 3000;
+  }
+  started = true;
+  PRINT("INFO: In testDeletionsCompleted");
+  if (window.old_num_epiph_asserts - ep_spent != window.num_epiph_asserts) {
+    await sleep(500);
+    if (window.timer_now_time > 6000) {
+      PRINT(
+        "In testDeletionsCompleted.. WTF 6000 ms have passed, calling getBadgeClasses"
+      );
+      getAssertions();
+      started = false;
+      now_time = 0;
+    }
+    testDeletionsCompleted();
+  } else {
+    PRINT(
+      "SUCCESS: In testDeletionsCompleted.. deletions completed.. \\o/ {0}",
+      ep_spent
     );
   }
 }
@@ -703,8 +734,9 @@ function prizeAccounting() {
         );
       }
     });
-    createPrizeAssertions(ep_spent)
+    createPrizeAssertions(ep_spent);
     deleteAssertions(ep_spent);
+    testDeletionsCompleted()
   } else {
     success = false;
     PRINT(
@@ -737,10 +769,11 @@ PRINT("DASHBOARD: In global_scope.. num_badges_needed: {0}", num_badges_needed);
 if (num_badges_needed > 0) {
   createBadges(new_badges_needed);
 }
+
+window.old_num_epiph_asserts = window.num_epiph_asserts;
 getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
 
 // 5BqKu<HV
-
-
+// 05vxm7yHLQ?)
