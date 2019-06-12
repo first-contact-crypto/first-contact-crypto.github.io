@@ -704,7 +704,7 @@ function prizeAccounting() {
       }
     });
     createPrizeAssertions(ep_spent)
-    deleteAssertion();
+    deleteAssertions(ep_spent);
   } else {
     success = false;
     PRINT(
