@@ -235,6 +235,8 @@ function createBadge(name) {
         "SUCCESS: In createBadge.. badge created: {0}",
         JSON.stringify(data)
       );
+      getBadgeClasses()
+      testBadgesCreated()
     },
     error: function(xhr, status, errMsg) {
       PRINT(
@@ -400,12 +402,12 @@ function onSelectPrizeEvent(title) {
 function onPlaceBidEvent() {
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
+  ep_left = ep_saved - ep_spent;
   if (ep_spent == 0) {
     return true;
   }
   PRINT("INFO: In onPlaceBidEvent");
 
-  ep_left = ep_saved - ep_spent;
   PRINT(
     "INFO: ep_left: {0} ep_saved: {1} ep_spent: {2}",
     ep_left,
@@ -698,8 +700,8 @@ function prizeAccounting() {
       }
     });
     deleteAssertion()
-    getBadgeClasses()
-    testBadgesCreated()
+    getAssertions()
+    testAssertionsCreated()
   } else {
     success = false;
     PRINT(
