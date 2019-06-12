@@ -703,6 +703,7 @@ function prizeAccounting() {
         );
       }
     });
+    createPrizeAssertions(ep_spent)
     deleteAssertion();
   } else {
     success = false;
