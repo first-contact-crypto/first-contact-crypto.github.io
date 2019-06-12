@@ -301,16 +301,11 @@ function deleteAssertion() {
     contentType: "application/json",
     data: JSON.stringify({ revocation_reason: "Epiphany Point Spent" }),
     url: assertion_url,
-    // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
-    // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
     success: function(data, status, xhr) {
       PRINT(
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
-      getAssertions()
-      testAssertionsCreated()
-      displaySpendEPText()
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
@@ -401,6 +396,9 @@ function deleteAssertions(num) {
 // }
 
 function onSelectPrizeEvent(title) {
+  getAssertions();
+  testAssertionsCreated();
+  displaySpendEPText();
   window.selectedPrize = convertToSlug(title);
   $("#placeBidModal").modal();
 }
