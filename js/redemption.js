@@ -310,6 +310,7 @@ function deleteAssertion() {
       );
       getAssertions()
       testAssertionsCreated()
+      displaySpendEPText()
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
