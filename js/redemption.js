@@ -37,6 +37,8 @@ var ep_spent = 0;
 var ep_saved = 0;
 var ep_left = 0;
 
+var receiving = false 
+
 // var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
 // // var gh = new GitHub({username: '', password: ''})
 // var gh_fcc = gh.getOrganization('first-contact-crypto')
@@ -305,6 +307,8 @@ function deleteAssertion() {
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
+      getAssertions()
+      testAssertionsCreated()
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
@@ -395,6 +399,8 @@ function deleteAssertions(num) {
 // }
 
 function onSelectPrizeEvent(title) {
+  getAssertions();
+  testAssertionsCreated();
   window.selectedPrize = convertToSlug(title);
   $("#placeBidModal").modal();
 }
@@ -699,9 +705,7 @@ function prizeAccounting() {
         );
       }
     });
-    deleteAssertion()
-    getAssertions()
-    testAssertionsCreated()
+    deleteAssertion();
   } else {
     success = false;
     PRINT(
@@ -712,6 +716,16 @@ function prizeAccounting() {
   }
   return success;
 }
+
+function sleep(millis) {
+  var date = new Date()
+  var curDate = null;
+  do {
+    curDate = new Date(); 
+  }
+  while (curDate-date < millis)
+}
+
 
 getUrlVars();
 getBadgeClasses();
