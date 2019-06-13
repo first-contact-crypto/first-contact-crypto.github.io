@@ -285,6 +285,7 @@ function displaySpendEPText() {
 function deleteAssertion() {
   ("In deleteAssertion");
   if (assertions.result.length == 0) {
+    PRINT("INFO In deleteAssertion.. assertions.result.length is 0.. no assertions to delte")
     return;
   }
   var assertion_slug = assertions.result[0].entityId;
@@ -324,7 +325,11 @@ function deleteAssertion() {
   });
 }
 
-function deleteAssertions(num) {
+// function callBadgrToDeleteAssertion() {
+  
+// }
+
+async function deleteAssertions(num) {
   PRINT("INFO: In deleteAssertions.. deleting {0}", num);
   for (i = 0; i < num; i++) {
     deleteAssertion();
@@ -386,15 +391,11 @@ function createAssertion() {
 }
 
 function createPrizeAssertions(ep_spent) {
-  PRINT("INFO: In createPrizeAssertion");
-  ret = true;
+  PRINT("INFO: In createPrizeAssertion.. num_creating: {0}", ep_spent);
   for (var i = 0; i < ep_spent; i++) {
     tret = createAssertion();
-    if (tret === false) {
-      ret = false;
-    }
   }
-  return ret;
+
 }
 
 function onSelectPrizeEvent(title) {
@@ -555,9 +556,9 @@ function testDeletionsCompleted() {
   var duration = 0
   getAssertions();
   testAssertionsCreated();
-    PRINT("INFO In testDeletionCompleted.. num_epiph_asserts_before: {0} ep_spent: {1} num_epiph_asserts: {2}");
+  PRINT("INFO In testDeletionCompleted.. num_epiph_asserts_before: {0} ep_spent: {1} num_epiph_asserts: {2}");
 
-  while (num_epiph_asserts_before - ep_spent == num_epiph_asserts) {
+  while (num_epiph_asserts_before - ep_spent != num_epiph_asserts) {
     PRINT("INFO In testDeletionCompleted.. num_epiph_asserts_before: {0} ep_spent: {1} num_epiph_asserts: {2} duration: {3}",num_epiph_asserts_before, ep_spent, num_epiph_asserts);
     if (duration >= 6000) {
       PRINT("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
@@ -731,7 +732,6 @@ function prizeAccounting() {
       JSON.stringify(window.badgeclasses)
     );
   }
-  return success;
 }
 
 function sleep(millis) {
