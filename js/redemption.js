@@ -553,7 +553,6 @@ async function testAssertionsCreated() {
 }
 
 function testDeletionCompleted() {
-  }
   for (;num_epiph_asserts_before - ep_spent == num_epiph_asserts;) {
     if (duration >= 6000) {
       PRINT("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
