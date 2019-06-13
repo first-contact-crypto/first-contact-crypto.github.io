@@ -330,6 +330,8 @@ function deleteAssertions(num) {
     deleteAssertion();
     num_epiph_asserts -= 1;
   }
+  getAssertions();
+  testAssertionsCreated();
 }
 
 function createAssertion() {
@@ -449,8 +451,6 @@ function onPlaceBidEvent() {
   //   );
   // }
   prizeAccounting()
-  getAssertions();
-  testAssertionsCreated();
   return true;
 }
 
