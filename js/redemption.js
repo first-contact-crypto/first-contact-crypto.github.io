@@ -329,11 +329,8 @@ function deleteAssertions(num) {
   for (i = 0; i < num; i++) {
     deleteAssertion();
     // num_epiph_asserts -= 1;
-    testDeletionCompleted()
   }
-  // testDeletionsCompleted()
-  // getAssertions();
-  // testAssertionsCreated();
+  testDeletionsCompleted()
 }
 
 function createAssertion() {
@@ -552,11 +549,19 @@ async function testAssertionsCreated() {
   }
 }
 
-function testDeletionCompleted() {
+function testDeletionsCompleted() {
+  PRINT("INFO In testDeletionCompleted..")
+  var duration = 0
+  getAssertions();
+  testAssertionsCreated();
   for (;num_epiph_asserts_before - ep_spent == num_epiph_asserts;) {
+    PRINT("INFO In testDeleteCompleted..")
     if (duration >= 6000) {
       PRINT("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
+      alert("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
     }
+    ++duration 
+    PRINT("INFO In testDeletionCompleted")
     sleep(500)
   } 
 }
