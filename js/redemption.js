@@ -330,6 +330,7 @@ function deleteAssertions(num) {
     deleteAssertion();
     num_epiph_asserts -= 1;
   }
+  testDeletionsCreated()
   getAssertions();
   testAssertionsCreated();
 }
@@ -548,6 +549,16 @@ async function testAssertionsCreated() {
       window.assertions.result.length
     );
   }
+}
+
+function testDeletionsCompleted() {
+  var duration = 0
+  for (;num_assertions_before - ep_spent == num_epiph_asserts;) {
+    if (duration >= 6000) {
+      PRINT("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
+    }
+    sleep(500)
+  } 
 }
 
 function getBadgeId(name) {
