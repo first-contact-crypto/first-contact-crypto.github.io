@@ -2,7 +2,7 @@
 
 const DEV_ENV = false;
 
-const BADGR_ACCESS_TOKEN = "WMyG6DHCpBzdZmdiwHPer5DB4zsadt";
+const BADGR_ACCESS_TOKEN = "u3FpGL7ZEVE5PcWhnaLZHaYI3Hwrvr";
 const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
