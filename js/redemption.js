@@ -330,7 +330,7 @@ function deleteAssertions(num) {
     deleteAssertion();
     num_epiph_asserts -= 1;
   }
-  testDeletionsCreated()
+  testDeletionsCompleted()
   getAssertions();
   testAssertionsCreated();
 }
