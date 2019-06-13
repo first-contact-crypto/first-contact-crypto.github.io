@@ -36,8 +36,8 @@ var timer_now_time = 0;
 var ep_spent = 0;
 var ep_saved = 0;
 var ep_left = 0;
-
 var cnt = 0
+var num_epiph_asserts_before = 0
 
 // var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
 // // var gh = new GitHub({username: '', password: ''})
@@ -328,11 +328,12 @@ function deleteAssertions(num) {
   PRINT("INFO: In deleteAssertions.. deleting {0}", num);
   for (i = 0; i < num; i++) {
     deleteAssertion();
-    num_epiph_asserts -= 1;
+    // num_epiph_asserts -= 1;
+    testDeletionCompleted()
   }
-  testDeletionsCompleted()
-  getAssertions();
-  testAssertionsCreated();
+  // testDeletionsCompleted()
+  // getAssertions();
+  // testAssertionsCreated();
 }
 
 function createAssertion() {
@@ -551,9 +552,9 @@ async function testAssertionsCreated() {
   }
 }
 
-function testDeletionsCompleted() {
-  var duration = 0
-  for (;num_assertions_before - ep_spent == num_epiph_asserts;) {
+function testDeletionCompleted() {
+  }
+  for (;num_epiph_asserts_before - ep_spent == num_epiph_asserts;) {
     if (duration >= 6000) {
       PRINT("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
     }
