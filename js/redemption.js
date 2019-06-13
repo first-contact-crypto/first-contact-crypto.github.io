@@ -555,14 +555,15 @@ function testDeletionsCompleted() {
   var duration = 0
   getAssertions();
   testAssertionsCreated();
-  for (;num_epiph_asserts_before - ep_spent == num_epiph_asserts;) {
-    PRINT("INFO In testDeleteCompleted..")
+    PRINT("INFO In testDeletionCompleted.. num_epiph_asserts_before: {0} ep_spent: {1} num_epiph_asserts: {2}");
+
+  while (num_epiph_asserts_before - ep_spent == num_epiph_asserts) {
+    PRINT("INFO In testDeletionCompleted.. num_epiph_asserts_before: {0} ep_spent: {1} num_epiph_asserts: {2} duration: {3}",num_epiph_asserts_before, ep_spent, num_epiph_asserts);
     if (duration >= 6000) {
       PRINT("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
       alert("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
     }
     ++duration 
-    PRINT("INFO In testDeletionCompleted")
     sleep(500)
   } 
 }
