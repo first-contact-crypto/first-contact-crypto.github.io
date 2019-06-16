@@ -7,7 +7,8 @@ const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
 const BADGR_REDEMPTION_TYPE = "redemption";
-const BADGR_BASE_URL = "https://api.badgr.io/";
+// const BADGR_BASE_URL = "https://api.badgr.io/";
+const BADGR_BASE_URL = "https://badgr.firstcontactcrypto.com";
 const BADGR_SERVER_SLUG_EPIPHANY = "V_MaSinhQJeKGOtZz6tDAQ";
 const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw";
 
@@ -224,7 +225,7 @@ function getAssertions() {
 
 function createBadge(name) {
   var badge_url = format(
-    "https://api.badgr.io/v2/issuers/{0}/badgeclasses",
+    "https://badgr.firstcontactcrypto.com/v2/issuers/{0}/badgeclasses",
     BADGR_ISSUER_ID
   );
   PRINT("INFO: In createBadge.. badge_url is: {0}", badge_url);
