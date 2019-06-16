@@ -2,7 +2,7 @@
 
 const DEV_ENV = false;
 
-const BADGR_ACCESS_TOKEN = "3OiFPe9afi6mjMTo0bginiQPuZG69h";
+const BADGR_ACCESS_TOKEN = "wIaFuvsXhfcGb6ex6DrOvptEegkmjE";
 const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
@@ -37,7 +37,9 @@ var ep_spent = 0;
 var ep_saved = 0;
 var ep_left = 0;
 var cnt = 0
-var num_epiph_asserts_before = 0
+var num_epiph_asserts = 0
+
+
 
 // var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
 // // var gh = new GitHub({username: '', password: ''})
@@ -252,6 +254,7 @@ function createBadge(name) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
     }
   });
+  return data.result.length
 }
 
 function createBadges(name_list) {
@@ -285,7 +288,6 @@ function displaySpendEPText() {
 function deleteAssertion() {
   ("In deleteAssertion");
   if (assertions.result.length == 0) {
-    PRINT("INFO In deleteAssertion.. assertions.result.length is 0.. no assertions to delte")
     return;
   }
   var assertion_slug = assertions.result[0].entityId;
@@ -325,18 +327,12 @@ function deleteAssertion() {
   });
 }
 
-// function callBadgrToDeleteAssertion() {
-  
-// }
-
-async function deleteAssertions(num) {
+function deleteAssertions(num) {
   PRINT("INFO: In deleteAssertions.. deleting {0}", num);
   for (i = 0; i < num; i++) {
     deleteAssertion();
-    sleep(500);
-    // num_epiph_asserts -= 1;
+    num_epiph_asserts -= 1;
   }
-  testDeletionsCompleted()
 }
 
 function createAssertion() {
@@ -391,11 +387,15 @@ function createAssertion() {
 }
 
 function createPrizeAssertions(ep_spent) {
-  PRINT("INFO: In createPrizeAssertion.. num_creating: {0}", ep_spent);
+  PRINT("INFO: In createPrizeAssertion");
+  ret = true;
   for (var i = 0; i < ep_spent; i++) {
     tret = createAssertion();
+    if (tret === false) {
+      ret = false;
+    }
   }
-
+  return ret;
 }
 
 function onSelectPrizeEvent(title) {
@@ -452,6 +452,9 @@ function onPlaceBidEvent() {
   //   );
   // }
   prizeAccounting()
+  window.old_num_epiph_asserts = window.num_epiph_asserts
+  getAssertions();
+  testAssertionsCreated();
   return true;
 }
 
@@ -551,22 +554,31 @@ async function testAssertionsCreated() {
   }
 }
 
-function testDeletionsCompleted() {
-  PRINT("INFO In testDeletionCompleted..")
-  var duration = 0
-  getAssertions();
-  testAssertionsCreated();
-  PRINT("INFO In testDeletionCompleted.. num_epiph_asserts_before: {0} ep_spent: {1} num_epiph_asserts: {2}");
-
-  while (num_epiph_asserts_before - ep_spent != num_epiph_asserts) {
-    PRINT("INFO In testDeletionCompleted.. num_epiph_asserts_before: {0} ep_spent: {1} num_epiph_asserts: {2} duration: {3}",num_epiph_asserts_before, ep_spent, num_epiph_asserts);
-    if (duration >= 6000) {
-      PRINT("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
-      alert("ERROR In testDeletionsCompleted.. DURATION OVER 6000")
+async function testDeletionsCompleted() {
+  PRINT("INFO: In testDeletionsCompleted");
+  started = false;
+  if (started === true) {
+    window.timer_now_time += 3000;
+  }
+  started = true;
+  PRINT("INFO: In testDeletionsCompleted");
+  if (window.old_num_epiph_asserts - ep_spent != window.num_epiph_asserts) {
+    await sleep(500);
+    if (window.timer_now_time > 6000) {
+      PRINT(
+        "In testDeletionsCompleted.. WTF 6000 ms have passed, calling getBadgeClasses"
+      );
+      getAssertions();
+      started = false;
+      now_time = 0;
     }
-    ++duration 
-    sleep(500)
-  } 
+    testDeletionsCompleted();
+  } else {
+    PRINT(
+      "SUCCESS: In testDeletionsCompleted.. deletions completed.. \\o/ {0}",
+      ep_spent
+    );
+  }
 }
 
 function getBadgeId(name) {
@@ -722,8 +734,9 @@ function prizeAccounting() {
         );
       }
     });
-    createPrizeAssertions(ep_spent)
+    createPrizeAssertions(ep_spent);
     deleteAssertions(ep_spent);
+    testDeletionsCompleted()
   } else {
     success = false;
     PRINT(
@@ -732,6 +745,7 @@ function prizeAccounting() {
       JSON.stringify(window.badgeclasses)
     );
   }
+  return success;
 }
 
 function sleep(millis) {
@@ -755,10 +769,11 @@ PRINT("DASHBOARD: In global_scope.. num_badges_needed: {0}", num_badges_needed);
 if (num_badges_needed > 0) {
   createBadges(new_badges_needed);
 }
+
+window.old_num_epiph_asserts = window.num_epiph_asserts;
 getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
 
 // 5BqKu<HV
-
-
+// 05vxm7yHLQ?)
