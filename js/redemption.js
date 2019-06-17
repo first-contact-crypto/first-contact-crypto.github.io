@@ -456,9 +456,10 @@ function getPrizeList() {
   $(".prize").each(function(index) {
     var txt = convertToSlug($(this).text());
     PRINT("INFO: In getPrizeList.. the prize is: {0}", txt);
-    window.prizeList.push(txt);
+    prizeList.push(txt);
   });
-  PRINT("INFO In getPrizeList.. !!! the window.prizeList is: {0}", window.prizeList)
+  PRINT("INFO In getPrizeList.. !!! the prizeList is: {0}", prizeList)
+  return prizeList
 }
 
 function getBadgeClassNamesList() {
@@ -475,14 +476,14 @@ function getBadgeClassNamesList() {
   return badgeclassNamesList;
 }
 
-function getBadgesToBeCreated() {
+function getBadgesToBeCreated(prizeList) {
   PRINT("INFO: In getBadgesToBeCreated");
   if (window.badgeclasses == null) {
     testBadgesCreated();
   }
   getBadgeClassNamesList();
-  PRINT("INFO: In getBadgesToBeCreated.. window.prizeList is: {0}", window.prizeList)
-  prizelist_set = new Set(window.prizeList);
+  PRINT("INFO: In getBadgesToBeCreated.. prizeList is: {0}", prizeList)
+  prizelist_set = new Set(prizeList);
   badgeclass_set = new Set(window.badgeclassNamesList);
   output_set = new Set([...prizelist_set].filter(x => !badgeclass_set.has(x)));
   PRINT(
@@ -561,9 +562,9 @@ function getBadgeId(name) {
 getUrlVars();
 getBadgeClasses();
 testBadgesCreated();
-getPrizeList();
+pl = getPrizeList();
 PRINT("INFO: In global_scope.. prizeList: {0}", prizeList.toString());
-var new_badges_needed = getBadgesToBeCreated();
+var new_badges_needed = getBadgesToBeCreated(pl);
 var num_badges_needed = new_badges_needed.length;
 PRINT("DASHBOARD: In global_scope.. num_badges_needed: {0}", num_badges_needed);
 if (num_badges_needed > 0) {
