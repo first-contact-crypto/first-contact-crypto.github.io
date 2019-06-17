@@ -458,7 +458,7 @@ function getPrizeList() {
     PRINT("INFO: In getPrizeList.. the prize is: {0}", txt);
     window.prizeList.push(txt);
   });
-  
+  PRINT("INFO In getPrizeList.. !!! the window.prizeList is: {0}", window.prizeList)
 }
 
 function getBadgeClassNamesList() {
