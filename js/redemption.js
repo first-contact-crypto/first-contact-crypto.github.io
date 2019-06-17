@@ -458,6 +458,7 @@ function getPrizeList() {
     PRINT("INFO: In getPrizeList.. the prize is: {0}", txt);
     window.prizeList.push(txt);
   });
+  
 }
 
 function getBadgeClassNamesList() {
@@ -480,17 +481,17 @@ function getBadgesToBeCreated() {
     testBadgesCreated();
   }
   getBadgeClassNamesList();
-
-  plSet = new Set(window.prizeList);
-  bcSet = new Set(window.badgeclassNamesList);
-  outSet = new Set([...plSet].filter(x => !bcSet.has(x)));
+  PRINT("INFO: In getBadgesToBeCreated.. window.prizeList is: {0}", window.prizeList)
+  prizelist_set = new Set(window.prizeList);
+  badgeclass_set = new Set(window.badgeclassNamesList);
+  output_set = new Set([...prizelist_set].filter(x => !badgeclass_set.has(x)));
   PRINT(
-    "INFO: In getBadgesToBeCreated.. plSet size: {0} .. bcSet size: {1} .. out size: {2}",
-    plSet.size,
-    bcSet.size,
-    outSet.size
+    "INFO: In getBadgesToBeCreated.. prizelist_set size: {0} .. badgeclass_set size: {1} .. out size: {2}",
+    prizelist_set.size,
+    badgeclass_set.size,
+    output_set.size
   );
-  return Array.from(outSet);
+  return Array.from(output_set);
 }
 
 async function testBadgesCreated() {
