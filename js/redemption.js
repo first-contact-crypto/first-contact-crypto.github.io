@@ -10,7 +10,7 @@ const BADGR_ACCESS_TOKEN = "0NEZDbBT6LEd9sP1R3GtfENBq0xifg";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
 const BADGR_REDEMPTION_TYPE = "redemption";
-const BADGR_BASE_URL = "https://api.badgr.io/";
+const BADGR_BASE_URL = "https://badgr.firstcontactcrypto.com/";
 const BADGR_SERVER_SLUG_EPIPHANY = "CM-sak0wQuCty2BfSEle3A";
 const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw";
 
