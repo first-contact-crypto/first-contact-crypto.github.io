@@ -561,6 +561,8 @@ function getBadgeId(name) {
 getUrlVars();
 getBadgeClasses();
 testBadgesCreated();
+getPrizeList();
+PRINT("INFO: In global_scope.. prizeList: {0}", prizeList.toString());
 var new_badges_needed = getBadgesToBeCreated();
 var num_badges_needed = new_badges_needed.length;
 PRINT("DASHBOARD: In global_scope.. num_badges_needed: {0}", num_badges_needed);
@@ -570,6 +572,5 @@ if (num_badges_needed > 0) {
 getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
-getPrizeList();
-PRINT("INFO: In global_scope.. prizeList: {0}", prizeList.toString());
+
 
