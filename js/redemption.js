@@ -92,7 +92,7 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     error: errorfunc,
     beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-      // xhr.setRequestHeader("Content-Type", "application/json")
+      xhr.setRequestHeader("Content-Type", "application/json")
     }
   });
 }
