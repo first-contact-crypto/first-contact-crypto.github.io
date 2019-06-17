@@ -324,6 +324,7 @@ function deleteAssertion() {
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
+      assertions.shift()    // removes first element
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
@@ -347,6 +348,7 @@ function deleteAssertions(num) {
   for (i = 0; i < num; i++) {
     deleteAssertion();
     num_epiph_asserts -= 1;
+    // sleep(500)
   }
 }
 
