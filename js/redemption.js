@@ -277,6 +277,8 @@ function createBadges(name_list) {
     createBadge(name_list[i]);
   }
   // createBadge(name_list[0])
+  getBadgeClasses();
+  testBadgesCreated();
 }
 
 // function displayUserInfo() {
@@ -541,8 +543,6 @@ async function testAssertionsCreated() {
 }
 
 function getBadgeId(name) {
-  getBadgeClasses()
-  testBadgesCreated()
   // if (window.badgeclasses == null) {
   //   testBadgesCreated();
   // }
