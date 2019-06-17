@@ -12,7 +12,6 @@ const BADGR_EPIPHANY_TYPE = "epiphany";
 const BADGR_REDEMPTION_TYPE = "redemption";
 const BADGR_BASE_URL = "https://badgr.firstcontactcrypto.com/";
 const BADGR_SERVER_SLUG_EPIPHANY = "CM-sak0wQuCty2BfSEle3A";
-const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw";
 
 var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"; // issuer id
 var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions"; // badge_class entityId
@@ -191,22 +190,44 @@ function getAssertions() {
       PRINT("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
     }
   );
+
+  var num_assertions_before = assertions.result.length;
+  var assertions_list = assertions.result;
+
   PRINT(
     "INFO: In getAssertions.. the num assertions before: {0}",
     assertions.result.length
   );
-  for (i = 0; i < window.assertions.result.length; ++i) {
-    a = window.assertions.result[i];
-    PRINT(
-      "INFO: In getAssertions.. assertion.recipient.identity: {0} window.useremail: {1}",
-      a.recipient.identity,
-      window.useremail
-    );
-    if (a.recipient.identity != window.useremail) {
-      window.assertions.result.splice(i, 1);
-      --window.num_epiph_asserts
+
+  var assertions_to_keep = []
+  for i = 0; i < num_assertions_before;++i) {
+    a = assertions_list[i]
+    if (a.recipient.identity === useremail) {
+      assertions_to_keep.push(a)
     }
   }
+
+  assertions.result = assertions_to_keep
+
+
+
+
+  // for (i = 0; i < window.assertions.result.length; ++i) {
+  //   output = []
+  //   a = window.assertions.result[i];
+  //   PRINT(
+  //     "INFO: In getAssertions.. assertion.recipient.identity: {0} window.useremail: {1}",
+  //     a.recipient.identity,
+  //     window.useremail
+  //   );
+  //   if (a.recipient.identity != window.useremail) {
+  //     // window.assertions.result.splice(i, 1);
+  //     output.append
+  //     --window.num_epiph_asserts
+  //   }
+  // }
+
+
   PRINT(
     "INFO: In getAssertions.. the num assertions after: {0}",
     assertions.result.length
