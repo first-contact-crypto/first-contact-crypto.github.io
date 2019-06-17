@@ -475,7 +475,7 @@ function getBadgeClassNamesList() {
   );
   for (var i = 0; i < window.badgeclasses.result.length; i++) {
     var name = window.badgeclasses.result[i].name;
-    // PRINT("{0}", name)
+    PRINT("INFO In getBadgeClassNameList the name being added is: {0}", name)
     badgeclassNamesList.push(name);
   }
   PRINT("INFO: bcnl: {0}", badgeclassNamesList.length);
