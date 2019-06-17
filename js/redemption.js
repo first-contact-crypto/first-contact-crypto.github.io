@@ -240,7 +240,7 @@ function createBadge(name) {
     "https://badgr.firstcontactcrypto.com/v2/issuers/{0}/badgeclasses",
     BADGR_ISSUER_ID
   );
-  PRINT("INFO: In createBadge.. badge_url is: {0}", badge_url);
+  PRINT("INFO: In createBadge.. the name is {0}, badge_url is: {1}", name, badge_url);
   $.ajax({
     method: "POST",
     dataType: "json",
@@ -253,6 +253,7 @@ function createBadge(name) {
         "SUCCESS: In createBadge.. badge created: {0}",
         JSON.stringify(data)
       );
+      badgeclasses.result.push(data)
     },
     error: function(xhr, status, errMsg) {
       PRINT(
@@ -277,8 +278,8 @@ function createBadges(name_list) {
     createBadge(name_list[i]);
   }
   // createBadge(name_list[0])
-  getBadgeClasses();
-  testBadgesCreated();
+  // getBadgeClasses();
+  // testBadgesCreated();
 }
 
 // function displayUserInfo() {
@@ -355,6 +356,9 @@ function createAssertion() {
     window.selectedPrize
   );
   var badgeId = getBadgeId(window.selectedPrize);
+  
+  PRINT("INFO In createAssertion.. the badgeId is {0}", badgeId)
+
   var assertion_url = format(
     BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
     badgeId
@@ -403,7 +407,7 @@ function createPrizeAssertions(ep_spent) {
 }
 
 function onSelectPrizeEvent(title) {
-  selectedPrize = convertToSlug(title);
+  window.selectedPrize = convertToSlug(title);
   $("#placeBidModal").modal();
 }
 
@@ -489,10 +493,11 @@ function getBadgesToBeCreated(prizeList) {
   badgeclass_set = new Set(window.badgeclassNamesList);
   output_set = new Set([...prizelist_set].filter(x => !badgeclass_set.has(x)));
   PRINT(
-    "INFO: In getBadgesToBeCreated.. prizelist_set size: {0} .. badgeclass_set size: {1} .. out size: {2}",
+    "INFO: In getBadgesToBeCreated.. prizelist_set size: {0} .. badgeclass_set size: {1} .. out size: {2} .. the output_set: {3}",
     prizelist_set.size,
     badgeclass_set.size,
-    output_set.size
+    output_set.size,
+    output_set
   );
   return Array.from(output_set);
 }
