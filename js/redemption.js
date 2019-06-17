@@ -196,11 +196,11 @@ function getAssertions() {
 
   PRINT(
     "INFO: In getAssertions.. the num assertions before: {0}",
-    assertions.result.length
+    num_assertions_before
   );
 
   var assertions_to_keep = []
-  for i = 0; i < num_assertions_before;++i) {
+  for (i = 0; i < num_assertions_before;++i) {
     a = assertions_list[i]
     if (a.recipient.identity === useremail) {
       assertions_to_keep.push(a)
