@@ -18,7 +18,7 @@ var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions"; // badge
 var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions";
 var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}";
 
-// https://api.badgr.io/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
+// https://badgr.firstcontactcrypto.com/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
 
 var recipient = new Object();
 recipient.identity = "string";
@@ -237,7 +237,7 @@ function getAssertions() {
 
 function createBadge(name) {
   var badge_url = format(
-    "https://api.badgr.io/v2/issuers/{0}/badgeclasses",
+    "https://badgr.firstcontactcrypto.com/v2/issuers/{0}/badgeclasses",
     BADGR_ISSUER_ID
   );
   PRINT("INFO: In createBadge.. badge_url is: {0}", badge_url);
