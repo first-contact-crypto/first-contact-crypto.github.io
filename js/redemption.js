@@ -2,14 +2,14 @@
 
 const DEV_ENV = false;
 
-const BADGR_ACCESS_TOKEN = "wIaFuvsXhfcGb6ex6DrOvptEegkmjE";
-const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg";
+const BADGR_ACCESS_TOKEN = "iQVVlGccqshiTnTa4cNDdDFrplKM5t";
+const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
 const BADGR_REDEMPTION_TYPE = "redemption";
 // const BADGR_BASE_URL = "https://api.badgr.io/";
 const BADGR_BASE_URL = "https://badgr.firstcontactcrypto.com";
-const BADGR_SERVER_SLUG_EPIPHANY = "V_MaSinhQJeKGOtZz6tDAQ";
+const BADGR_SERVER_SLUG_EPIPHANY = "CM-sak0wQuCty2BfSEle3A";
 const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw";
 
 var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"; // issuer id
@@ -18,7 +18,7 @@ var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions";
 var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}";
 var BADGR_BADGECLASS_UPDATE_PATH = "v2/badgeclasses/{0}";
 
-// https://api.badgr.io/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
+// https://api.badgr.io/v2/badgeclasses/CM-sak0wQuCty2BfSEle3A/assertions
 
 var recipient = new Object();
 recipient.identity = "string";
@@ -37,10 +37,8 @@ var timer_now_time = 0;
 var ep_spent = 0;
 var ep_saved = 0;
 var ep_left = 0;
-var cnt = 0
-var num_epiph_asserts = 0
-
-
+var cnt = 0;
+var num_epiph_asserts = 0;
 
 // var gh = new GitHub({ token: "ff2254e5a7e7154411a13ea7dfb60fbb941158c0" });
 // // var gh = new GitHub({username: '', password: ''})
@@ -48,10 +46,10 @@ var num_epiph_asserts = 0
 // var gist_id = "1b4318e76e5c02436425a1a8f754cec4"
 // var gist = gh.getGist(gist_id)
 
-// EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
+// EPIPHANY BADGE SERVER SLUG: CM-sak0wQuCty2BfSEle3A
 // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_efc20af1 - 7d43 - 4d1e - 877e-447244ea3fd3.png
 
-// COURSE BADGE SERVER SLUG: 2gnNK3RZSlOutOrVeQlD_A
+// COURSE BADGE SERVER SLUG: RBNmTgTUTQC4o_0-yDIA4g
 // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_63237c1a - 3f3d - 40b7 - 9e48 - 085658d2799f.png
 
 // REDEMPTION BADGE SERVER SLUG: XrG4QUcyTQGVch1VipS-Qw
@@ -147,7 +145,7 @@ function getUrlVars() {
     // num_epiph_asserts: Object.keys(assertions).length,
     // num_epiph_asserts: pc_pkg.num_epiph_asserts,
     epiphany_badgeclass_id: BADGR_SERVER_SLUG_EPIPHANY,
-    epiphany_issuer_id: "rGy5MNWtQgSs1vfnLyPlmg",
+    epiphany_issuer_id: "MC67oN42TPm9VARGW7TmKw",
     username: username,
     useremail: useremail
   };
@@ -220,7 +218,11 @@ function getAssertions() {
     assertions.result.length
   );
   window.num_epiph_asserts = window.assertions.result.length;
-  PRINT("INFO In getAssertions for the {0} time.. window.num_epiph_asserts: {1}", ++cnt, window.num_epiph_asserts)
+  PRINT(
+    "INFO In getAssertions for the {0} time.. window.num_epiph_asserts: {1}",
+    ++cnt,
+    window.num_epiph_asserts
+  );
 }
 
 function createBadge(name) {
@@ -241,8 +243,8 @@ function createBadge(name) {
         "SUCCESS: In createBadge.. badge created: {0}",
         JSON.stringify(data)
       );
-      getBadgeClasses()
-      testBadgesCreated()
+      getBadgeClasses();
+      testBadgesCreated();
     },
     error: function(xhr, status, errMsg) {
       PRINT(
@@ -255,7 +257,7 @@ function createBadge(name) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
     }
   });
-  return data.result.length
+  return data.result.length;
 }
 
 function createBadges(name_list) {
@@ -452,8 +454,8 @@ function onPlaceBidEvent() {
   //     "ERROR: NOT ALL PRIZE ASSERTIONS WERE CREATED!! NOT DELETING ANY OF THEM!"
   //   );
   // }
-  prizeAccounting()
-  window.old_num_epiph_asserts = window.num_epiph_asserts
+  prizeAccounting();
+  window.old_num_epiph_asserts = window.num_epiph_asserts;
   getAssertions();
   testAssertionsCreated();
   return true;
@@ -643,7 +645,7 @@ function prizeAccounting() {
     prizeAssertion.timestamp = Date.now();
     PRINT(
       "INFO In prizeAssertions: NEW prizeAssertion: {0}",
- 
+
       JSON.stringify(prizeAssertion)
     );
     if (bp.description && bp.description.startsWith("[{")) {
@@ -700,21 +702,16 @@ function prizeAccounting() {
       "INFO In prizeAssertions: NEW prizeAssertion(S): {0}",
       JSON.stringify(prizeAssertions)
     );
-    PRINT("INFO In prizeAccounting: Calling badgeclass update now")
+    PRINT("INFO In prizeAccounting: Calling badgeclass update now");
     $.ajax({
       method: "PUT",
       dataType: "json",
       processData: false,
       contentType: "application/json",
-      url:
-        BADGR_BASE_URL +
-        format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
+      url: BADGR_BASE_URL + format(BADGR_BADGECLASS_UPDATE_PATH, bp.entityId),
       data: JSON.stringify(bp),
       success: function(data, status, xhr) {
-        PRINT(
-          "SUCCESS: In prizeAccounting: {0}",
-          JSON.stringify(data)
-        );
+        PRINT("SUCCESS: In prizeAccounting: {0}", JSON.stringify(data));
       },
       error: function(xhr, status, errMsg) {
         success = false;
@@ -725,19 +722,13 @@ function prizeAccounting() {
         );
       },
       beforeSend: function(xhr) {
-        xhr.setRequestHeader(
-          "Authorization",
-          "Bearer " + BADGR_ACCESS_TOKEN
-        );
-        xhr.setRequestHeader(
-          "Content-Type",
-          "application/json"
-        );
+        xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+        xhr.setRequestHeader("Content-Type", "application/json");
       }
     });
     createPrizeAssertions(ep_spent);
     deleteAssertions(ep_spent);
-    testDeletionsCompleted()
+    testDeletionsCompleted();
   } else {
     success = false;
     PRINT(
@@ -750,14 +741,12 @@ function prizeAccounting() {
 }
 
 function sleep(millis) {
-  var date = new Date()
+  var date = new Date();
   var curDate = null;
   do {
-    curDate = new Date(); 
-  }
-  while (curDate-date < millis)
+    curDate = new Date();
+  } while (curDate - date < millis);
 }
-
 
 getUrlVars();
 getBadgeClasses();
