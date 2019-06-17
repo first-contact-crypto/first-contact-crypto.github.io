@@ -5,13 +5,13 @@ const DEV_ENV = false;
 //   "badgr_refresh_token": "ScStrEeMla8gfXfR70Xxmm0sEW1zRY"
 // }
 
-const BADGR_ISSUER_ID = "rGy5MNWtQgSs1vfnLyPlmg";
-const BADGR_ACCESS_TOKEN = "wOFWgXg3Gv1t4TWsEy1FJjWkSZSn4A";
+const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
+const BADGR_ACCESS_TOKEN = "0NEZDbBT6LEd9sP1R3GtfENBq0xifg";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
 const BADGR_REDEMPTION_TYPE = "redemption";
 const BADGR_BASE_URL = "https://api.badgr.io/";
-const BADGR_SERVER_SLUG_EPIPHANY = "V_MaSinhQJeKGOtZz6tDAQ";
+const BADGR_SERVER_SLUG_EPIPHANY = "CM-sak0wQuCty2BfSEle3A";
 const BADGR_SERVER_SLUG_REDEMPTION = "XrG4QUcyTQGVch1VipS-Qw";
 
 var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"; // issuer id
