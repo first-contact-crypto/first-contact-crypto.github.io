@@ -35,6 +35,7 @@ var badgeclassNamesList = [];
 var selectedPrize = "";
 var timer_started = false;
 var timer_now_time = 0;
+var ep_left = None;
 
 // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
 // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_efc20af1 - 7d43 - 4d1e - 877e-447244ea3fd3.png
