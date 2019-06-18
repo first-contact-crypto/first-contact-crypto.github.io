@@ -298,8 +298,11 @@ function displaySpendEPText() {
     .setAttribute("max", window.num_epiph_asserts);
 }
 
+var wtf_count = 0
+
 function deleteAssertion() {
-  ("In deleteAssertion");
+  wtf_count++
+  ("In deleteAssertion.. the wtf_count is: {0}", wtf_count);
   if (assertions.result.length == 0) {
     return 
   }
@@ -328,7 +331,7 @@ function deleteAssertion() {
         JSON.stringify(data)
       );
       
-      assertions.result.splice(0, 1)  // removes first element
+      // assertions.result.splice(0, 1)  // removes first element
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
