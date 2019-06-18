@@ -6,7 +6,7 @@ const DEV_ENV = false;
 // }
 
 const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
-const BADGR_ACCESS_TOKEN = "0NEZDbBT6LEd9sP1R3GtfENBq0xifg";
+const BADGR_ACCESS_TOKEN = "CMelVbVdYx7vKVbQKBYYttGCSfmf7A";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
 const BADGR_REDEMPTION_TYPE = "redemption";
@@ -92,7 +92,7 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     error: errorfunc,
     beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
-      xhr.setRequestHeader("Content-Type", "application/json")
+      xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
 }
@@ -200,21 +200,21 @@ function getAssertions() {
     num_assertions_before
   );
 
-  var assertions_to_keep = []
-  for (i = 0; i < num_assertions_before;++i) {
-    a = assertions_list[i]
+  var assertions_to_keep = [];
+  for (i = 0; i < num_assertions_before; ++i) {
+    a = assertions_list[i];
     if (a.recipient.identity === useremail) {
-      assertions_to_keep.push(a)
+      assertions_to_keep.push(a);
     }
   }
 
-  assertions.result = assertions_to_keep
+  assertions.result = assertions_to_keep;
 
   PRINT(
     "INFO: In getAssertions.. the num assertions after: {0}",
     assertions.result.length
   );
-  window.num_epiph_asserts = window.assertions.result.length
+  window.num_epiph_asserts = window.assertions.result.length;
 }
 
 function createBadge(name) {
@@ -222,7 +222,11 @@ function createBadge(name) {
     "https://badgr.firstcontactcrypto.com/v2/issuers/{0}/badgeclasses",
     BADGR_ISSUER_ID
   );
-  PRINT("INFO: In createBadge.. the name is {0}, badge_url is: {1}", name, badge_url);
+  PRINT(
+    "INFO: In createBadge.. the name is {0}, badge_url is: {1}",
+    name,
+    badge_url
+  );
   $.ajax({
     method: "POST",
     dataType: "json",
@@ -235,7 +239,7 @@ function createBadge(name) {
         "SUCCESS: In createBadge.. badge created: {0}",
         JSON.stringify(data)
       );
-      badgeclasses.result.push(data)
+      badgeclasses.result.push(data);
     },
     error: function(xhr, status, errMsg) {
       PRINT(
@@ -269,45 +273,51 @@ function createBadges(name_list) {
 //   document.getElementById("introductory-text").innerHTML = "Congratulations " + window.username + " You currently have " + window.num_epiph_asserts + " Epiphany Points to spend.";
 // }
 
-function displaySpendEPText(ep_left=-1) {
-  num_left = 0
+function displaySpendEPText(ep_left = -1) {
+  num_left = 0;
   if (ep_left >= 0) {
-    num_left = ep_left
-  }
-  else {
-    num_left =  window.num_epiph_asserts
+    num_left = ep_left;
+  } else {
+    num_left = window.num_epiph_asserts;
   }
   console.log("In displaySpendEPText.. ");
   document.getElementById("spend-ep-text").innerHTML =
     "You currently have " +
     num_left +
     " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
-  document
-    .getElementById("num-spent-input")
-    .setAttribute("max", num_left);
+  document.getElementById("num-spent-input").setAttribute("max", num_left);
 }
 
-var wtf_count = 0
+var wtf_count = 0;
 
 function deleteAssertion(num) {
   if (wtf_count >= num) {
-    return
+    return;
   }
-  wtf_count++
+  wtf_count++;
 
   PRINT("INFO In deleteAssertion.. the wtf_count is: {0}", wtf_count);
   if (assertions.result.length == 0) {
-    return 
+    return;
   }
 
-  PRINT("INFO In deleteAssertion.. the assertions.size before is: {0}", assertions.result.length)
-  var assertion = assertions.result.pop()
-  PRINT("INFO In deleteAssertion.. the assertions.size after removal is: {0}", assertions.result.length)
+  PRINT(
+    "INFO In deleteAssertion.. the assertions.size before is: {0}",
+    assertions.result.length
+  );
+  var assertion = assertions.result.pop();
+  PRINT(
+    "INFO In deleteAssertion.. the assertions.size after removal is: {0}",
+    assertions.result.length
+  );
 
   var assertion_slug = assertion.entityId;
   PRINT("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug);
 
-  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, assertion_slug);
+  var assertion_url = format(
+    BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH,
+    assertion_slug
+  );
 
   $.ajax({
     method: "DELETE",
@@ -323,7 +333,7 @@ function deleteAssertion(num) {
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
-      
+
       // assertions.result.splice(0, 1)  // removes first element
     },
     error: function(xhr, status, errMsg) {
@@ -358,8 +368,8 @@ function createAssertion() {
     window.selectedPrize
   );
   var badgeId = getBadgeId(window.selectedPrize);
-  
-  PRINT("INFO In createAssertion.. the badgeId is {0}", badgeId)
+
+  PRINT("INFO In createAssertion.. the badgeId is {0}", badgeId);
 
   var assertion_url = format(
     BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
@@ -411,25 +421,21 @@ function createPrizeAssertions(ep_spent) {
 function onSelectPrizeEvent(title) {
   // $("num-spent-input").val(assertions.result.length);
   // ep_spent = document.getElementById("num-spent-input").value;
-  num_to_spend = 0
+  num_to_spend = 0;
   if (ep_left && ep_left > 0) {
-    num_to_spend = ep_left
-  }
-  else if (ep_left && ep_left === 0) {
-    num_to_spend = 0
-  }
-  else {
-    num_to_spend = num_epiph_asserts
+    num_to_spend = ep_left;
+  } else if (ep_left && ep_left === 0) {
+    num_to_spend = 0;
+  } else {
+    num_to_spend = num_epiph_asserts;
   }
   document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
-  document.getElementById("num-spent-input").value = 0
-    document.getElementById("spend-ep-text").innerHTML =
-      "You currently have " +
-      num_to_spend +
-      " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
-    document
-      .getElementById("num-spent-input")
-      .setAttribute("max", num_to_spend);
+  document.getElementById("num-spent-input").value = 0;
+  document.getElementById("spend-ep-text").innerHTML =
+    "You currently have " +
+    num_to_spend +
+    " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
+  document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
   window.selectedPrize = convertToSlug(title);
   $("#placeBidModal").modal();
 }
@@ -465,7 +471,7 @@ function onPlaceBidEvent() {
     '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
   );
   displaySpendEPText(ep_left);
-  getAssertions()
+  getAssertions();
   return true;
 }
 
@@ -483,8 +489,8 @@ function getPrizeList() {
     PRINT("INFO: In getPrizeList.. the prize is: {0}", txt);
     prizeList.push(txt);
   });
-  PRINT("INFO In getPrizeList.. !!! the prizeList is: {0}", prizeList)
-  return prizeList
+  PRINT("INFO In getPrizeList.. !!! the prizeList is: {0}", prizeList);
+  return prizeList;
 }
 
 function getBadgeClassNamesList() {
@@ -494,7 +500,7 @@ function getBadgeClassNamesList() {
   );
   for (var i = 0; i < window.badgeclasses.result.length; i++) {
     var name = window.badgeclasses.result[i].name;
-    PRINT("INFO In getBadgeClassNameList the name being added is: {0}", name)
+    PRINT("INFO In getBadgeClassNameList the name being added is: {0}", name);
     badgeclassNamesList.push(name);
   }
   PRINT("INFO: bcnl: {0}", badgeclassNamesList.length);
@@ -507,7 +513,7 @@ function getBadgesToBeCreated(prizeList) {
     testBadgesCreated();
   }
   getBadgeClassNamesList();
-  PRINT("INFO: In getBadgesToBeCreated.. prizeList is: {0}", prizeList)
+  PRINT("INFO: In getBadgesToBeCreated.. prizeList is: {0}", prizeList);
   prizelist_set = new Set(prizeList);
   badgeclass_set = new Set(window.badgeclassNamesList);
   output_set = new Set([...prizelist_set].filter(x => !badgeclass_set.has(x)));
@@ -523,7 +529,7 @@ function getBadgesToBeCreated(prizeList) {
 
 async function testBadgesCreated() {
   PRINT("INFO: In testBadgesCreated");
-  started = false 
+  started = false;
   if (started === true) {
     window.timer_now_time += 3000;
   }
@@ -550,7 +556,7 @@ async function testBadgesCreated() {
 
 async function testAssertionsCreated() {
   PRINT("INFO: In testAssertionsCreated");
-  started = false
+  started = false;
   if (started === true) {
     window.timer_now_time += 3000;
   }
@@ -562,7 +568,7 @@ async function testAssertionsCreated() {
     PRINT(
       "SUCCESS: In testAssertionsCreated.. assertions list created.. \\0/ {0}",
       window.assertions.result.length
-    )
+    );
   }
 }
 
@@ -578,7 +584,11 @@ function getBadgeId(name) {
   );
   for (var i = 0; i < num; i++) {
     var bc = window.badgeclasses.result[i];
-    PRINT("DASHBOARD: In getBadgeId.. the bc.name is: {0} .. the name is: {1}", bc.name, name)
+    PRINT(
+      "DASHBOARD: In getBadgeId.. the bc.name is: {0} .. the name is: {1}",
+      bc.name,
+      name
+    );
     if (bc.name === name) {
       return bc.entityId;
     }
@@ -599,5 +609,3 @@ if (num_badges_needed > 0) {
 getAssertions();
 testAssertionsCreated();
 displaySpendEPText();
-
-
