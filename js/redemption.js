@@ -209,25 +209,6 @@ function getAssertions() {
 
   assertions.result = assertions_to_keep
 
-
-
-
-  // for (i = 0; i < window.assertions.result.length; ++i) {
-  //   output = []
-  //   a = window.assertions.result[i];
-  //   PRINT(
-  //     "INFO: In getAssertions.. assertion.recipient.identity: {0} window.useremail: {1}",
-  //     a.recipient.identity,
-  //     window.useremail
-  //   );
-  //   if (a.recipient.identity != window.useremail) {
-  //     // window.assertions.result.splice(i, 1);
-  //     output.append
-  //     --window.num_epiph_asserts
-  //   }
-  // }
-
-
   PRINT(
     "INFO: In getAssertions.. the num assertions after: {0}",
     assertions.result.length
@@ -300,7 +281,10 @@ function displaySpendEPText() {
 
 var wtf_count = 0
 
-function deleteAssertion() {
+function deleteAssertion(num) {
+  if (wtf_count >= num) {
+    return
+  }
   wtf_count++
 
   PRINT("INFO In deleteAssertion.. the wtf_count is: {0}", wtf_count);
@@ -354,7 +338,7 @@ function deleteAssertion() {
 function deleteAssertions(num) {
   PRINT("INFO: In deleteAssertions.. deleting {0}", num);
   for (i = 0; i < num; i++) {
-    deleteAssertion();
+    deleteAssertion(num);
     num_epiph_asserts -= 1;
     // sleep(500)
   }
@@ -417,6 +401,24 @@ function createPrizeAssertions(ep_spent) {
 }
 
 function onSelectPrizeEvent(title) {
+  // $("num-spent-input").val(assertions.result.length);
+  // ep_spent = document.getElementById("num-spent-input").value;
+  num_to_spend = 0
+  if (ep_left > 0) {
+    num_to_spend = ep_left
+  }
+  else {
+    num_to_spend = num_epiph_asserts
+  }
+  document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
+  document.getElementById("num-spent-input").value = 0
+    document.getElementById("spend-ep-text").innerHTML =
+      "You currently have " +
+      num_to_spend +
+      " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
+    document
+      .getElementById("num-spent-input")
+      .setAttribute("max", num_to_spend);
   window.selectedPrize = convertToSlug(title);
   $("#placeBidModal").modal();
 }
@@ -449,14 +451,17 @@ function onPlaceBidEvent() {
     " Epiphany Points, or go on back to the control center to earn some more!";
   $("#congrats-instructions").text(msg);
   $("#congrats-instructions").after(
-    '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-primary">Mission Control</a>'
+    '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
   );
-  ep_saved = window.num_epiph_asserts;
+  // ep_saved = window.num_epiph_asserts;
 
-  ep_left = ep_saved - ep_spent;
-  createPrizeAssertions(ep_spent);
-  deleteAssertions(ep_spent);
-
+  // ep_left = ep_saved - ep_spent;
+  // createPrizeAssertions(ep_spent);
+  // deleteAssertions(ep_spent);
+  // getAssertions()
+  // // testAssertionsCreated()
+  // ep_spent = document.getElementById("num-spent-input").value;
+  $("num-spent-input").val(ep_left)
   return true;
 }
 
