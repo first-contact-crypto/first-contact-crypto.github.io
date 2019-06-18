@@ -462,6 +462,7 @@ function onPlaceBidEvent() {
   // // testAssertionsCreated()
   // ep_spent = document.getElementById("num-spent-input").value;
   $("num-spent-input").val(ep_left)
+  getAssertions()
   return true;
 }
 
