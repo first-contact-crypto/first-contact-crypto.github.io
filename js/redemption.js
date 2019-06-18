@@ -324,9 +324,9 @@ function deleteAssertion() {
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
-      PRINT("INFO In deleteAssertion.. the assertions.size before is: {0}", assertions.result.size)
+      PRINT("INFO In deleteAssertion.. the assertions.size before is: {0}", assertions.result.length)
       assertions.result.shift  // removes first element
-      PRINT("INFO In deleteAssertion.. the assertions.size after removal is: {0}", assertions.result.size)
+      PRINT("INFO In deleteAssertion.. the assertions.size after removal is: {0}", assertions.result.length)
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
@@ -350,7 +350,7 @@ function deleteAssertions(num) {
   for (i = 0; i < num; i++) {
     deleteAssertion();
     num_epiph_asserts -= 1;
-    // sleep(500)
+    sleep(500)
   }
 }
 
