@@ -36,6 +36,7 @@ var selectedPrize = "";
 var timer_started = false;
 var timer_now_time = 0;
 var ep_left = null;
+var cycle = 0;
 
 // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
 // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_efc20af1 - 7d43 - 4d1e - 877e-447244ea3fd3.png
@@ -452,6 +453,8 @@ function onPlaceBidEvent() {
   createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
   $("#welcome-video").remove();
+  $("#welcome-body").remove();
+  $("welcome-message-button").remove()
   $("#welcome-title").text("Good job cryptonaut and good luck!");
   $("#introductory-text").text(
     "You now are entered to win, an email will be sent you confirming your bid."
@@ -461,9 +464,18 @@ function onPlaceBidEvent() {
     ep_left +
     " Epiphany Points, or go on back to the control center to earn some more!";
   $("#congrats-instructions").text(msg);
-  $("#congrats-instructions").after(
-    '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
-  );
+  if (cycle === 0) {
+    $("#congrats-instructions").after(
+      // '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
+            `<div class="btn-group" role="group" aria-label="Collapse Buttons">
+              <div id="welcome-message-button" class="form-row text-center">
+                  <div class="col-12">
+                    <a href="https://learn.firstcontactcrypto.com" class="btn btn-outline-success"></a>Mission Control</button>
+                </div>
+              </div>
+            </div>`
+    );
+  }
   displaySpendEPText(ep_left);
   getAssertions()
   return true;
