@@ -403,13 +403,16 @@ function createPrizeAssertions(ep_spent) {
 function onSelectPrizeEvent(title) {
   // $("num-spent-input").val(assertions.result.length);
   // ep_spent = document.getElementById("num-spent-input").value;
-  // num_to_spend = 0
-  // if (ep_left > 0) {
-  //   num_to_spend = ep_left
-  // }
-  // else {
-  //   num_to_spend = num_epiph_asserts
-  // }
+  num_to_spend = 0
+  if (ep_left && ep_left > 0) {
+    num_to_spend = ep_left
+  }
+  else if (ep_left && ep_left === 0) {
+    num_to_spend = 0
+  }
+  else {
+    num_to_spend = num_epiph_asserts
+  }
   document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
   document.getElementById("num-spent-input").value = 0
     document.getElementById("spend-ep-text").innerHTML =
