@@ -269,15 +269,22 @@ function createBadges(name_list) {
 //   document.getElementById("introductory-text").innerHTML = "Congratulations " + window.username + " You currently have " + window.num_epiph_asserts + " Epiphany Points to spend.";
 // }
 
-function displaySpendEPText() {
+function displaySpendEPText(ep_left=-1) {
+  num_left = 0
+  if (ep_left >= 0) {
+    num_left = ep_left
+  }
+  else {
+    num_left =  window.num_epiph_asserts
+  }
   console.log("In displaySpendEPText.. ");
   document.getElementById("spend-ep-text").innerHTML =
     "You currently have " +
-    window.num_epiph_asserts +
+    num_left +
     " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
   document
     .getElementById("num-spent-input")
-    .setAttribute("max", window.num_epiph_asserts);
+    .setAttribute("max", num_left);
 }
 
 var wtf_count = 0
@@ -457,15 +464,7 @@ function onPlaceBidEvent() {
   $("#congrats-instructions").after(
     '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
   );
-  // ep_saved = window.num_epiph_asserts;
-
-  // ep_left = ep_saved - ep_spent;
-  // createPrizeAssertions(ep_spent);
-  // deleteAssertions(ep_spent);
-  // getAssertions()
-  // // testAssertionsCreated()
-  // ep_spent = document.getElementById("num-spent-input").value;
-  $("num-spent-input").val(ep_left)
+  displaySpendEPText(ep_left);
   getAssertions()
   return true;
 }
