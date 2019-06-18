@@ -302,7 +302,8 @@ var wtf_count = 0
 
 function deleteAssertion() {
   wtf_count++
-  ("In deleteAssertion.. the wtf_count is: {0}", wtf_count);
+
+  PRINT("INFO In deleteAssertion.. the wtf_count is: {0}", wtf_count);
   if (assertions.result.length == 0) {
     return 
   }
