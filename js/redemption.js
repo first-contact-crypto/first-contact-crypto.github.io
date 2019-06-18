@@ -324,9 +324,9 @@ function deleteAssertion() {
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
-      PRINT("INFO In deleteAssertion.. the assertions.size before is: {0}", assertions.size)
+      PRINT("INFO In deleteAssertion.. the assertions.size before is: {0}", assertions.result.size)
       assertions.result.shift  // removes first element
-      PRINT("INFO In deleteAssertion.. the assertions.size after removal is: {0}", assertions.size)
+      PRINT("INFO In deleteAssertion.. the assertions.size after removal is: {0}", assertions.result.size)
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
