@@ -303,12 +303,15 @@ function deleteAssertion() {
   if (assertions.result.length == 0) {
     return 
   }
-  var assertion_slug = assertions.result[0].entityId;
+
+  PRINT("INFO In deleteAssertion.. the assertions.size before is: {0}", assertions.result.length)
+  var assertion = assertions.result.pop()
+  PRINT("INFO In deleteAssertion.. the assertions.size after removal is: {0}", assertions.result.length)
+
+  var assertion_slug = assertion.entityId;
   PRINT("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug);
-  var assertion_url = format(
-    BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH,
-    assertion_slug
-  );
+
+  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, assertion_slug);
 
   $.ajax({
     method: "DELETE",
@@ -324,9 +327,8 @@ function deleteAssertion() {
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
-      PRINT("INFO In deleteAssertion.. the assertions.size before is: {0}", assertions.result.length)
-      assertions.result.shift  // removes first element
-      PRINT("INFO In deleteAssertion.. the assertions.size after removal is: {0}", assertions.result.length)
+      
+      assertions.result.splice(0, 1)  // removes first element
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
