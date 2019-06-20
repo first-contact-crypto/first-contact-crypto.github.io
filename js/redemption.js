@@ -1,12 +1,8 @@
 const DEV_ENV = false;
 
-// {
-//   "badgr_access_token": "eQYBJeoj8MD5CNNGiW9lbhmrqoGYTz",
-//   "badgr_refresh_token": "ScStrEeMla8gfXfR70Xxmm0sEW1zRY"
-// }
 
+const BADGR_ACCESS_TOKEN = "cgaeiPlUHIyzg7MvijiCOgZ9TnM5pX";
 const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
-const BADGR_ACCESS_TOKEN = "CMelVbVdYx7vKVbQKBYYttGCSfmf7A";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
 const BADGR_REDEMPTION_TYPE = "redemption";
@@ -17,8 +13,6 @@ var BADGR_BADGECLASS_SINGLE_ISSUER_PATH = "v2/issuers/{0}/badgeclasses"; // issu
 var BADGR_ASSERTION_BADGECLASS_PATH = "v2/badgeclasses/{0}/assertions"; // badge_class entityId
 var BADGR_ASSERTION_ISSUER_PATH = "v2/issuers/{0}/assertions";
 var BADGR_ASSERTION_DELETE_PATH = "v2/assertions/{0}";
-
-// https://badgr.firstcontactcrypto.com/v2/badgeclasses/V_MaSinhQJeKGOtZz6tDAQ/assertions
 
 var recipient = new Object();
 recipient.identity = "string";
