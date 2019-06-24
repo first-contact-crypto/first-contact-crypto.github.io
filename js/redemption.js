@@ -29,6 +29,7 @@ var selectedPrize = "";
 var timer_started = false;
 var timer_now_time = 0;
 var ep_left = null;
+var first_run = true;
 
 // EPIPHANY BADGE SERVER SLUG: V_MaSinhQJeKGOtZz6tDAQ
 // IMAGE: https: // media.us.badgr.io / uploads / badges / issuer_badgeclass_efc20af1 - 7d43 - 4d1e - 877e-447244ea3fd3.png
@@ -438,7 +439,7 @@ function onSelectPrizeEvent(title) {
   $("#placeBidModal").modal();
 }
 
-var first_run = true;
+
 
 function onPlaceBidEvent() {
   ep_spent = document.getElementById("num-spent-input").value;
@@ -458,7 +459,7 @@ function onPlaceBidEvent() {
   );
   createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
-  if (first_run) {
+  if (first_run === true) {
     $("#welcome-video").remove();
     $("#welcome-title").text("Good job cryptonaut and good luck!");
     $("#introductory-text").text(
