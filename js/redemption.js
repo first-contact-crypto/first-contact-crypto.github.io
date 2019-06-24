@@ -444,6 +444,7 @@ function onPlaceBidEvent() {
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
   if (ep_spent == 0) {
+    first_run = false;
     return true;
   }
   PRINT("INFO: In onPlaceBidEvent");
@@ -471,7 +472,7 @@ function onPlaceBidEvent() {
     $("#congrats-instructions").after(
       '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
     );
-    first_run = false 
+     
   } else {
     var msg =
       "Now you can continue to bid on another prize with your remaining " +
@@ -481,6 +482,7 @@ function onPlaceBidEvent() {
 
   displaySpendEPText(ep_left);
   getAssertions();
+  first_run = false;
   return true;
 }
 
