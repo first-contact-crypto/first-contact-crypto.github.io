@@ -196,7 +196,7 @@ function getAssertions() {
   var assertions_to_keep = [];
   for (i = 0; i < num_assertions_before; ++i) {
     a = assertions_list[i];
-    if (a.recipient.identity === useremail) {
+    if (a.recipient.identity === useremail && a.revoked === false) {
       assertions_to_keep.push(a);
     }
   }
