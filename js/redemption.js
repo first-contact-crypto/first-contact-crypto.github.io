@@ -83,7 +83,7 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     url: url,
     success: successfunc,
     error: errorfunc,
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -148,7 +148,7 @@ function getBadgeClasses() {
       BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH,
       BADGR_ISSUER_ID
     ),
-    function(data, status, jqXhr) {
+    function (data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
       window.badgeclasses = data;
       PRINT(
@@ -156,7 +156,7 @@ function getBadgeClasses() {
         JSON.stringify(window.badgeclasses)
       );
     },
-    function(jqXhr, textStatus, errorMessage) {
+    function (jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In getBadgeClasses.. {0}, {1}", textStatus, errorMessage);
     }
   );
@@ -170,7 +170,7 @@ function getAssertions() {
       BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
       BADGR_SERVER_SLUG_EPIPHANY
     ),
-    function(data, status, jqXhr) {
+    function (data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
       window.assertions = data;
       // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
@@ -180,7 +180,7 @@ function getAssertions() {
         window.num_epiph_asserts
       );
     },
-    function(jqXhr, textStatus, errorMessage) {
+    function (jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
     }
   );
@@ -227,21 +227,21 @@ function createBadge(name) {
     contentType: "application/json",
     url: badge_url,
     data: JSON.stringify({ name: name, description: "An FCC prize category." }),
-    success: function(data, status, xhr) {
+    success: function (data, status, xhr) {
       PRINT(
         "SUCCESS: In createBadge.. badge created: {0}",
         JSON.stringify(data)
       );
       badgeclasses.result.push(data);
     },
-    error: function(xhr, status, errMsg) {
+    error: function (xhr, status, errMsg) {
       PRINT(
         "ERROR: In createBadge.. badge creation failed! {0} {1}",
         status,
         errMsg
       );
     },
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
     }
   });
@@ -321,7 +321,7 @@ function deleteAssertion(num) {
     url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
-    success: function(data, status, xhr) {
+    success: function (data, status, xhr) {
       PRINT(
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
@@ -329,7 +329,7 @@ function deleteAssertion(num) {
 
       // assertions.result.splice(0, 1)  // removes first element
     },
-    error: function(xhr, status, errMsg) {
+    error: function (xhr, status, errMsg) {
       if (xhr.status != 200) {
         PRINT(
           "ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}",
@@ -339,7 +339,7 @@ function deleteAssertion(num) {
         );
       }
     },
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -384,20 +384,20 @@ function createAssertion() {
         plaintextIdentity: username
       }
     }),
-    success: function(data, status, xhr) {
+    success: function (data, status, xhr) {
       PRINT(
         "SUCCESS: In createAssertion.. assertion created: {0}",
         JSON.stringify(data)
       );
     },
-    error: function(xhr, status, errMsg) {
+    error: function (xhr, status, errMsg) {
       PRINT(
         "ERROR: In createAssertion.. assertion creation failed! {0} {1}",
         status,
         errMsg
       );
     },
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -433,6 +433,8 @@ function onSelectPrizeEvent(title) {
   $("#placeBidModal").modal();
 }
 
+var first_run = true;
+
 function onPlaceBidEvent() {
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
@@ -450,19 +452,28 @@ function onPlaceBidEvent() {
   );
   createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
-  $("#welcome-video").remove();
-  $("#welcome-title").text("Good job cryptonaut and good luck!");
-  $("#introductory-text").text(
-    "You now are entered to win, an email will be sent you confirming your bid."
-  );
-  var msg =
-    "Now you can continue to bid on another prize with your remaining " +
-    ep_left +
-    " Epiphany Points, or go on back to the control center to earn some more!";
-  $("#congrats-instructions").text(msg);
-  $("#congrats-instructions").after(
-    '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
-  );
+  if (first_run) {
+    $("#welcome-video").remove();
+    $("#welcome-title").text("Good job cryptonaut and good luck!");
+    $("#introductory-text").text(
+      "You now are entered to win, an email will be sent you confirming your bid."
+    );
+    var msg =
+      "Now you can continue to bid on another prize with your remaining " +
+      num_epiph_asserts +
+      " Epiphany Points, or go on back to the control center to earn some more!";
+    $("#congrats-instructions").text(msg);
+    $("#congrats-instructions").after(
+      '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
+    );
+    first_run = false 
+  } else {
+    var msg =
+      "Now you can continue to bid on another prize with your remaining " +
+      ep_left +
+      " Epiphany Points, or go on back to the control center to earn some more!";
+  }
+
   displaySpendEPText(ep_left);
   getAssertions();
   return true;
@@ -477,7 +488,7 @@ function convertToSlug(text) {
 
 function getPrizeList() {
   PRINT("INFO: In getPrizeList");
-  $(".prize").each(function(index) {
+  $(".prize").each(function (index) {
     var txt = convertToSlug($(this).text());
     PRINT("INFO: In getPrizeList.. the prize is: {0}", txt);
     prizeList.push(txt);
