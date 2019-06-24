@@ -173,6 +173,13 @@ function getAssertions() {
     ),
     function (data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
+      ret = []
+      for (ass in data.result) {
+        if (ass.revoked === false) {
+          ret.push(ass)
+        }
+      }
+      data.result = ret 
       window.assertions = data;
       // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
       window.num_epiph_asserts = assertions.result.length;
@@ -445,7 +452,6 @@ function onPlaceBidEvent() {
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
   if (ep_spent == 0) {
-    first_run = false;
     return true;
   }
   PRINT("INFO: In onPlaceBidEvent");
