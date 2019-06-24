@@ -1,7 +1,6 @@
 const DEV_ENV = false;
 
-
-const BADGR_ACCESS_TOKEN = "RgNV5ZgyelHbPy596yltlg1k8vJloX";
+const BAT = "Ko3mDsSppuT3nPRikcqoTnbgGQobtT";
 const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
@@ -85,7 +84,7 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     success: successfunc,
     error: errorfunc,
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
@@ -243,7 +242,7 @@ function createBadge(name) {
       );
     },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      xhr.setRequestHeader("Authorization", "Bearer " + BAT);
     }
   });
 }
@@ -341,7 +340,7 @@ function deleteAssertion(num) {
       }
     },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
@@ -399,7 +398,7 @@ function createAssertion() {
       );
     },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
