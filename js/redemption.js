@@ -180,6 +180,7 @@ function getAssertions() {
         }
       }
       data.result = ret;
+      
       window.assertions = data;
       // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
       window.num_epiph_asserts = assertions.result.length;
@@ -446,6 +447,7 @@ function onSelectPrizeEvent(title) {
 
 function onPlaceBidEvent() {
   getAssertions();
+  testAssertionsCreated();
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
   if (ep_spent == 0) {
@@ -462,7 +464,7 @@ function onPlaceBidEvent() {
   createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
   getAssertions();
-
+  testAssertionsCreated();
   if (first_run === true) {
     $("#welcome-video").remove();
     $("#welcome-title").text("Good job cryptonaut and good luck!");
