@@ -177,14 +177,14 @@ function getAssertions() {
 
       window.assertions = data;
       ret = []
-      for (ass in assertions.result) {
+      for (ass in window.assertions.result) {
         if (ass.revoked === false) {
-          ret.push(ass)
+          ret.push(ass);
         }
       }
-      assertions = ret
+      window.assertions.result = ret;
       // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
-      window.num_epiph_asserts = assertions.result.length;
+      window.num_epiph_asserts = window.assertions.result.length;
       PRINT(
         "INFO: In getAssertions.. window.num_epiph_asserts: {0}",
         window.num_epiph_asserts
