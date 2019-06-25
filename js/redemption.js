@@ -173,7 +173,7 @@ function getAssertions() {
     ),
     function(data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
-      console.log("INFO In getAssertions the num data.result is: " + data.reslult.length)
+      console.log("INFO In getAssertions the num data.result is: " + data.result.length)
 
       window.assertions = data;
       ret = []
@@ -194,7 +194,9 @@ function getAssertions() {
       PRINT("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
     }
   );
-
+  while (assertions === null) {
+    sleep(500)
+  }
   var num_assertions_before = assertions.result.length;
   var assertions_list = assertions.result;
 
@@ -429,6 +431,7 @@ function createPrizeAssertions(ep_spent) {
 function onSelectPrizeEvent(title) {
   // $("num-spent-input").val(assertions.result.length);
   // ep_spent = document.getElementById("num-spent-input").value;
+  console.log("INFO In onSelectPrizeEvent..")
   num_to_spend = 0;
   if (num_epiph_asserts > 0) {
     num_to_spend = num_epiph_asserts;
