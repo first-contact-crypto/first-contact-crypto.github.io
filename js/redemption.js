@@ -549,6 +549,8 @@ function onPlaceBidEvent() {
       ep_left +
       " Epiphany Points, or go on back to the control center to earn some more!";
     $("#congrats-instructions").text(msg);
+    document.getElementById("spend-ep-text").innerHTML = "You currently have " + ep_left + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
+  document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
   if (first_run === true) {
 
     $("#congrats-instructions").after(
