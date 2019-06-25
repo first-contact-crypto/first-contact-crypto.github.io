@@ -384,17 +384,17 @@ function deleteAssertion(num) {
   }
 
   PRINT(
-    "INFO In deleteAssertion.. 1 the assertions.size before is: {0}",
+    "INFO In deleteAssertion.. 2 the assertions.size before is: {0}",
     assertions.result.length
   );
   var assertion = assertions.result.pop();
   PRINT(
-    "INFO In deleteAssertion.. 1 the assertions.size after removal is: {0}",
+    "INFO In deleteAssertion.. 2 the assertions.size after removal is: {0}",
     assertions.result.length
   );
 
   var assertion_slug = assertion.entityId;
-  PRINT("In deleteAssertion.. 1 the assertion_slug is: {0}", assertion_slug);
+  PRINT("In deleteAssertion.. 2 the assertion_slug is: {0}", assertion_slug);
 
   var assertion_url = format(
     BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH,
@@ -429,7 +429,7 @@ function deleteAssertion(num) {
       }
     },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
+      xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
