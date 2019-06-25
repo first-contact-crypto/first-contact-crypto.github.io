@@ -182,6 +182,7 @@ function getAssertions() {
       for (var i = 0; window.assertions.result.length-1; ++i) {
         var x = window.assertions.result[i].revoked
         if ( x === false) {
+          console.log("INFO In getAssertions.. 19 revoked is: " + JSON.stringify(x))
           ret.push(window.assertions.result[i])
         }
         
