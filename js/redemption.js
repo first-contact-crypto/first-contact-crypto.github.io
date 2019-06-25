@@ -311,65 +311,128 @@ function displaySpendEPText(ep_left = -1) {
 
 var wtf_count = 0;
 
+// function deleteAssertion(num) {
+//   console.log("INFO In deleteAssertion.. total num to delete is: " + num)
+//   var assertion = null
+//   if (wtf_count >= num) {
+//     return;
+//   }
+//   wtf_count++;
+
+//   PRINT("INFO In deleteAssertion.. the wtf_count is: {0}", wtf_count);
+//   if (window.assertions.result.length == 0) {
+//     return;
+//   }
+
+//   PRINT("INFO In deleteAssertion.. the window.assertions.size before is: {0}",window.assertions.result.length);
+
+//   var ass = null 
+//   var ret = []
+//   for (ass in window.assertions.result) {
+//     if (ass.revoked === false) {
+//       assertion = ass;
+//       break;
+//     }
+//   }
+//   PRINT("INFO In deleteAssertion.. the window.assertions.size after removal is: {0}", window.assertions.result.length);
+//   PRINT("INFO In deleteAssertion.. 26 BLAH BLAH BLAH")
+//   PRINT("INFO In deleteAssertion.. 26 BLAH BLAH BLAH");
+//   var assertion_slug = assertion.entityId;
+//   PRINT("INFO In deleteAssertion.. 25 the assertion_slug is: " + assertion_slug);
+
+//   var assertion_url = BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH + assertion_slug
+//   PRINT("In deleteAssertion.. 24 the assertion_url is: {0}", assertion_url);
+
+//   $.ajax({
+//     method: "DELETE",
+//     dataType: "json",
+//     processData: false,
+//     contentType: "application/json",
+//     data: JSON.stringify({
+//       revocation_reason: "Epiphany Point Spent"
+//     }),
+//     url: assertion_url,
+//     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
+//     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
+//     success: function(data, status, xhr) {
+//       PRINT("SUCCESS: In deleteAssertion.. assertion deleted: {0}",JSON.stringify(data));
+
+//       // window.assertions.result.splice(0, 1)  // removes first element
+//     },
+//     error: function(xhr, status, errMsg) {
+//       if (xhr.status != 200) {
+//         PRINT("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}",xhr.status,status,errMsg);
+//       }
+//     },
+//     beforeSend: function(xhr) {
+//       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
+//       xhr.setRequestHeader("Content-Type", "application/json");
+//     }
+//   });
+//   PRINT("In deleteAssertion.. 23 LEAVING: {0}", assertion_slug);
+// }
+
 function deleteAssertion(num) {
-  console.log("INFO In deleteAssertion.. total num to delete is: " + num)
-  var assertion = null
   if (wtf_count >= num) {
     return;
   }
   wtf_count++;
 
-  PRINT("INFO In deleteAssertion.. the wtf_count is: {0}", wtf_count);
+  PRINT("INFO In deleteAssertion.. 1 the wtf_count is: {0}", wtf_count);
   if (assertions.result.length == 0) {
     return;
   }
 
-  PRINT("INFO In deleteAssertion.. the window.assertions.size before is: {0}",window.assertions.result.length);
+  PRINT(
+    "INFO In deleteAssertion.. 1 the assertions.size before is: {0}",
+    assertions.result.length
+  );
+  var assertion = assertions.result.pop();
+  PRINT(
+    "INFO In deleteAssertion.. 1 the assertions.size after removal is: {0}",
+    assertions.result.length
+  );
 
-  var ass = null 
-  var ret = []
-  for (ass in window.assertions.result) {
-    if (ass.revoked === false) {
-      assertion = ass;
-      break;
-    }
-  }
-  PRINT("INFO In deleteAssertion.. the window.assertions.size after removal is: {0}", window.assertions.result.length);
-  PRINT("INFO In deleteAssertion.. 26 BLAH BLAH BLAH")
-  PRINT("INFO In deleteAssertion.. 26 BLAH BLAH BLAH");
   var assertion_slug = assertion.entityId;
-  PRINT("INFO In deleteAssertion.. 25 the assertion_slug is: " + assertion_slug);
+  PRINT("In deleteAssertion.. 1 the assertion_slug is: {0}", assertion_slug);
 
-  var assertion_url = BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH + assertion_slug
-  PRINT("In deleteAssertion.. 24 the assertion_url is: {0}", assertion_url);
+  var assertion_url = format(
+    BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH,
+    assertion_slug
+  );
 
   $.ajax({
     method: "DELETE",
     dataType: "json",
     processData: false,
     contentType: "application/json",
-    data: JSON.stringify({
-      revocation_reason: "Epiphany Point Spent"
-    }),
+    data: JSON.stringify({ revocation_reason: "Epiphany Point Spent" }),
     url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
     success: function(data, status, xhr) {
-      PRINT("SUCCESS: In deleteAssertion.. assertion deleted: {0}",JSON.stringify(data));
+      PRINT(
+        "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
+        JSON.stringify(data)
+      );
 
-      // window.assertions.result.splice(0, 1)  // removes first element
+      // assertions.result.splice(0, 1)  // removes first element
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
-        PRINT("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}",xhr.status,status,errMsg);
+        PRINT(
+          "ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}",
+          xhr.status,
+          status,
+          errMsg
+        );
       }
     },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Authorization", "Bearer " + BAT);
+      xhr.setRequestHeader("Authorization", "Bearer " + BADGR_ACCESS_TOKEN);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
-  PRINT("In deleteAssertion.. 23 LEAVING: {0}", assertion_slug);
 }
 
 function deleteAssertions(num) {
