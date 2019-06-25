@@ -541,7 +541,7 @@ function onPlaceBidEvent() {
   getAssertions();
   testAssertionsCreated();
   // if (first_run === true) {
-    $("#welcome-video").remove();
+    $("#welcome-button").remove();
     $("#welcome-title").text("Good job cryptonaut and good luck!");
     $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.");
     var msg =
