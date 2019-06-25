@@ -330,9 +330,10 @@ function deleteAssertion(num) {
   PRINT("INFO In deleteAssertion.. the window.assertions.size after removal is: {0}", window.assertions.result.length);
   PRINT("INFO In deleteAssertion.. BLAH BLAH BLAH")
   var assertion_slug = assertion.entityId;
+  PRINT("INFO In deleteAssertion.. BLAH BLAH BLAH");
 
-  var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, assertion_slug);
-  PRINT("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug);
+  var assertion_url = BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH + assertion_slug
+  PRINT("In deleteAssertion.. 24 the assertion_url is: {0}", assertion_url);
 
   $.ajax({
     method: "DELETE",
@@ -360,7 +361,7 @@ function deleteAssertion(num) {
       xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
-  PRINT("In deleteAssertion.. LEAVING: {0}", assertion_slug);
+  PRINT("In deleteAssertion.. 23 LEAVING: {0}", assertion_slug);
 }
 
 function deleteAssertions(num) {
