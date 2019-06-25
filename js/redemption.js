@@ -306,7 +306,7 @@ function deleteAssertion(num) {
     "INFO In deleteAssertion.. the assertions.size before is: {0}",
     assertions.result.length
   );
-  for (ass in assertions) {
+  for (ass in assertions.result) {
     if (ass.revoked === false) {
       assertion = ass;
       break;
