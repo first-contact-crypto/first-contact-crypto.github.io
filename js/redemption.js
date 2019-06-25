@@ -84,7 +84,7 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     url: url,
     success: successfunc,
     error: errorfunc,
-    beforeSend: function (xhr) {
+    beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -149,7 +149,7 @@ function getBadgeClasses() {
       BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH,
       BADGR_ISSUER_ID
     ),
-    function (data, status, jqXhr) {
+    function(data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
       window.badgeclasses = data;
       PRINT(
@@ -157,7 +157,7 @@ function getBadgeClasses() {
         JSON.stringify(window.badgeclasses)
       );
     },
-    function (jqXhr, textStatus, errorMessage) {
+    function(jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In getBadgeClasses.. {0}, {1}", textStatus, errorMessage);
     }
   );
@@ -171,15 +171,15 @@ function getAssertions() {
       BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
       BADGR_SERVER_SLUG_EPIPHANY
     ),
-    function (data, status, jqXhr) {
+    function(data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
-      ret = []
+      ret = [];
       for (ass in data.result) {
         if (ass.revoked === false) {
-          ret.push(ass)
+          ret.push(ass);
         }
       }
-      data.result = ret 
+      data.result = ret;
       window.assertions = data;
       // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
       window.num_epiph_asserts = assertions.result.length;
@@ -188,7 +188,7 @@ function getAssertions() {
         window.num_epiph_asserts
       );
     },
-    function (jqXhr, textStatus, errorMessage) {
+    function(jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
     }
   );
@@ -235,21 +235,21 @@ function createBadge(name) {
     contentType: "application/json",
     url: badge_url,
     data: JSON.stringify({ name: name, description: "An FCC prize category." }),
-    success: function (data, status, xhr) {
+    success: function(data, status, xhr) {
       PRINT(
         "SUCCESS: In createBadge.. badge created: {0}",
         JSON.stringify(data)
       );
       badgeclasses.result.push(data);
     },
-    error: function (xhr, status, errMsg) {
+    error: function(xhr, status, errMsg) {
       PRINT(
         "ERROR: In createBadge.. badge creation failed! {0} {1}",
         status,
         errMsg
       );
     },
-    beforeSend: function (xhr) {
+    beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
     }
   });
@@ -308,8 +308,8 @@ function deleteAssertion(num) {
   );
   for (ass in assertions) {
     if (ass.revoked === false) {
-      assertion = ass 
-      break
+      assertion = ass;
+      break;
     }
   }
   PRINT(
@@ -334,7 +334,7 @@ function deleteAssertion(num) {
     url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
-    success: function (data, status, xhr) {
+    success: function(data, status, xhr) {
       PRINT(
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
@@ -342,7 +342,7 @@ function deleteAssertion(num) {
 
       // assertions.result.splice(0, 1)  // removes first element
     },
-    error: function (xhr, status, errMsg) {
+    error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
         PRINT(
           "ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}",
@@ -352,7 +352,7 @@ function deleteAssertion(num) {
         );
       }
     },
-    beforeSend: function (xhr) {
+    beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -397,20 +397,20 @@ function createAssertion() {
         plaintextIdentity: username
       }
     }),
-    success: function (data, status, xhr) {
+    success: function(data, status, xhr) {
       PRINT(
         "SUCCESS: In createAssertion.. assertion created: {0}",
         JSON.stringify(data)
       );
     },
-    error: function (xhr, status, errMsg) {
+    error: function(xhr, status, errMsg) {
       PRINT(
         "ERROR: In createAssertion.. assertion creation failed! {0} {1}",
         status,
         errMsg
       );
     },
-    beforeSend: function (xhr) {
+    beforeSend: function(xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -428,12 +428,10 @@ function onSelectPrizeEvent(title) {
   // $("num-spent-input").val(assertions.result.length);
   // ep_spent = document.getElementById("num-spent-input").value;
   num_to_spend = 0;
-  if (num_epiph_asserts && num_epiph_asserts > 0) {
+  if (num_epiph_asserts > 0) {
     num_to_spend = num_epiph_asserts;
-  } else if (num_epiph_asserts && num_epiph_asserts === 0) {
+  } else if (num_epiph_asserts === 0) {
     num_to_spend = 0;
-  } else {
-    num_to_spend = num_epiph_asserts;
   }
   document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
   document.getElementById("num-spent-input").value = 0;
@@ -446,10 +444,8 @@ function onSelectPrizeEvent(title) {
   $("#placeBidModal").modal();
 }
 
-
-
 function onPlaceBidEvent() {
-  getAssertions()
+  getAssertions();
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
   if (ep_spent == 0) {
@@ -481,7 +477,6 @@ function onPlaceBidEvent() {
     $("#congrats-instructions").after(
       '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
     );
-     
   } else {
     var msg =
       "Now you can continue to bid on another prize with your remaining " +
@@ -490,7 +485,7 @@ function onPlaceBidEvent() {
   }
 
   displaySpendEPText(ep_left);
-  
+
   first_run = false;
   return true;
 }
@@ -504,7 +499,7 @@ function convertToSlug(text) {
 
 function getPrizeList() {
   PRINT("INFO: In getPrizeList");
-  $(".prize").each(function (index) {
+  $(".prize").each(function(index) {
     var txt = convertToSlug($(this).text());
     PRINT("INFO: In getPrizeList.. the prize is: {0}", txt);
     prizeList.push(txt);
