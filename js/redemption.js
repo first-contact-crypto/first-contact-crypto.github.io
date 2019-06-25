@@ -179,10 +179,9 @@ function getAssertions() {
 
       window.assertions = data;
       var ret = []
-      var ass = null
-      for (i = 0; window.assertions.result.length-1;++i) {
+      for (var i = 0,ass = null; window.assertions.result.length-1; ++i) {
         ass = window.assertions.result[i]
-        console.log("INFO In getAssertions.. the ass.revoked 2 is: " + JSON.stringify(window.assertions.result[i].revoked))
+        console.log("INFO In getAssertions.. the ass.revoked 3 is: " + JSON.stringify(ass.revoked))
       }
       // for (ass in window.assertions.result) {
       //   console.log("INFO In getAssertions.. ass.revoked: " + ass[cnt])
@@ -191,7 +190,7 @@ function getAssertions() {
       //   }
       //   ++cnt
       // }
-      window.assertions.result = ret;
+      window.assertions.result = ret; 
       window.num_epiph_asserts = window.assertions.result.length;
       PRINT(
         "INFO: In getAssertions.. window.num_epiph_asserts: {0}",
