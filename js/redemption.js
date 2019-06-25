@@ -165,6 +165,7 @@ function getBadgeClasses() {
 
 function getAssertions() {
   PRINT("INFO: In getAssertions");
+  window.assertions = null
   var wait = true 
   getJSONData(
     false,
@@ -178,40 +179,40 @@ function getAssertions() {
       console.log(
         "INFO In getAssertions the num data.result is: " + data.result.length
       );
-      wait = false
+      // wait = false
       window.assertions = data;
-      var ret = []
-      console.log("Info In getAssertions.. 36 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
-      var results = window.assertions.result
-      console.log("In getAssertions.. 37 typeof results is array: " + Array.isArray(results))
-      console.log("In getAssertions.. 37 typeof results[0] is: " + typeof(results[0]))
+      // var ret = []
+      // console.log("Info In getAssertions.. 36 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
+      // var results = window.assertions.result
+      // console.log("In getAssertions.. 37 typeof results is array: " + Array.isArray(results))
+      // console.log("In getAssertions.. 37 typeof results[0] is: " + typeof(results[0]))
 
-      for (i = 0; window.assertions.result.length-1; ++i) {
+      // for (i = 0; window.assertions.result.length-1; ++i) {
 
-        console.log("INFO In getAssertions.. 38 i is: " + i.toString() + "revoked is: " + JSON.stringify(results))
-        var result = results[i]
-        var x = results[i].revoked
-        if ( x === false) {
-          console.log("INFO In getAssertions.. 38 revoked is: " + JSON.stringify(x))
-          ret.push(results[i])
-        }
+      //   console.log("INFO In getAssertions.. 38 i is: " + i.toString() + "revoked is: " + JSON.stringify(results))
+      //   var result = results[i]
+      //   var x = results[i].revoked
+      //   if ( x === false) {
+      //     console.log("INFO In getAssertions.. 38 revoked is: " + JSON.stringify(x))
+      //     ret.push(results[i])
+      //   }
         
-      }
-      while (wait === true) {
-        sleep(500)
-      }
-      window.assertions.result = ret; 
-      window.num_epiph_asserts = window.assertions.result.length;
-      PRINT(
-        "INFO: In getAssertions.. window.num_epiph_asserts: {0}",
-        window.num_epiph_asserts
-      );
+      // }
+      // while (wait === true) {
+      //   sleep(500)
+      // }
+      // window.assertions.result = ret; 
+      // window.num_epiph_asserts = window.assertions.result.length;
+      // PRINT(
+      //   "INFO: In getAssertions.. window.num_epiph_asserts: {0}",
+      //   window.num_epiph_asserts
+      // );
     },
     function(jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
     }
   );
-  while (assertions === null) {
+  while (window.assertions === null) {
     sleep(500);
   }
   var num_assertions_before = window.assertions.result.length;
@@ -233,7 +234,7 @@ function getAssertions() {
   window.assertions.result = assertions_to_keep;
 
   PRINT(
-    "INFO: In getAssertions.. the num window.assertions after: {0}",
+    "INFO: In getAssertions.. 39 the num window.assertions after: {0}",
     window.assertions.result.length
   );
   window.num_epiph_asserts = window.assertions.result.length;
