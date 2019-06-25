@@ -20,9 +20,9 @@ recipient.hashed = true;
 recipient.plaintextIdentity = "string";
 
 var badgeclasses = null;
-var window.assertions = null;
+var assertions = null;
 var badgeclasses_txt = "";
-var window.assertions_txt = "";
+var assertions_txt = "";
 var prizeList = [];
 var badgeclassNamesList = [];
 var selectedPrize = "";
