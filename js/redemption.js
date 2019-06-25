@@ -330,9 +330,9 @@ function deleteAssertion(num) {
   PRINT("INFO In deleteAssertion.. the window.assertions.size after removal is: {0}", window.assertions.result.length);
   PRINT("INFO In deleteAssertion.. BLAH BLAH BLAH")
   var assertion_slug = assertion.entityId;
-  PRINT("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug);
 
   var assertion_url = format(BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH, assertion_slug);
+  PRINT("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug);
 
   $.ajax({
     method: "DELETE",
@@ -352,12 +352,7 @@ function deleteAssertion(num) {
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
-        PRINT(
-          "ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}",
-          xhr.status,
-          status,
-          errMsg
-        );
+        PRINT("ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}",xhr.status,status,errMsg);
       }
     },
     beforeSend: function(xhr) {
@@ -365,11 +360,12 @@ function deleteAssertion(num) {
       xhr.setRequestHeader("Content-Type", "application/json");
     }
   });
+  PRINT("In deleteAssertion.. LEAVING: {0}", assertion_slug);
 }
 
 function deleteAssertions(num) {
   PRINT("INFO: In deleteAssertions.. deleting {0}", num);
-  for (i = 0; i < num; i++) {
+  for (i = 0; i < num; i++) { 
     deleteAssertion(num);
     num_epiph_asserts -= 1;
     // sleep(500)
