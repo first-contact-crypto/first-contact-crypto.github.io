@@ -188,12 +188,12 @@ function getAssertions() {
 
       for (i = 0; window.assertions.result.length-1; ++i) {
 
-        console.log("INFO In getAssertions.. 37 i is: " + i.toString() + "revoked is: " + JSON.stringify(results))
+        console.log("INFO In getAssertions.. 38 i is: " + i.toString() + "revoked is: " + JSON.stringify(results))
         var result = results[i]
         var x = results[i].revoked
         if ( x === false) {
-          console.log("INFO In getAssertions.. 37 revoked is: " + JSON.stringify(x))
-          ret.push(result)
+          console.log("INFO In getAssertions.. 38 revoked is: " + JSON.stringify(x))
+          ret.push(results[i])
         }
         
       }
