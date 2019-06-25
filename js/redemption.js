@@ -415,6 +415,8 @@ function deleteAssertion(num) {
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
+      
+      window.num_epiph_asserts-- 
 
       // assertions.result.splice(0, 1)  // removes first element
     },
@@ -522,6 +524,7 @@ function onSelectPrizeEvent(title) {
 }
 
 function onPlaceBidEvent() {
+  
   getAssertions();
   testAssertionsCreated();
   ep_spent = document.getElementById("num-spent-input").value;
