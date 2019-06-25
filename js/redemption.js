@@ -428,9 +428,9 @@ function onSelectPrizeEvent(title) {
   // $("num-spent-input").val(assertions.result.length);
   // ep_spent = document.getElementById("num-spent-input").value;
   num_to_spend = 0;
-  if (ep_left && ep_left > 0) {
-    num_to_spend = ep_left;
-  } else if (ep_left && ep_left === 0) {
+  if (num_epiph_asserts && num_epiph_asserts > 0) {
+    num_to_spend = num_epiph_asserts;
+  } else if (num_epiph_asserts && num_epiph_asserts === 0) {
     num_to_spend = 0;
   } else {
     num_to_spend = num_epiph_asserts;
@@ -449,6 +449,7 @@ function onSelectPrizeEvent(title) {
 
 
 function onPlaceBidEvent() {
+  getAssertions()
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
   if (ep_spent == 0) {
@@ -456,15 +457,16 @@ function onPlaceBidEvent() {
   }
   PRINT("INFO: In onPlaceBidEvent");
 
-  ep_left = ep_saved - ep_spent;
   PRINT(
-    "INFO: ep_left: {0} ep_saved: {1} ep_spent: {2}",
-    ep_left,
+    "INFO: num_epiph_asserts: {0} ep_saved: {1} ep_spent: {2}",
+    num_epiph_asserts,
     ep_saved,
     ep_spent
   );
   createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
+  getAssertions();
+
   if (first_run === true) {
     $("#welcome-video").remove();
     $("#welcome-title").text("Good job cryptonaut and good luck!");
@@ -483,12 +485,12 @@ function onPlaceBidEvent() {
   } else {
     var msg =
       "Now you can continue to bid on another prize with your remaining " +
-      ep_left +
+      num_epiph_asserts +
       " Epiphany Points, or go on back to the control center to earn some more!";
   }
 
   displaySpendEPText(ep_left);
-  getAssertions();
+  
   first_run = false;
   return true;
 }
