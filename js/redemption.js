@@ -436,6 +436,7 @@ function deleteAssertion(num) {
 
 function deleteAssertions(num) {
   PRINT("INFO: In deleteAssertions.. deleting {0}", num);
+  wtf_count = 0
   for (i = 0; i < num; i++) { 
     deleteAssertion(num);
     num_epiph_asserts -= 1;
