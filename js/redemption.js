@@ -176,14 +176,14 @@ function getAssertions() {
       console.log("INFO In getAssertions the num data.result is: " + data.result.length)
 
       window.assertions = data;
-      ret = []
-      for (ass in window.assertions.result) {
-        console.log("INFO In getAssertions.. ass.revoked: " + ass.revoked)
-        if (ass.revoked === false) {
-          ret.push(ass);
-        }
-      }
-      window.assertions.result = ret;
+      // ret = []
+      // for (ass in window.assertions.result) {
+      //   console.log("INFO In getAssertions.. ass.revoked: " + ass.revoked)
+      //   if (ass.revoked === false) {
+      //     ret.push(ass);
+      //   }
+      // }
+      // window.assertions.result = ret;
       // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
       window.num_epiph_asserts = window.assertions.result.length;
       PRINT(
