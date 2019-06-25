@@ -415,9 +415,6 @@ function deleteAssertion(num) {
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
-      
-      window.num_epiph_asserts-- 
-
       // assertions.result.splice(0, 1)  // removes first element
     },
     error: function(xhr, status, errMsg) {
@@ -520,13 +517,13 @@ function onSelectPrizeEvent(title) {
     " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
   document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
   window.selectedPrize = convertToSlug(title);
+  getAssertions();
+  testAssertionsCreated();
   $("#placeBidModal").modal();
 }
 
 function onPlaceBidEvent() {
   
-  getAssertions();
-  testAssertionsCreated();
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
   if (ep_spent == 0) {
