@@ -173,15 +173,16 @@ function getAssertions() {
     ),
     function(data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
-      ret = [];
-      for (ass in data.result) {
+      console.log("INFO In getAssertions the num data.result is: " + data.reslult.length)
+
+      window.assertions = data;
+      ret = []
+      for (ass in assertions.result) {
         if (ass.revoked === false) {
-          ret.push(ass);
+          ret.push(ass)
         }
       }
-      data.result = ret;
-      
-      window.assertions = data;
+      assertions = ret
       // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
       window.num_epiph_asserts = assertions.result.length;
       PRINT(
@@ -235,7 +236,10 @@ function createBadge(name) {
     processData: false,
     contentType: "application/json",
     url: badge_url,
-    data: JSON.stringify({ name: name, description: "An FCC prize category." }),
+    data: JSON.stringify({
+      name: name,
+      description: "An FCC prize category."
+    }),
     success: function(data, status, xhr) {
       PRINT(
         "SUCCESS: In createBadge.. badge created: {0}",
@@ -276,12 +280,7 @@ function createBadges(name_list) {
 // }
 
 function displaySpendEPText(ep_left = -1) {
-  num_left = 0;
-  if (ep_left >= 0) {
-    num_left = ep_left;
-  } else {
-    num_left = window.num_epiph_asserts;
-  }
+  num_left = window.num_epiph_asserts;
   console.log("In displaySpendEPText.. ");
   document.getElementById("spend-ep-text").innerHTML =
     "You currently have " +
@@ -331,7 +330,9 @@ function deleteAssertion(num) {
     dataType: "json",
     processData: false,
     contentType: "application/json",
-    data: JSON.stringify({ revocation_reason: "Epiphany Point Spent" }),
+    data: JSON.stringify({
+      revocation_reason: "Epiphany Point Spent"
+    }),
     url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
