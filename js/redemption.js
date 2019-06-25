@@ -165,43 +165,41 @@ function getBadgeClasses() {
 
 function getAssertions() {
   PRINT("INFO: In getAssertions");
+  var wait = true 
   getJSONData(
     false,
     format(
       BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
       BADGR_SERVER_SLUG_EPIPHANY
     ),
+    
     function(data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
       console.log(
         "INFO In getAssertions the num data.result is: " + data.result.length
       );
-
+      wait = false
       window.assertions = data;
       var ret = []
-      console.log("Info In getAssertions.. 26 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
+      console.log("Info In getAssertions.. 35 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
       var results = window.assertions.result
-      console.log("In getAssertions.. 33 typeof results is array: " + Array.isArray(results))
-      console.log("In getAssertions.. 3 typeof results[0] is: " + typeof(results[0]))
+      console.log("In getAssertions.. 35 typeof results is array: " + Array.isArray(results))
+      console.log("In getAssertions.. 35 typeof results[0] is: " + typeof(results[0]))
 
       for (i = 0; window.assertions.result.length-1; ++i) {
 
-        console.log("INFO In getAssertions.. 34 i is: " + i + "revoked is: " + JSON.stringify(results))
+        console.log("INFO In getAssertions.. 35 i is: " + i + "revoked is: " + JSON.stringify(results))
 
         var x = results[i].revoked
         if ( x === false) {
-          console.log("INFO In getAssertions.. 33 revoked is: " + JSON.stringify(x))
+          console.log("INFO In getAssertions.. 35 revoked is: " + JSON.stringify(x))
           ret.push(result)
         }
         
       }
-      // for (ass in window.assertions.result) {
-      //   console.log("INFO In getAssertions.. ass.revoked: " + ass[cnt])
-      //   if (ass[cnt].revoked === false) {
-      //     ret.push(ass);
-      //   }
-      //   ++cnt
-      // }
+      while (wait === true) {
+        sleep(500)
+      }
       window.assertions.result = ret; 
       window.num_epiph_asserts = window.assertions.result.length;
       PRINT(
