@@ -182,7 +182,7 @@ function getAssertions() {
       var ass = null
       for (i = 0; window.assertions.result.length-1;++i) {
         ass = window.assertions.result[i]
-        console.log("INFO In getAssertions.. the ass.revoked is: " + JSON.stringify(ass.revoked))
+        console.log("INFO In getAssertions.. the ass.revoked 2 is: " + JSON.stringify(window.assertions.result[i].revoked))
       }
       // for (ass in window.assertions.result) {
       //   console.log("INFO In getAssertions.. ass.revoked: " + ass[cnt])
