@@ -178,15 +178,14 @@ function getAssertions() {
       );
 
       window.assertions = data;
-      // ret = []
-      // for (ass in window.assertions.result) {
-      //   console.log("INFO In getAssertions.. ass.revoked: " + ass.revoked)
-      //   if (ass.revoked === false) {
-      //     ret.push(ass);
-      //   }
-      // }
-      // window.assertions.result = ret;
-      // setDevButton("Assertions", "<p>" + JSON.stringify(assertions))
+      ret = []
+      for (ass in window.assertions.result) {
+        console.log("INFO In getAssertions.. ass.revoked: " + JSON.stringify(ass.revoked))
+        if (ass.revoked === false) {
+          ret.push(ass);
+        }
+      }
+      window.assertions.result = ret;
       window.num_epiph_asserts = window.assertions.result.length;
       PRINT(
         "INFO: In getAssertions.. window.num_epiph_asserts: {0}",
@@ -210,7 +209,7 @@ function getAssertions() {
 
   var assertions_to_keep = [];
   for (i = 0; i < num_assertions_before; ++i) {
-    a = window.assertions_list[i];
+    a = assertions_list[i];
     if (a.recipient.identity === useremail && a.revoked === false) {
       assertions_to_keep.push(a);
     }
