@@ -180,12 +180,13 @@ function getAssertions() {
       window.assertions = data;
       var ret = []
       console.log("Info In getAssertions.. 26 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
-      var result = window.assertions.result
+      var results = window.assertions.result
       for (var i = 0; window.assertions.result.length-1; ++i) {
-        var x = result[i].revoked
+        var result = results[i]
+        var x = result.revoked
         if ( x === false) {
-          console.log("INFO In getAssertions.. 27 revoked is: " + JSON.stringify(x))
-          ret.push(result[i])
+          console.log("INFO In getAssertions.. 28 revoked is: " + JSON.stringify(x))
+          ret.push(result)
         }
         
       }
