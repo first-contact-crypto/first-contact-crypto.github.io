@@ -305,6 +305,7 @@ function displaySpendEPText(ep_left = -1) {
 var wtf_count = 0;
 
 function deleteAssertion(num) {
+  var assertion = null
   if (wtf_count >= num) {
     return;
   }
