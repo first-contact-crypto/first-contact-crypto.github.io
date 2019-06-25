@@ -181,13 +181,17 @@ function getAssertions() {
       var ret = []
       console.log("Info In getAssertions.. 26 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
       var results = window.assertions.result
-      console.log("In getAssertions.. 31 typeof results is array: " + Array.isArray(results))
-      for (var i = 0; window.assertions.result.length-1; ++i) {
+      console.log("In getAssertions.. 33 typeof results is array: " + Array.isArray(results))
+      console.log("In getAssertions.. 33 typeof results[0] is: " + typeof(results[0]))
+
+      for (i = 0; window.assertions.result.length-1; ++i) {
         
         let result = results[i]
+        console.log("INFO In getAssertions.. 33 revoked is: " + JSON.stringify(results))
+
         var x = result.revoked
         if ( x === false) {
-          console.log("INFO In getAssertions.. 28 revoked is: " + JSON.stringify(x))
+          console.log("INFO In getAssertions.. 33 revoked is: " + JSON.stringify(x))
           ret.push(result)
         }
         
