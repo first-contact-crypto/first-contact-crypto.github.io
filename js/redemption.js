@@ -179,6 +179,8 @@ function getAssertions() {
 
       window.assertions = data;
       var ret = []
+      console.log("Info In getAssertions.. 26 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
+
       for (var i = 0; window.assertions.result.length-1; ++i) {
         var x = window.assertions.result[i].revoked
         if ( x === false) {
@@ -328,7 +330,8 @@ function deleteAssertion(num) {
     }
   }
   PRINT("INFO In deleteAssertion.. the window.assertions.size after removal is: {0}", window.assertions.result.length);
-  PRINT("INFO In deleteAssertion.. BLAH BLAH BLAH")
+  PRINT("INFO In deleteAssertion.. 26 BLAH BLAH BLAH")
+  PRINT("INFO In deleteAssertion.. 26 BLAH BLAH BLAH");
   var assertion_slug = assertion.entityId;
   PRINT("INFO In deleteAssertion.. 25 the assertion_slug is: " + assertion_slug);
 
