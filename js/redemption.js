@@ -184,7 +184,7 @@ function getAssertions() {
       console.log("In getAssertions.. 31 typeof results is array: " + Array.isArray(results))
       for (var i = 0; window.assertions.result.length-1; ++i) {
         
-        var result = results[i]
+        let result = results[i]
         var x = result.revoked
         if ( x === false) {
           console.log("INFO In getAssertions.. 28 revoked is: " + JSON.stringify(x))
