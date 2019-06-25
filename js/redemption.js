@@ -540,7 +540,7 @@ function onPlaceBidEvent() {
   deleteAssertions(ep_spent);
   getAssertions();
   testAssertionsCreated();
-  // if (first_run === true) {
+
     $("#welcome-button").remove();
     $("#welcome-title").text("Good job cryptonaut and good luck!");
     $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.");
@@ -549,10 +549,12 @@ function onPlaceBidEvent() {
       ep_left +
       " Epiphany Points, or go on back to the control center to earn some more!";
     $("#congrats-instructions").text(msg);
+  if (first_run === true) {
+
     $("#congrats-instructions").after(
       '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
     );
-  // }
+  }
 
   displaySpendEPText(ep_left);
 
