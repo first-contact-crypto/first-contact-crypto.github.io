@@ -180,8 +180,8 @@ function getAssertions() {
       window.assertions = data;
       var ret = []
       for (i = 0; window.assertions.result;++i) {
-        var ass = window.assertions.result[i]
-        console.log("INFO In getAssertions.. the ass.revoked is: " + ass.revoked)
+        var x = window.assertions.result[i]
+        console.log("INFO In getAssertions.. the ass.revoked is: " + x.revoked)
       }
       // for (ass in window.assertions.result) {
       //   console.log("INFO In getAssertions.. ass.revoked: " + ass[cnt])
