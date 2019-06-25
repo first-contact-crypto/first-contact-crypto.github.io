@@ -330,7 +330,7 @@ function deleteAssertion(num) {
   PRINT("INFO In deleteAssertion.. the window.assertions.size after removal is: {0}", window.assertions.result.length);
   PRINT("INFO In deleteAssertion.. BLAH BLAH BLAH")
   var assertion_slug = assertion.entityId;
-  PRINT("INFO In deleteAssertion.. BLAH BLAH BLAH");
+  PRINT("INFO In deleteAssertion.. 25 the assertion_slug is: " + assertion_slug);
 
   var assertion_url = BADGR_BASE_URL + BADGR_ASSERTION_DELETE_PATH + assertion_slug
   PRINT("In deleteAssertion.. 24 the assertion_url is: {0}", assertion_url);
