@@ -20,9 +20,9 @@ recipient.hashed = true;
 recipient.plaintextIdentity = "string";
 
 var badgeclasses = null;
-var assertions = null;
+var window.assertions = null;
 var badgeclasses_txt = "";
-var assertions_txt = "";
+var window.assertions_txt = "";
 var prizeList = [];
 var badgeclassNamesList = [];
 var selectedPrize = "";
@@ -178,6 +178,7 @@ function getAssertions() {
       window.assertions = data;
       ret = []
       for (ass in window.assertions.result) {
+        console.log("INFO In getAssertions.. ass.revoked: " + ass.revoked)
         if (ass.revoked === false) {
           ret.push(ass);
         }
@@ -197,27 +198,27 @@ function getAssertions() {
   while (assertions === null) {
     sleep(500)
   }
-  var num_assertions_before = assertions.result.length;
-  var assertions_list = assertions.result;
+  var num_assertions_before = window.assertions.result.length;
+  var assertions_list = window.assertions.result;
 
   PRINT(
-    "INFO: In getAssertions.. the num assertions before: {0}",
+    "INFO: In getAssertions.. the num window.assertions before: {0}",
     num_assertions_before
   );
 
   var assertions_to_keep = [];
   for (i = 0; i < num_assertions_before; ++i) {
-    a = assertions_list[i];
+    a = window.assertions_list[i];
     if (a.recipient.identity === useremail && a.revoked === false) {
       assertions_to_keep.push(a);
     }
   }
 
-  assertions.result = assertions_to_keep;
+  window.assertions.result = window.assertions_to_keep;
 
   PRINT(
-    "INFO: In getAssertions.. the num assertions after: {0}",
-    assertions.result.length
+    "INFO: In getAssertions.. the num window.assertions after: {0}",
+    window.assertions.result.length
   );
   window.num_epiph_asserts = window.assertions.result.length;
 }
@@ -305,18 +306,18 @@ function deleteAssertion(num) {
   }
 
   PRINT(
-    "INFO In deleteAssertion.. the assertions.size before is: {0}",
-    assertions.result.length
+    "INFO In deleteAssertion.. the window.assertions.size before is: {0}",
+    window.assertions.result.length
   );
-  for (ass in assertions.result) {
+  for (ass in window.assertions.result) {
     if (ass.revoked === false) {
       assertion = ass;
       break;
     }
   }
   PRINT(
-    "INFO In deleteAssertion.. the assertions.size after removal is: {0}",
-    assertions.result.length
+    "INFO In deleteAssertion.. the window.assertions.size after removal is: {0}",
+    window.assertions.result.length
   );
 
   var assertion_slug = assertion.entityId;
@@ -344,7 +345,7 @@ function deleteAssertion(num) {
         JSON.stringify(data)
       );
 
-      // assertions.result.splice(0, 1)  // removes first element
+      // window.assertions.result.splice(0, 1)  // removes first element
     },
     error: function(xhr, status, errMsg) {
       if (xhr.status != 200) {
@@ -587,7 +588,7 @@ async function testAssertionsCreated() {
     testAssertionsCreated();
   } else {
     PRINT(
-      "SUCCESS: In testAssertionsCreated.. assertions list created.. \\0/ {0}",
+      "SUCCESS: In testAssertionsCreated.. window.assertions list created.. \\0/ {0}",
       window.assertions.result.length
     );
   }
