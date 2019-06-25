@@ -518,12 +518,14 @@ function onSelectPrizeEvent(title) {
   document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
   window.selectedPrize = convertToSlug(title);
   getAssertions();
+  getAssertions();
   testAssertionsCreated();
   $("#placeBidModal").modal();
 }
 
 function onPlaceBidEvent() {
-  
+  getAssertions();
+  testAssertionsCreated();
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
   if (ep_spent == 0) {
@@ -544,7 +546,7 @@ function onPlaceBidEvent() {
     );
     var msg =
       "Now you can continue to bid on another prize with your remaining " +
-      num_epiph_asserts +
+      ep_left +
       " Epiphany Points, or go on back to the control center to earn some more!";
     $("#congrats-instructions").text(msg);
     $("#congrats-instructions").after(
@@ -553,7 +555,7 @@ function onPlaceBidEvent() {
   } else {
     var msg =
       "Now you can continue to bid on another prize with your remaining " +
-      num_epiph_asserts +
+      ep_left +
       " Epiphany Points, or go on back to the control center to earn some more!";
   }
 
