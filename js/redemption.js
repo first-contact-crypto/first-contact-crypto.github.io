@@ -181,7 +181,7 @@ function getAssertions() {
       var ret = []
       console.log("Info In getAssertions.. 26 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
       var results = window.assertions.result
-      console.log("In getAssertions.. 29 typeof results is: " + typeof(results))
+      console.log("In getAssertions.. 30 typeof results is array: " + ARRAY.isArray(results))
       for (var i = 0; window.assertions.result.length-1; ++i) {
         
         var result = results[i]
