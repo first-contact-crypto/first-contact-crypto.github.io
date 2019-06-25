@@ -503,6 +503,8 @@ function onSelectPrizeEvent(title) {
   // $("num-spent-input").val(assertions.result.length);
   // ep_spent = document.getElementById("num-spent-input").value;
   console.log("INFO In onSelectPrizeEvent..");
+  getAssertions();
+  testAssertionsCreated();
   num_to_spend = 0;
   if (num_epiph_asserts > 0) {
     num_to_spend = num_epiph_asserts;
@@ -517,7 +519,6 @@ function onSelectPrizeEvent(title) {
     " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
   document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
   window.selectedPrize = convertToSlug(title);
-  getAssertions();
   getAssertions();
   testAssertionsCreated();
   $("#placeBidModal").modal();
