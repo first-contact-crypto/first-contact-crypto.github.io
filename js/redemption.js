@@ -305,7 +305,7 @@ function displaySpendEPText(ep_left = -1) {
 var wtf_count = 0;
 
 function deleteAssertion(num) {
-  console.log("INFO In deleteAssertion.. num is: " + num)
+  console.log("INFO In deleteAssertion.. total num to delete is: " + num)
   var assertion = null
   if (wtf_count >= num) {
     return;
@@ -328,7 +328,7 @@ function deleteAssertion(num) {
     }
   }
   PRINT("INFO In deleteAssertion.. the window.assertions.size after removal is: {0}", window.assertions.result.length);
-
+  PRINT("INFO In deleteAssertion.. BLAH BLAH BLAH")
   var assertion_slug = assertion.entityId;
   PRINT("In deleteAssertion.. the assertion_slug is: {0}", assertion_slug);
 
