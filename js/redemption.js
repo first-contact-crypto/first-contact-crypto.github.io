@@ -180,7 +180,8 @@ function getAssertions() {
       window.assertions = data;
       var ret = []
       for (var i = 0; window.assertions.result.length-1; ++i) {
-        if (window.assertions.result[i].revoked === false) {
+        var x = window.assertions.result[i].revoked
+        if ( x === false) {
           ret.push(window.assertions.result[i])
         }
         
