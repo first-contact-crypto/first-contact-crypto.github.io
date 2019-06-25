@@ -178,15 +178,18 @@ function getAssertions() {
       );
 
       window.assertions = data;
-      ret = []
-      cnt = 0
-      for (ass in window.assertions.result) {
-        console.log("INFO In getAssertions.. ass.revoked: " + ass[cnt])
-        if (ass[cnt].revoked === false) {
-          ret.push(ass);
-        }
-        ++cnt
+      var ret = []
+      for (i = 0; window.assertions.result;++i) {
+        var ass = window.assertions.result[i]
+        console.log("INFO In getAssertions.. the ass.revoked is: " + ass.revoked)
       }
+      // for (ass in window.assertions.result) {
+      //   console.log("INFO In getAssertions.. ass.revoked: " + ass[cnt])
+      //   if (ass[cnt].revoked === false) {
+      //     ret.push(ass);
+      //   }
+      //   ++cnt
+      // }
       window.assertions.result = ret;
       window.num_epiph_asserts = window.assertions.result.length;
       PRINT(
