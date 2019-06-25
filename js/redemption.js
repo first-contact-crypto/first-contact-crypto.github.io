@@ -181,10 +181,11 @@ function getAssertions() {
       ret = []
       cnt = 0
       for (ass in window.assertions.result) {
-        console.log("INFO In getAssertions.. ass.revoked: " + ass[cnt++])
-        if (ass.revoked === false) {
+        console.log("INFO In getAssertions.. ass.revoked: " + ass[cnt])
+        if (ass[cnt].revoked === false) {
           ret.push(ass);
         }
+        ++cnt
       }
       window.assertions.result = ret;
       window.num_epiph_asserts = window.assertions.result.length;
