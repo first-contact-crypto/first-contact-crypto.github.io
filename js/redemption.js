@@ -529,6 +529,7 @@ function onPlaceBidEvent() {
   testAssertionsCreated();
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
+  ep_left = ep_saved - ep_spent
   if (ep_spent == 0) {
     return true;
   }
@@ -542,9 +543,7 @@ function onPlaceBidEvent() {
   if (first_run === true) {
     $("#welcome-video").remove();
     $("#welcome-title").text("Good job cryptonaut and good luck!");
-    $("#introductory-text").text(
-      "You now are entered to win, an email will be sent you confirming your bid."
-    );
+    $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.");
     var msg =
       "Now you can continue to bid on another prize with your remaining " +
       ep_left +
@@ -553,11 +552,6 @@ function onPlaceBidEvent() {
     $("#congrats-instructions").after(
       '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
     );
-  } else {
-    var msg =
-      "Now you can continue to bid on another prize with your remaining " +
-      ep_left +
-      " Epiphany Points, or go on back to the control center to earn some more!";
   }
 
   displaySpendEPText(ep_left);
