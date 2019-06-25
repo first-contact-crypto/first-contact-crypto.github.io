@@ -1,6 +1,6 @@
 const DEV_ENV = false;
 
-const BAT = "Ko3mDsSppuT3nPRikcqoTnbgGQobtT";
+const BAT = "o90AHEear8Vfog9SG6yuniPHIiQt18";
 const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
@@ -173,7 +173,9 @@ function getAssertions() {
     ),
     function(data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
-      console.log("INFO In getAssertions the num data.result is: " + data.result.length)
+      console.log(
+        "INFO In getAssertions the num data.result is: " + data.result.length
+      );
 
       window.assertions = data;
       // ret = []
@@ -196,7 +198,7 @@ function getAssertions() {
     }
   );
   while (assertions === null) {
-    sleep(500)
+    sleep(500);
   }
   var num_assertions_before = window.assertions.result.length;
   var assertions_list = window.assertions.result;
@@ -214,7 +216,7 @@ function getAssertions() {
     }
   }
 
-  window.assertions.result = window.assertions_to_keep;
+  window.assertions.result = assertions_to_keep;
 
   PRINT(
     "INFO: In getAssertions.. the num window.assertions after: {0}",
@@ -432,7 +434,7 @@ function createPrizeAssertions(ep_spent) {
 function onSelectPrizeEvent(title) {
   // $("num-spent-input").val(assertions.result.length);
   // ep_spent = document.getElementById("num-spent-input").value;
-  console.log("INFO In onSelectPrizeEvent..")
+  console.log("INFO In onSelectPrizeEvent..");
   num_to_spend = 0;
   if (num_epiph_asserts > 0) {
     num_to_spend = num_epiph_asserts;
