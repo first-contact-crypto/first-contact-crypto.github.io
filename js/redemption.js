@@ -181,7 +181,9 @@ function getAssertions() {
       var ret = []
       console.log("Info In getAssertions.. 26 the window.assertions.result is: " + JSON.stringify(window.assertions.result))
       var results = window.assertions.result
+      console.log("In getAssertions.. 29 typeof results is: " + typeof(results))
       for (var i = 0; window.assertions.result.length-1; ++i) {
+        
         var result = results[i]
         var x = result.revoked
         if ( x === false) {
