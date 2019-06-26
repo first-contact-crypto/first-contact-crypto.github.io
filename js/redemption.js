@@ -526,8 +526,6 @@ function onSelectPrizeEvent(title) {
 }
 
 function onPlaceBidEvent() {
-  getAssertions();
-  testAssertionsCreated();
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
   ep_left = ep_saved - ep_spent;
