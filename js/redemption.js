@@ -1,6 +1,6 @@
 const DEV_ENV = false;
 
-const BAT = "o90AHEear8Vfog9SG6yuniPHIiQt18";
+const BAT = "hW4sNn956gwvmmcM7xvXHKfA7SHQ6h";
 const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
@@ -165,15 +165,15 @@ function getBadgeClasses() {
 
 function getAssertions() {
   PRINT("INFO: In getAssertions");
-  window.assertions = null
-  var wait = true 
+  window.assertions = null;
+  var wait = true;
   getJSONData(
     false,
     format(
       BADGR_BASE_URL + BADGR_ASSERTION_BADGECLASS_PATH,
       BADGR_SERVER_SLUG_EPIPHANY
     ),
-    
+
     function(data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
       console.log(
@@ -196,12 +196,12 @@ function getAssertions() {
       //     console.log("INFO In getAssertions.. 38 revoked is: " + JSON.stringify(x))
       //     ret.push(results[i])
       //   }
-        
+
       // }
       // while (wait === true) {
       //   sleep(500)
       // }
-      // window.assertions.result = ret; 
+      // window.assertions.result = ret;
       // window.num_epiph_asserts = window.assertions.result.length;
       // PRINT(
       //   "INFO: In getAssertions.. window.num_epiph_asserts: {0}",
@@ -326,7 +326,7 @@ var wtf_count = 0;
 
 //   PRINT("INFO In deleteAssertion.. the window.assertions.size before is: {0}",window.assertions.result.length);
 
-//   var ass = null 
+//   var ass = null
 //   var ret = []
 //   for (ass in window.assertions.result) {
 //     if (ass.revoked === false) {
@@ -436,8 +436,8 @@ function deleteAssertion(num) {
 
 function deleteAssertions(num) {
   PRINT("INFO: In deleteAssertions.. deleting {0}", num);
-  wtf_count = 0
-  for (i = 0; i < num; i++) { 
+  wtf_count = 0;
+  for (i = 0; i < num; i++) {
     deleteAssertion(num);
     num_epiph_asserts -= 1;
     // sleep(500)
@@ -530,30 +530,39 @@ function onPlaceBidEvent() {
   testAssertionsCreated();
   ep_spent = document.getElementById("num-spent-input").value;
   ep_saved = window.num_epiph_asserts;
-  ep_left = ep_saved - ep_spent
+  ep_left = ep_saved - ep_spent;
   if (ep_spent == 0) {
     return true;
   }
   PRINT("INFO: In onPlaceBidEvent");
 
-  PRINT("INFO: num_epiph_asserts: {0} ep_saved: {1} ep_spent: {2}",num_epiph_asserts,ep_saved,ep_spent);
+  PRINT(
+    "INFO: num_epiph_asserts: {0} ep_saved: {1} ep_spent: {2}",
+    num_epiph_asserts,
+    ep_saved,
+    ep_spent
+  );
   createPrizeAssertions(ep_spent);
   deleteAssertions(ep_spent);
   getAssertions();
   testAssertionsCreated();
 
-    $("#welcome-button").remove();
-    $("#welcome-title").text("Good job cryptonaut and good luck!");
-    $("#introductory-text").text("You now are entered to win, an email will be sent you confirming your bid.");
-    var msg =
-      "Now you can continue to bid on another prize with your remaining " +
-      ep_left +
-      " Epiphany Points, or go on back to the control center to earn some more!";
-    $("#congrats-instructions").text(msg);
-    document.getElementById("spend-ep-text").innerHTML = "You currently have " + ep_left + " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
+  $("#welcome-button").remove();
+  $("#welcome-title").text("Good job cryptonaut and good luck!");
+  $("#introductory-text").text(
+    "You now are entered to win, an email will be sent you confirming your bid."
+  );
+  var msg =
+    "Now you can continue to bid on another prize with your remaining " +
+    ep_left +
+    " Epiphany Points, or go on back to the control center to earn some more!";
+  $("#congrats-instructions").text(msg);
+  document.getElementById("spend-ep-text").innerHTML =
+    "You currently have " +
+    ep_left +
+    " epiphany points to spend. Each EP represents one chance to win. The more you spend the more chances you have to win!";
   document.getElementById("num-spent-input").setAttribute("max", num_to_spend);
   if (first_run === true) {
-
     $("#congrats-instructions").after(
       '<br/><a href="https://learn.firstcontactcrypto.com/dashboard" type="button" class="btn btn-outline-success">Mission Control</a>'
     );
