@@ -1,30 +1,25 @@
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
+
 }
 
 html,
-body,
-#intro {
+body
+{
   height: 100%;
+  margin: 0;
 }
 
 body {
-  /* background:
-    #000
-    url("../img/loopable-stars-4096x2304.png")
-    no-repeat
-    center
-    center
-    fixed; */
-    background-image: url("../img/loopable-stars-4096x2304.png");
-    background-color: #000;
-    background-repeat: repeat;
-    background-attachment: fixed;
+  background-image: url("../img/loopable-stars-4096x2304.png");
+  background-color: #000;
+  background-repeat: repeat;
+  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
+} 
 
 /* grey-darken-4 */
 .my-bg-color-primary {
@@ -51,6 +46,7 @@ body {
 
 .my-hr-primary {
   border-top: 1px solid #0000FF !important;
+  /* padding-bottom: 100px; */
 }
 
 .my-hr-secondary {
@@ -117,7 +113,7 @@ body {
     font-weight: 400; }
 
 .my-anchor::before {
-  height: 10px;
+  height: 60px;
   content: "";
   display: block;
 }
@@ -161,4 +157,13 @@ body {
 
 .my-text-border-blue {
   text-shadow: 2px 0 0 #0000FF, -2px 0 0 #0000FF, 0 2px 0 #0000FF, 0 -2px 0 #0000FF, 1px 1px #0000FF, -1px -1px 0 #0000FF, 1px -1px 0 #0000FF, -1px 1px 0 #0000FF;
+}
+
+#my-move-hr {
+  margin-top: 150px;
+}
+
+#my-landing {
+  height: 100%;
+  margin-bottom: 110px;
 }

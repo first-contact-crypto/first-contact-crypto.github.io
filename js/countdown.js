@@ -1,35 +1,37 @@
 // Set the date we're counting down to
-var keepkeyCountDownDate = new Date("July 31, 2019 23:59:59").getTime()
-var bitcoin5CountDownDate = new Date("July 28, 2019 23:59:59").getTime()
-var amazon5CountDownDate = new Date("July 28, 2019 23:59:59").getTime()
+var keepkeyCountDownDate = new Date("July 31, 2019 23:59:59").getTime();
+var bitcoin5CountDownDate = new Date("July 7, 2019 23:59:59").getTime();
+var amazon5CountDownDate = new Date("July 7, 2019 23:59:59").getTime();
 
 // Update the count down every 1 second
 function mySetInterval(el_id, countDownDate) {
-    var x = setInterval(function() {
+  var x = setInterval(function() {
     // Get today's date and time
-        var now = new Date().getTime()
+    var now = new Date().getTime();
 
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
 
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24))
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000)
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Display the result in the element with id="demo"
-        document.getElementById(el_id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
-        // If the count down is finished, write some text
-        if (distance < 0) {
-                            clearInterval(x);
-                            // eslint-disable-next-line indent
-                            document.getElementById(el_id).innerHTML = "EXPIRED"
-                          }
-    }, 1000)
+    // Display the result in the element with id="demo"
+    document.getElementById(el_id).innerHTML =
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      // eslint-disable-next-line indent
+      document.getElementById(el_id).innerHTML = "EXPIRED";
+    }
+  }, 1000);
 }
 
-
-mySetInterval("countdown-timer-keepkey", keepkeyCountDownDate)
-mySetInterval("countdown-timer-bitcoin5",bitcoin5CountDownDate)
-mySetInterval("countdown-timer-amazon5", amazon5CountDownDate)
+mySetInterval("countdown-timer-keepkey", keepkeyCountDownDate);
+mySetInterval("countdown-timer-bitcoin5", bitcoin5CountDownDate);
+mySetInterval("countdown-timer-amazon5", amazon5CountDownDate);
