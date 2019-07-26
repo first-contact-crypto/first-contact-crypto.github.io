@@ -171,3 +171,12 @@ body {
 #my-container {
   margin-top: 10vh;
 }
+
+#my-welcome-title {
+  margin-top: 150px;
+}
+
+#my-welcome-button {
+  margin-top: 80px;
+  margin-bottom: 35px;
+}
