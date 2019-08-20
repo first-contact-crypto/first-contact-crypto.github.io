@@ -19,7 +19,11 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-} 
+}
+
+h2 {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
 
 /* grey-darken-4 */
 .my-bg-color-primary {
@@ -71,41 +75,6 @@ body {
 }
 
 /** Cards **/
-/* .card {
-  box-shadow: $z-depth-1;
-  border: 0;
-  font-weight: 400;
-  border: 1px solid #673ab7;
-  &[class*="border"] {
-    border: 1px solid $grey-base;
-    box-shadow: none;
-  }
-  .card-body {
-    background-color: $my-bg-color-primary;
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 400;
-      color: $my-color-secondary;
-    }
-    .card-title {
-      a {
-        transition: $md-card-link-transition;
-        &:hover {
-          transition: $md-card-link-transition;
-        }
-      }
-    }
-    .card-text {
-      color: $my-color-primary;
-      font-size: $md-card-font-size;
-      font-weight: 400;
-    }
-  }
-  .md-form {
-    label {
-      font-weight: 300;
-    }
-  }
-} */
 
   .card .card-body .card-text {
     color: #ddd;
@@ -180,3 +149,15 @@ body {
   margin-top: 60px;
   margin-bottom: 15px;
 }
+
+/* .btn-outline-success {
+  background-color: #000 !important;
+  &:hover {
+    background-color: 
+  }
+} */
+
+/* .btn-outline-success {
+  background: #000 !important;
+  opacity: none !important;
+} */
