@@ -18,6 +18,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
   </head>
+
   <body class="my-bg-color-primary my-color-primary">
     <!-- Start your project here-->
     <!-- Main Navigation -->
@@ -36,51 +37,64 @@
             </script> -->
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async
-        src="https://www.googletagmanager.com/gtag/js?id=UA-133040802-1"></script>
+        src="https://www.googletagmanager.com/gtag/js?id=UA-133040802-1">
+      </script>
       <script>
-              window.dataLayer = window.dataLayer || [];
-              function gtag() { dataLayer.push(arguments); }
-              gtag('js', new Date()); gtag('config', 'UA-133040802-1');
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-133040802-1');
+
       </script>
       <!-- Facebook Pixel Code -->
       <script>
-              !function (f, b, e, v, n, t, s) {
-                if (f.fbq) return; n = f.fbq = function () {
-                  n.callMethod ?
-                  n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-                };
-                if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-                n.queue = []; t = b.createElement(e); t.async = !0;
-                t.src = v; s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s)
-              }(window, document, 'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '672217579861378');
-              fbq('track', 'PageView');
+        ! function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+            n.callMethod ?
+              n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = '2.0';
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '672217579861378');
+        fbq('track', 'PageView');
+
       </script>
       <noscript>
-        <img height="1" width="1"
-          src="https://www.facebook.com/tr?id=672217579861378&ev=PageView
+        <img height="1" width="1" src="https://www.facebook.com/tr?id=672217579861378&ev=PageView
           &noscript=1" />
       </noscript>
       <!-- End Facebook Pixel Code -->
       <!-- Chatra -->
       <script>
-          (function(d, w, c) {
-                w.ChatraID = 'Fsd8dAcWeT5dRicjL';
-              var s = d.createElement('script');
-              w[c] = w[c] || function() {
-                (w[c].q = w[c].q || []).push(arguments);
-              };
-              s.async = true;
-              s.src = 'https://call.chatra.io/chatra.js';
-              if (d.head) d.head.appendChild(s);
-          })(document, window, 'Chatra');
+        (function (d, w, c) {
+          w.ChatraID = 'Fsd8dAcWeT5dRicjL';
+          var s = d.createElement('script');
+          w[c] = w[c] || function () {
+            (w[c].q = w[c].q || []).push(arguments);
+          };
+          s.async = true;
+          s.src = 'https://call.chatra.io/chatra.js';
+          if (d.head) d.head.appendChild(s);
+        })(document, window, 'Chatra');
+
       </script>
       <!-- End Chatra -->
       <!-- Navbar -->
-      <nav
-        class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar
         my-bg-color-primary">
         <div class="container-fluid">
 
@@ -138,16 +152,14 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="https://angel.co/firstcontactcrypto"
-                  class="nav-link"
+                <a href="https://angel.co/firstcontactcrypto" class="nav-link"
                   target="_blank">
                   <i class="fab fa-angellist mr-2"></i>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="https://www.linkedin.com/company/firstcontactcrypto/"
-                  class="nav-link"
-                  target="_blank">
+                  class="nav-link" target="_blank">
                   <i class="fab fa-linkedin mr-2"></i>
                 </a>
               </li>
@@ -158,8 +170,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="https://discord.gg/Dk6Sdpj"
-                  class="nav-link"
+                <a href="https://discord.gg/Dk6Sdpj" class="nav-link"
                   target="_blank">
                   <i class="fab fa-discord mr-2"></i>
                 </a>
@@ -177,8 +188,8 @@
     </header>
     <!--Main layout-->
     <main class="mt-2">
-      <div id="my-landing" 
-            class="container-fluid d-flex align-items-center justify-content-center h-100 mt-6 vh-100">
+      <div id="my-landing"
+        class="container-fluid d-flex align-items-center justify-content-center h-100 mt-6 vh-100">
 
         <div class="row d-flex justify-content-center text-center">
 
@@ -194,21 +205,23 @@
             <hr class="my-hr-primary">
 
             <!-- Description -->
-            <!-- <h4 class="my-color- my-4">..earn while you learn the amazing
-                technology that is blockchain.
-              </h4> -->
-            <h5>We invite you to discover the blockchain technology frontier
-              with us. To boldly go and learn and earn crypto. This journey will
-              always be free. Come be an explorer. </h5>
+            <div class="landing-bg">
+              <h5>We invite you to discover the blockchain technology frontier
+                with us. To boldly go and learn and earn crypto. This journey
+                will
+                always be free. Come be an explorer.
+              </h5>
+            </div>
+
             <p style="padding-top:35px;"></p>
             <!-- <div class="btn-group pb-5" role="group" aria-label="Basic example"> -->
-              <a class="btn btn-outline-success btn-lg" href="#welcome-anchor"
-                role="button">Learn More</a>
-              <!-- <p></p> -->
-              <a class="btn btn-outline-success btn-lg"
-                href="https://learn.firstcontactcrypto.com/register?next=%2Fdashboard"
-                role="button"
-                style="margin-top: 10px;">Launch Your Journey Here</a>
+            <a class="btn btn-outline-success btn-lg" href="#welcome-anchor"
+              role="button">Learn More</a>
+            <!-- <p></p> -->
+            <a class="btn btn-outline-success btn-lg"
+              href="https://learn.firstcontactcrypto.com/register?next=%2Fdashboard"
+              role="button" style="margin-top: 10px;">Launch Your Journey
+              Here</a>
             <!-- </div> -->
           </div>
         </div>
@@ -231,7 +244,7 @@
 
               <!--Carousel Wrapper-->
               <div id="carousel-example-1z"
-                class="carousel slide carousel-fade" data-ride="carousel" 
+                class="carousel slide carousel-fade" data-ride="carousel"
                 style="float:left;max-width: 450px;margin-right: 25px;margin-bottom: 10px">
                 <!--Indicators-->
                 <ol class="carousel-indicators">
@@ -286,47 +299,49 @@
               <!--/.Carousel Wrapper-->
               <!-- Main heading -->
               <div>
-              <h4 class="h4 mb-3 my-color-secondary">This is Blockchain
-                Education Mission Command Learning Station 3.0</h4>
-              <p>Future Cadet, join our quest to spread knowledge about
-                blockchain and cryptocurrency.
-                Our mission is to transform the learning process into a fun
-                and
-                addictive experience by giving you rewards just for coming
-                here
-                and learning about blockchain and cryptocurrency!
-                We believe the noble society of the future should actually
-                incentivize learning, playing, and sharing. Our platform is a
-                place to explore these revolutionary new ideas.
-                Learning here is better than free, it pays you and it’s fast
-                and
-                easy too.
-                Our bite-sized lessons are perfect for breaking down all the
-                barriers surrounding this futuristic but mysterious blockchain
-                technology while at the same time ensuring it is easy enough
-                for
-                anyone to understand. </p>
-              <p>
-                Start earning Epiphany points for watching quick videos and
-                answering simple questions as you discover how the blockchain
-                and cryptocurrencies work.
-                Redeem your Epiphany points for chances to win the
-                cryptocurrencies you learn about!
-                Earn bonus points for learning new things every day and keep
-                logging in each month to claim new rewards and discover new
-                exciting content!
-                Learning and earning is completely free and accessible to
-                anyone. What are you waiting for? Proceed to launch.
-              </p>
-            </div>
+                <h4 class="h4 mb-3 my-color-secondary">This is Blockchain
+                  Education Mission Command Learning Station 3.0</h4>
+                <hr class="my-hr-primary">
+                <p>Future Cadet, join our quest to spread knowledge about
+                  blockchain and cryptocurrency.
+                  Our mission is to transform the learning process into a fun
+                  and
+                  addictive experience by giving you rewards just for coming
+                  here
+                  and learning about blockchain and cryptocurrency!
+                  We believe the noble society of the future should actually
+                  incentivize learning, playing, and sharing. Our platform is a
+                  place to explore these revolutionary new ideas.
+                  Learning here is better than free, it pays you and it’s fast
+                  and
+                  easy too.
+                  Our bite-sized lessons are perfect for breaking down all the
+                  barriers surrounding this futuristic but mysterious
+                  blockchain
+                  technology while at the same time ensuring it is easy enough
+                  for
+                  anyone to understand. </p>
+                <p>
+                  Start earning Epiphany points for watching quick videos and
+                  answering simple questions as you discover how the blockchain
+                  and cryptocurrencies work.
+                  Redeem your Epiphany points for chances to win the
+                  cryptocurrencies you learn about!
+                  Earn bonus points for learning new things every day and keep
+                  logging in each month to claim new rewards and discover new
+                  exciting content!
+                  Learning and earning is completely free and accessible to
+                  anyone. What are you waiting for? Proceed to launch.
+                </p>
+              </div>
               <!-- Main heading -->
             </div>
             <!--Grid column-->
 
             <!--Grid column-->
             <!-- <div class="col-md-6"> -->
-              <!-- Main heading -->
-              <!-- <h4 class="h4 mb-3 my-color-secondary">This is Blockchain
+            <!-- Main heading -->
+            <!-- <h4 class="h4 mb-3 my-color-secondary">This is Blockchain
                 Education Mission Command Learning Station 3.0</h3>
               <p>Future Cadet, join our quest to spread knowledge about
                 blockchain and cryptocurrency.
@@ -359,7 +374,7 @@
                 anyone. What are you waiting for? Proceed to launch.
               </p> -->
 
-              <!-- Main heading -->
+            <!-- Main heading -->
             <!-- </div> -->
             <!--Grid column-->
 
@@ -499,7 +514,8 @@
             <!--Grid column-->
             <div class="col-md-4 mb-5">
               <i class="fas fa-users fa-4x blue-text"></i>
-              <h4 class="my-4 font-weight-bold my-color-secondary">Individuals</h4>
+              <h4 class="my-4 font-weight-bold my-color-secondary">Individuals
+              </h4>
               <p>
                 Individuals are encouraged to sign up for free as cadets and
                 start learning about the blockchain space immediately.
@@ -535,7 +551,8 @@
             <!--Grid column-->
             <div class="col-md-4 mb-1">
               <i class="fas fa-university fa-4x blue-text"></i>
-              <h4 class="my-4 font-weight-bold my-color-secondary">Non-profits</h4>
+              <h4 class="my-4 font-weight-bold my-color-secondary">Non-profits
+              </h4>
               <p>
                 If you are a nonprofit organization or a governmental body, we
                 would like to assist you with building educational experiences
@@ -578,7 +595,8 @@
             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
               style="width: 60px;">
             <p>
-              The first educational blockchain onboarding service specialists in
+              The first educational blockchain onboarding service specialists
+              in
               the
               industry!
               Contact us for your specific education and onboarding needs.

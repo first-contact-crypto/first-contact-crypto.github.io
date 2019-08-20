@@ -8999,25 +8999,28 @@ ul.stepper {
   color: #00c851 !important; }
 
 #welcome {
-  background-color: #111;
-  -webkit-box-shadow: 0 30px 40px 40px rgba(0, 0, 255, 0.1) !important;
-  box-shadow: 0 30px 40px 40px rgba(0, 0, 255, 0.1) !important;
-  -webkit-border-radius: 7px;
-  border-radius: 7px; }
+  background-color: #111 !important;
+  -webkit-box-shadow: 0 0 100px 10px rgba(0, 0, 255, 0.175) !important;
+  box-shadow: 0 0 100px 10px rgba(0, 0, 255, 0.175) !important;
+  -webkit-border-radius: 7px !important;
+  border-radius: 7px !important;
+  padding: 30px !important; }
 
 #features {
-  background-color: #111;
-  -webkit-box-shadow: 0 30px 40px 40px rgba(0, 0, 255, 0.1) !important;
-  box-shadow: 0 30px 40px 40px rgba(0, 0, 255, 0.1) !important;
-  -webkit-border-radius: 7px;
-  border-radius: 7px; }
+  background-color: #111 !important;
+  -webkit-box-shadow: 0 0 100px 10px rgba(0, 0, 255, 0.175) !important;
+  box-shadow: 0 0 100px 10px rgba(0, 0, 255, 0.175) !important;
+  -webkit-border-radius: 7px !important;
+  border-radius: 7px !important;
+  padding: 30px !important; }
 
 #services {
-  background-color: #111;
-  -webkit-box-shadow: 0 30px 40px 40px rgba(0, 0, 255, 0.1) !important;
-  box-shadow: 0 30px 40px 40px rgba(0, 0, 255, 0.1) !important;
-  -webkit-border-radius: 7px;
-  border-radius: 7px; }
+  background-color: #111 !important;
+  -webkit-box-shadow: 0 0 100px 10px rgba(0, 0, 255, 0.175) !important;
+  box-shadow: 0 0 100px 10px rgba(0, 0, 255, 0.175) !important;
+  -webkit-border-radius: 7px !important;
+  border-radius: 7px !important;
+  padding: 30px !important; }
 
 html {
   scroll-behavior: smooth; }
@@ -9128,8 +9131,7 @@ h2 {
   background-color: #000; }
 
 .my-text-border-blue {
-  text-shadow: 2px 0 0 #0000FF, -2px 0 0 #0000FF, 0 2px 0 #0000FF, 0 -2px 0 #0000FF, 1px 1px #0000FF, -1px -1px 0 #0000FF, 1px -1px 0 #0000FF, -1px 1px 0 #0000FF;
-  color: blue !important; }
+  text-shadow: 2px 0 0 #0000FF, -2px 0 0 #0000FF, 0 2px 0 #0000FF, 0 -2px 0 #0000FF, 1px 1px #0000FF, -1px -1px 0 #0000FF, 1px -1px 0 #0000FF, -1px 1px 0 #0000FF; }
 
 #my-move-hr {
   margin-top: 150px; }
