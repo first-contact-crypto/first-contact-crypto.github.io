@@ -1,6 +1,6 @@
 const DEV_ENV = false;
 
-const BAT = "r4gUCTQyUhGMWxPKXAYDLDtzZR9ryG";
+const BAT = "CBLgWi0AL9sHIguEuEK0tW3gHXNg7I";
 const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
@@ -84,7 +84,7 @@ function getJSONData(sync, url, successfunc, errorfunc) {
     url: url,
     success: successfunc,
     error: errorfunc,
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -149,7 +149,7 @@ function getBadgeClasses() {
       BADGR_BASE_URL + BADGR_BADGECLASS_SINGLE_ISSUER_PATH,
       BADGR_ISSUER_ID
     ),
-    function(data, status, jqXhr) {
+    function (data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
       window.badgeclasses = data;
       PRINT(
@@ -157,7 +157,7 @@ function getBadgeClasses() {
         JSON.stringify(window.badgeclasses)
       );
     },
-    function(jqXhr, textStatus, errorMessage) {
+    function (jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In getBadgeClasses.. {0}, {1}", textStatus, errorMessage);
     }
   );
@@ -174,7 +174,7 @@ function getAssertions() {
       BADGR_SERVER_SLUG_EPIPHANY
     ),
 
-    function(data, status, jqXhr) {
+    function (data, status, jqXhr) {
       // alert(format("SUCCESS.. got the badgeclasses {0}", JSON.stringify(data)));
       console.log(
         "INFO In getAssertions the num data.result is: " + data.result.length
@@ -208,7 +208,7 @@ function getAssertions() {
       //   window.num_epiph_asserts
       // );
     },
-    function(jqXhr, textStatus, errorMessage) {
+    function (jqXhr, textStatus, errorMessage) {
       PRINT("ERROR: In getAssertions.. {0}, {1}", textStatus, errorMessage);
     }
   );
@@ -260,21 +260,21 @@ function createBadge(name) {
       name: name,
       description: "An FCC prize category."
     }),
-    success: function(data, status, xhr) {
+    success: function (data, status, xhr) {
       PRINT(
         "SUCCESS: In createBadge.. badge created: {0}",
         JSON.stringify(data)
       );
       badgeclasses.result.push(data);
     },
-    error: function(xhr, status, errMsg) {
+    error: function (xhr, status, errMsg) {
       PRINT(
         "ERROR: In createBadge.. badge creation failed! {0} {1}",
         status,
         errMsg
       );
     },
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
     }
   });
@@ -406,18 +406,20 @@ function deleteAssertion(num) {
     dataType: "json",
     processData: false,
     contentType: "application/json",
-    data: JSON.stringify({ revocation_reason: "Epiphany Point Spent" }),
+    data: JSON.stringify({
+      revocation_reason: "Epiphany Point Spent"
+    }),
     url: assertion_url,
     // data: JSON.stringify({"name": name, "description": "An FCC prize category."}),
     // data: JSON.stringify({"recipient": {"identity": useremail, "type": "email", "hashed": false, "plaintextIdentity": username}}),
-    success: function(data, status, xhr) {
+    success: function (data, status, xhr) {
       PRINT(
         "SUCCESS: In deleteAssertion.. assertion deleted: {0}",
         JSON.stringify(data)
       );
       // assertions.result.splice(0, 1)  // removes first element
     },
-    error: function(xhr, status, errMsg) {
+    error: function (xhr, status, errMsg) {
       if (xhr.status != 200) {
         PRINT(
           "ERROR: In deleteAssertion.. assertion deletion failed! {0} {1} {2}",
@@ -427,7 +429,7 @@ function deleteAssertion(num) {
         );
       }
     },
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -473,20 +475,20 @@ function createAssertion() {
         plaintextIdentity: username
       }
     }),
-    success: function(data, status, xhr) {
+    success: function (data, status, xhr) {
       PRINT(
         "SUCCESS: In createAssertion.. assertion created: {0}",
         JSON.stringify(data)
       );
     },
-    error: function(xhr, status, errMsg) {
+    error: function (xhr, status, errMsg) {
       PRINT(
         "ERROR: In createAssertion.. assertion creation failed! {0} {1}",
         status,
         errMsg
       );
     },
-    beforeSend: function(xhr) {
+    beforeSend: function (xhr) {
       xhr.setRequestHeader("Authorization", "Bearer " + BAT);
       xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -581,7 +583,7 @@ function convertToSlug(text) {
 
 function getPrizeList() {
   PRINT("INFO: In getPrizeList");
-  $(".prize").each(function(index) {
+  $(".prize").each(function (index) {
     var txt = convertToSlug($(this).text());
     PRINT("INFO: In getPrizeList.. the prize is: {0}", txt);
     prizeList.push(txt);
