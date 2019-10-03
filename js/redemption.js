@@ -1,6 +1,6 @@
 const DEV_ENV = false;
 
-const BAT = "qwmdUnRL6w1EpAKMDahcOHuSsCX6MC";
+const BAT = "boWO7KgeDuYncExF0tGAjH9B8kZLOA";
 const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
@@ -119,13 +119,8 @@ function getUrlVars() {
   // };
   var pc_pkg = JSON.parse(getURLParameter("pc_pkg_str"));
   var useremail = "";
-  if (DEV_ENV) {
-    username = "peteralexander";
-    useremail = "peter.alexander@prodatalab.com";
-  } else {
-    useremail = pc_pkg.useremail;
-    username = pc_pkg.username;
-  }
+  useremail = pc_pkg.useremail;
+  username = pc_pkg.username;
   var vars = {
     // num_epiph_asserts: Object.keys(assertions).length,
     // num_epiph_asserts: pc_pkg.num_epiph_asserts,
