@@ -118,10 +118,11 @@ function getUrlVars() {
   //   useremail: ""
   // };
   var pc_pkg = JSON.parse(getURLParameter("pc_pkg_str"));
-  PRINT("INFO: pc_pkg.. {}", pc_pkg);
+  PRINT("INFO: pc_pkg.. {0}", pc_pkg);
   var useremail = "";
   window.useremail = pc_pkg["useremail"];
   window.username = pc_pkg["username"];
+  PRINT("INFO: window.useremail: {0} window.username: {1}", window.useremail, window.username);
   // var vars = {
   //   // num_epiph_asserts: Object.keys(assertions).length,
   //   // num_epiph_asserts: pc_pkg.num_epiph_asserts,
