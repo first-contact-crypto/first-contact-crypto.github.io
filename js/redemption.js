@@ -120,8 +120,10 @@ function getUrlVars() {
   //   username: "",
   //   useremail: ""
   // };
-  PRINT("INFO: In getUrlVars..");
-  var pc_pkg = JSON.parse(getURLParameter("pc_pkg_str"));
+  var result = getURLParameter("pc_pkg_str");
+  PRINT("INFO: In getUrlVars..getURLParameter: {0}", result);
+
+  var pc_pkg = JSON.parse(result);
   PRINT("INFO:  In getUrlVars.. pc_pkg: {0}", pc_pkg);
   var useremail = "";
   window.useremail = pc_pkg["useremail"];
