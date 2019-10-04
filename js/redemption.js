@@ -221,6 +221,9 @@ function getAssertions() {
   var assertions_to_keep = [];
   for (i = 0; i < num_assertions_before; ++i) {
     a = assertions_list[i];
+    PRINT(
+      "INFO: In getAssertions.. a.recipient.identity: {} .. window.useremail: {}".format(a.recipient.identity, window.useremail)
+    );
     if (a.recipient.identity === window.useremail && a.revoked === false) {
       assertions_to_keep.push(a);
     }
@@ -228,8 +231,8 @@ function getAssertions() {
 
   window.assertions.result = assertions_to_keep;
 
-  PRINT(
-    "INFO: In getAssertions.. 39 the num window.assertions after: {0}",
+PRINT(
+    "INFO: In getAssertions.. the num window.assertions after: {0}",
     window.assertions.result.length
   );
   window.num_epiph_asserts = window.assertions.result.length;
