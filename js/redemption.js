@@ -129,6 +129,10 @@ function getUrlVars() {
     username: window.username,
     useremail: window.useremail
   };
+  window.username = pc_pkg.username;
+  window.useremail = pc_pkg.useremail;
+  window.epiphany_badgeclass_id = BADGR_SERVER_SLUG_EPIPHANY;
+  window.epiphany_issuer_id = "rGy5MNWtQgSs1vfnLyPlmg";
   setVarsGlobally(vars);
 }
 
