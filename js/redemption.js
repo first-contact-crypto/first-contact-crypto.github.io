@@ -222,7 +222,7 @@ function getAssertions() {
   for (i = 0; i < num_assertions_before; ++i) {
     a = assertions_list[i];
     PRINT(
-      "INFO: In getAssertions.. a.recipient.identity: {} .. window.useremail: {}".format(a.recipient.identity, window.useremail)
+      "INFO: In getAssertions.. a.recipient.identity: {} .. window.useremail: {}", a.recipient.identity, window.useremail
     );
     if (a.recipient.identity === window.useremail && a.revoked === false) {
       assertions_to_keep.push(a);
