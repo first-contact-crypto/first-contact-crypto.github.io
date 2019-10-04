@@ -119,15 +119,15 @@ function getUrlVars() {
   // };
   var pc_pkg = JSON.parse(getURLParameter("pc_pkg_str"));
   var useremail = "";
-  useremail = pc_pkg.useremail;
-  username = pc_pkg.username;
+  window.useremail = pc_pkg.useremail;
+  window.username = pc_pkg.username;
   var vars = {
     // num_epiph_asserts: Object.keys(assertions).length,
     // num_epiph_asserts: pc_pkg.num_epiph_asserts,
     epiphany_badgeclass_id: BADGR_SERVER_SLUG_EPIPHANY,
     epiphany_issuer_id: "rGy5MNWtQgSs1vfnLyPlmg",
-    username: username,
-    useremail: useremail
+    username: window.username,
+    useremail: window.useremail
   };
   setVarsGlobally(vars);
 }
