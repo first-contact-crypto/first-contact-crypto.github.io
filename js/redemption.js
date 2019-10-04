@@ -123,6 +123,7 @@ function getUrlVars() {
   var result = getURLParameter("pc_pkg_str");
   PRINT("INFO: In getUrlVars.. the type of getURLParameter is: {0}", typeof result);
   PRINT("INFO: In getUrlVars..getURLParameter: {0}", result);
+  PRINT("INFO: In getUrlVars..getURLParameter AFTER ALTERATION: {0}", result.replace('+', ''));
 
   var pc_pkg = JSON.parse(result);
   PRINT("INFO:  In getUrlVars.. pc_pkg: {0}", pc_pkg);
