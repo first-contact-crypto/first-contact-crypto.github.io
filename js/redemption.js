@@ -117,12 +117,13 @@ function getUrlVars() {
   //   username: "",
   //   useremail: ""
   // };
+  PRINT("INFO: In getUrlVars..")
   var pc_pkg = JSON.parse(getURLParameter("pc_pkg_str"));
-  PRINT("INFO: pc_pkg.. {0}", pc_pkg);
+  PRINT("INFO:  In getUrlVars.. pc_pkg: {0}", pc_pkg);
   var useremail = "";
   window.useremail = pc_pkg["useremail"];
   window.username = pc_pkg["username"];
-  PRINT("INFO: window.useremail: {0} window.username: {1}", window.useremail, window.username);
+  PRINT("INFO:  In getUrlVars.. (0) window.useremail: {0} window.username: {1}", window.useremail, window.username);
   // var vars = {
   //   // num_epiph_asserts: Object.keys(assertions).length,
   //   // num_epiph_asserts: pc_pkg.num_epiph_asserts,
@@ -133,6 +134,7 @@ function getUrlVars() {
   // };
   window.username = pc_pkg.username;
   window.useremail = pc_pkg.useremail;
+  PRINT("INFO:  In getUrlVars.. (1) window.useremail: {0} window.username: {1}", window.useremail, window.username);
   window.epiphany_badgeclass_id = BADGR_SERVER_SLUG_EPIPHANY;
   window.epiphany_issuer_id = "rGy5MNWtQgSs1vfnLyPlmg";
   setVarsGlobally(vars);
