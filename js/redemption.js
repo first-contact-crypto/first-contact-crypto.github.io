@@ -104,8 +104,11 @@ function getURLParameter(parameterName) {
   var items = location.search.substr(1).split("&");
   for (var index = 0; index < items.length; index++) {
     tmp = items[index].split("=");
-    if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    if (tmp[0] === parameterName) {
+      result = decodeURIComponent(tmp[1]);
+    }
   }
+  PRINT("INFO: in getURLParameter.. the result is: {0}", result);
   return result;
 }
 
@@ -117,7 +120,7 @@ function getUrlVars() {
   //   username: "",
   //   useremail: ""
   // };
-  PRINT("INFO: In getUrlVars..")
+  PRINT("INFO: In getUrlVars..");
   var pc_pkg = JSON.parse(getURLParameter("pc_pkg_str"));
   PRINT("INFO:  In getUrlVars.. pc_pkg: {0}", pc_pkg);
   var useremail = "";
