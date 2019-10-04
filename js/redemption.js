@@ -123,6 +123,9 @@ function getUrlVars() {
   var result = getURLParameter("pc_pkg_str");
   PRINT("INFO: In getUrlVars.. the type of getURLParameter is: {0}", typeof result);
   PRINT("INFO: In getUrlVars..getURLParameter: {0}", result);
+  for (var i = 0; i < result.length; i++) {
+    PRINT("INFO: In getUrlVars.. letter {0} is {1}", i, result.charAt(i));
+  }
   var reg = new RegExp("t");
   var nresult = result.replace(reg, '');
   PRINT("INFO: In getUrlVars..getURLParameter AFTER ALTERATION: {0}", nresult);
