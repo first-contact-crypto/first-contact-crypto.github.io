@@ -1,7 +1,7 @@
 // Set the date we're counting down to
-var keepkeyCountDownDate = new Date("Dec 23, 2019 23:59:59").getTime();
-var bitcoin5CountDownDate = new Date("Dec 15, 2019 23:59:59").getTime();
-var amazon5CountDownDate = new Date("Dec 15, 2019 23:59:59").getTime();
+var keepkeyCountDownDate = new Date("Jan 15, 2020 23:59:59").getTime();
+var bitcoin5CountDownDate = new Date("Dec 23, 2019 23:59:59").getTime();
+var amazon5CountDownDate = new Date("Dec 23, 2019 23:59:59").getTime();
 
 // Update the count down every 1 second
 function mySetInterval(el_id, countDownDate) {
