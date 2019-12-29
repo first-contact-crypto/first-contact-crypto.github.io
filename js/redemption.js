@@ -1,6 +1,6 @@
 const DEV_ENV = false;
 
-const BAT = "WuwP4ixhOtiILffrW6wZOYtDWW6j9F";
+const BAT = "cB2X1kvljnkvvQvt2MhaTN8lPX2Uz9";
 const BADGR_ISSUER_ID = "MC67oN42TPm9VARGW7TmKw";
 const BADGR_COURSE_TYPE = "course";
 const BADGR_EPIPHANY_TYPE = "epiphany";
